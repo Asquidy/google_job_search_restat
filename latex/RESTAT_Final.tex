@@ -1,0 +1,502 @@
+\documentclass[12pt]{article}
+\usepackage{natbib}
+\usepackage[toc,page]{appendix}
+\usepackage{graphicx}
+\usepackage{rotating}
+\usepackage{longtable}
+\usepackage{dcolumn}
+\usepackage{threeparttable}
+\usepackage{rotating}
+\usepackage{subfig}
+\usepackage{tabularx}
+\usepackage{threeparttable}
+\usepackage[margin = 1.0in]{geometry}
+\usepackage{caption}
+\usepackage{lscape}
+\usepackage[capposition=top]{floatrow}
+\usepackage{amsmath}
+\usepackage{wrapfig}
+\usepackage{hyperref}
+\usepackage{setspace}
+%\usepackage{changepage}
+
+\pdfpagewidth 8.5in
+\pdfpageheight 11in
+
+\hypersetup{colorlinks, linkcolor = blue, citecolor = blue, urlcolor = blue}
+\floatsetup[table]{capposition=top}
+
+\begin{document}
+
+
+\title{\vspace{-25mm} The Impact of Unemployment Insurance on Job Search: Evidence from Google Search Data}
+
+\begin{spacing}{2}
+
+\author{Scott R. Baker and Andrey Fradkin
+\thanks{%
+Baker: Kellogg School of Management, s-baker@kellogg.northwestern.edu. Fradkin: MIT Sloan, afradkin@mit.edu. Note, this paper supersedes a previous version named ``What Drives Job Search? Evidence from Google Search Data''. Thanks to Caroline Hoxby, Doug Bernheim, Nick Bloom, Hal Varian, David Card, Camille Landais and seminar participants for their comments and suggestions. Thanks to Jack Bao, David Summers, and Holly Faubion at the Texas Workforce Commission for help in obtaining administrative data. This research was supported by the Shultz Graduate Student Fellowship in Economic Policy.}}
+%The first draft of this paper was created on April 17 2011.
+
+\date{\today}
+\maketitle
+
+
+\begin{abstract}
+Job search is a key choice variable in theories of labor markets but is difficult to measure directly. We develop a job search activity index based on Google search data, the Google Job Search Index (GJSI). We validate the GJSI with both survey- and web-based measures of job search. Unlike those measures, the GJSI is high-frequency, geographically precise, and available in real time. We demonstrate the GJSI's utility by using it to study the effects of changes in the unemployment insurance (UI) system between 2008 and 2014 on job search, finding no evidence of economically meaningful decreases in aggregate search activity. \\
+\textbf{JEL Classification}: C82, D83, I38, J64, J65, J68
+%%% \Keywords{Job Search, Unemployment Insurance, Google Search, Unemployment}
+\end{abstract}
+
+\clearpage
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+\section{Introduction} 
+The amount of job search exerted by unemployed individuals is a key choice variable in theories of optimal social insurance and business cycles. Furthermore, 49 states impose a job search requirement for unemployment insurance (UI) eligibility, demonstrating the perceived importance of job search by policymakers. However, job search has proven difficult to measure. Most prior research on job search has measured it using limited surveys or hard to access proprietary data. In this paper, we address this gap in measurement by constructing and validating a new measure of job search which is publicly accessible and observable at a daily and metropolitan area level.\footnotemark \ Our measure, the Google Job Search Index (GJSI), is constructed using the Google Trends tool and is derived from the total amount of Google searches that contain the term `jobs'. We then use the GJSI to study the effects of UI policy on aggregate job search effort. 
+\footnotetext{The GJSI is measured at the Designated Market Areas (DMA) level. This designation is based on geographical areas which can receive the same radio and television signals. DMAs are generally similar to but not identical to Metropolitan Statistical Areas.}
+
+We first discuss why measuring job search is useful even when data on other labor market outcomes such as job finding rates or UI exit rates is available. Next, we validate the GJSI as a proxy for overall job search by showing that the GJSI is correlated with both searches for `jobs' in the comScore web panel and aggregate job search of all types in the American Time Use Survey (ATUS). Furthermore, the GJSI displays the same intra-week and holiday effects as the job search data from comScore and the ATUS. The GJSI also responds as expected to macroeconomic drivers of job search such as the unemployment rate and labor market tightness. Although the GJSI is an aggregate measure, we also show that, under certain assumptions, it can be used to infer the relative search intensities of different groups comprising the population of a region. We use this strategy to provide evidence that those individuals closer to UI expiration are likely to search more.
+
+We then demonstrate the utility of the GJSI for answering economic questions by using it to test for changes in job search following expansions of UI around the Great Recession. Using a state-level panel, we show that an increase of 10 weeks in the potential benefit duration is associated with 1.5\% to 2.3\% decrease in the GJSI. We also find that aggregate job search was more sensitive to UI policy during the Great Recession (2005 - 2011) than in later years. This difference could be caused either by the greater unemployed population or by the fact that changes in UI policy after the Great Recession were less salient.
+
+Although our panel regression results we control for fixed effects, trends, and state level economic conditions, our estimates may nonetheless be biased by endogeneity. States with longer potential benefit durations may suffer from unobservable shocks that affect both the persistence of UI expansions and the propensity of searchers to work. Furthermore, some searchers may anticipate future changes to UI policy. As a robustness check, we use an event study approach focusing on the response of the GJSI to large or plausibly unanticipated changes in potential benefit duration. We fail to find statistically or economically different estimates from our baseline estimates. Our results are broadly consistent with the small estimated effects of UI expansions on job finding rates in \citet{Rothstein2011} and \citet{Farber2013}.
+
+
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+\section{Why Measure Job Search?}
+The outcome variable throughout this paper is a measure of job search rather than job finding rates, the most common outcome of interest in studies of UI. We believe that measuring job search is important for at least two reasons, even when data on job finding rates and vacancies is available. First, theories of optimal UI in response to economic fluctuations (e.g. \citet{Landais2015}, \citet{Schmieder2012}) define the labor market tightness as a function of aggregate job search effort and this variable is typically not directly observable. Instead, the rate of vacancies to unemployed individuals is typically used as a proxy for tightness. The validity of this ratio depends on the extent to which job search per unemployed person fluctuates over time.
+
+These fluctuations in job search can matter in practice. For example, if job search per person falls without a commensurate drop in job finding rates per unemployed individual, holding the number of vacancies and unemployed individuals constant, this provides evidence of search externalities in the labor market. The presence of these externalities has implications for optimal UI policy in recessions (e.g. \citet{Landais2015}). Second, data on job search can be useful for directly observing the moral hazard effects of UI. Moral hazard effects due to job search could be mitigated by job search requirements as shown in \citet{Lachowska2015} and direct measures of job search may help measure the impact and effectiveness of these policies. Importantly, because the GJSI is available in real-time, the presence of these effects can be detected quickly, rather than with a lag until appropriate micro-data is released.
+
+Google Search data provides several other advantages compared to survey-based data. First, Google data is based on millions of searches which can be aggregated across geographies and at a high-frequency. In comparison, the American Time Use Survey (ATUS), the most commonly used survey of job search, often contains fewer than 5 unemployed respondents per state-month. The GJSI allows policymakers to measure changes in local labor market conditions (down to DMA-day granularity) or behavioral responses to policies in a way that is impossible with publicly available data.\footnotemark \ Furthermore, although we focus on aggregate job search, Google Trends allows for more specific queries such as `tech jobs', `new york jobs', or `walmart jobs'. This data can be used to study how search is directed across sectors, regions, and employers.
+\footnotetext{See \citet{Choi2009} and \citet{Choi2013} for examples of real-time analysis using Google Trends data.}
+
+Several recent papers have used proprietary data from online platforms such as CareerBuilder (\citet{Marinescu2015}) and SnagAJob (\citet{Kudlyak2013}) to study job search. This proprietary data is useful, especially because it contains individual-level behavioral data. However, access to this data is limited due to some combination of privacy restrictions, management changes, and lack of personal connections. An open data source like Google Trends enables researchers and policymakers to easily replicate and expand on earlier work. Furthermore, search activity varies across job sites and over time not only due to the economic drivers of search but also due to the competition between online platforms. For example, LinkedIn passed Careerbuilder in the Google Trends series in the middle of 2008, and has continued growing while Careerbuilder has stagnated and then declined.\footnotemark \ On the other hand, Google has been the predominant search engine in the US for over 10 years and captures a variety of searches that more specialized job search platforms may not. Lastly, the GJSI can be used to validate the representativeness of proprietary data from these online platforms.
+\footnotetext{This data can be obtained by comparing the Google Trends series for `linkedin' and `careerbuilder' for the US.}
+
+
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+\section{Prior Work on Job Search and UI}
+Economists have been interested in understanding the costs and benefits of UI since the inception of the UI system. Prior literature has focused on the effects of benefit levels and duration on hazard rates out of UI. This research uses a variety of empirical strategies (regression discontinuity, natural experiments, cross-state variation) to find elasticities of unemployment with respect to benefit levels of around 0.5. \cite{Card2007} conduct a review of the literature on the topic of the spike in exit rate from unemployment near the exhaustion of UI benefits. Their study finds that how `exit' is measured can dramatically change the estimated effects: the spike in exit rates does not always corresponding to a spike in re-employment rates. Because none of these studies use data on job search effort, they cannot tell whether a change in job-finding rates comes from search effort or reservation wages.
+
+There have been several studies that use survey data about job search in order to study the response of job search to UI benefits. For example, \citet{Krueger2010} use the ATUS to study how the job search behavior of individuals varies across states and at different points in an unemployment spell. They show that job search activity increases prior to benefit exhaustion and that job search activity is responsive to the level of UI benefits. Given the difference in UI generosity, they assert that these elasticities can potentially explain most of the gap in job search time between the U.S. and Europe.
+
+In another study, \citet{Krueger2011a}(hereafter KM) administer a survey to UI recipients in New Jersey which asks questions about job search activity and reservation wages. They find that effort decreases over the duration of unemployment and that stated reservation wages remain approximately constant throughout the unemployment spell. Importantly, KM present the first longitudinal evidence on job search. In contrast to prior, cross-sectional, evidence, KM find that job search actually decreases as individuals near expiration. Their finding may be due to unobserved heterogeneity across UI claimants that jointly drives exit rates and search intensity. Another important finding in KM is that an extra 20 hours of search is correlated with a 20\% increase in exit to unemployment in a given week. Although this correlation is not necessarily causal, it is an important benchmark because there are few other estimates of the returns to job search in the literature.
+
+KM also estimate the effect of the 2009 expansion of Emergency Unemployment Compensation (EUC) on job search. They find that there are 11 - 20 fewer minutes of job search per day per individual after the policy change. However, their identification strategy cannot separate time trends from the policy change due to the fact that they only observe a single expansion for a single state and therefore lack cross-sectional variation in treatment intensity. This is an important shortcoming because job search activity can vary over time due to factors such as labor market conditions (e.g. \citet{Schmieder2012}), the weather and seasonality. Our data and research strategy allows us to separately identify the effects of UI policy changes from time trends.
+
+
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+\section{Institutional Background on UI}
+Individuals eligible for unemployment insurance can typically draw on benefits for up to 26 weeks at a maximum weekly benefit amount that varies across states. For example, to qualify in the state of Texas an individual needs to have earned a sufficient amount of wages in their base year (the first four of the past 5 completed quarters prior to their first UI claim) and have worked in at least 2 of the quarters in their base year.\footnotemark \ UI recipients need to have been laid off for economic reasons, fired without work-related misconduct, or quit for a valid reason. Once on UI, job-seekers must be able and available to work, be registered with Texas Workforce Solutions, and search for full-time work unless exempted.
+\footnotetext{This amount is generally equal to 37 times the UI weekly benefit amount.}
+
+During times of high unemployment, individuals have access to additional weeks of UI through the federally-funded Extended Benefits (EB) program. EB consists of two tiers, adding 13 and 7 weeks of eligibility respectively. The most common trigger condition used during the recession for the first tier occurred when the three month moving average of a state's seasonally adjusted three month total unemployment rate (TUR) hits 6.5\%. The second level (7 additional weeks beyond the initial 13 weeks) became available when the TUR hit 8\%.\footnotemark 
+\footnotetext{There are additional nuances to EB eligibility. First, states have the option of using the insured unemployment rate (IUR) rather than the total unemployment rate for the triggers. This option is typically more stringent and most states chose the TUR option. Second, the unemployment rate must be higher than 110\% of the same average in the past two years. A similar condition holds if states choose the IUR option.}
+
+Due to the severity of the recession, the federal government passed the Emergency Unemployment Compensation(EUC) Act to extend the potential duration of UI. This act was significantly amended several times according to the following timeline:
+\begin{enumerate}
+\item June 30th, 2008 - The Emergency Unemployment Compensation (EUC) program is created, giving an additional 13 weeks of benefits to the unemployed.
+
+\item November 21st, 2008 - The EUC is expanded by 7 weeks for all unemployed and by an additional 13 weeks for those residing in states with greater than 6\% three months average TUR.
+
+\item November 6th, 2009 - The EUC is expanded by 1 week for all unemployed, 13 additional weeks for unemployed residents of states with greater than 6\% TUR, and an additional 6 weeks for states with TUR greater than 8.5\%.
+\end{enumerate}
+
+The combination of the EUC and EB programs had the effect of increasing the maximum weeks of unemployment insurance from 26 to 99 weeks in many states, including Texas. EUC was also characterized by legislative instability. In particular, after the November 6th, 2009 expansion, EUC was amended numerous times to extend the period for which individuals were eligible for these expanded benefits (see Table \ref{tab:announcements} for details). In December 2013, EUC was terminated by Congress, drastically reducing the potential benefit duration of UI in some states. Furthermore, after the recession, several states chose to reduce their regular potential benefit duration.
+
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+\section{Google Search's Validity as a Measure of Job Search}\label{sec:validity}
+In this section we first describe the construction of the GJSI and then demonstrate its validity as a proxy for aggregate job search. The GJSI is constructed from indexes of search activity containing the term `jobs' obtained from Google Trends (http://www.google.com/trends/). Google Trends returns a time series representing search activity for a query term, date range, and geography. The values of a Google Trends series represent the number of searches for the specified search term relative to the total number of searches on Google.com.\footnotemark \ Each series is normalized so that the highest value over the query time period is set to 100 and the values of the series are always integers between 0 and 100.
+
+\footnotetext{The relative frequency is determined by examining a sample of all Google search traffic. A potential concern is that Google imposes thresholds for reporting search data below which a 0 is displayed in Google Trends. For instance, too few searches were done for the search term `econometrics' in July 2006 in Texas. Therefore, Google Trends displays a 0 rather than a low number, producing large swings in the time series data. However, for the search term, `jobs', even at a weekly-DMA level in Texas, there are no zeros reported by Google Trends after 2005. Our results are robust to excluding the first year of data and to re-sampling the Google Trends series.}
+
+The exact volume of searches for `jobs', or any other term, on Google is kept confidential. However, several tools available as of 2013 offer clues into the raw numbers underlying Google Trends. For example, Google's Adwords tool states that there were 68 million monthly searches for `jobs' in the United States in the year proceeding April 2013. That amounts to approximately 6 searches per unemployed individual per month in the United States. According to the Adwords traffic estimator, an alternative measure of search volume, the top placed ad for `jobs' in Texas in April 2013 would generate 25,714 impressions per day or 771,000 impressions per month. That amounts to approximately one search per month per unemployed individual in Texas. If one serves the ad to not just the Google main site but to affiliates in Google's network then the total potential impressions per day is 3.3 million per day. It is unclear whether the impressions numbers that Google provides assume that the top ad is seen by all searchers. Nonetheless, the search numbers from Adwords suggest that there is a substantial volume of searches for the term `jobs' and variants of the term. 
+
+The GJSI represents the share of all searches that involve `jobs' and, as a result, may move either because the number of searches for `jobs' changes or because the number of aggregate Google searches changes. This can be an advantage or disadvantage depending on the empirical research strategy, as we discuss later. Therefore, researchers should carefully consider whether to include time trends or time fixed effects when using the GJSI.
+We use three samples from Google Trends: a national daily index to study day-of-week effects, a state-month panel to look at responses to UI policy across states, and a DMA-week panel for an exercise using administrative UI data from Texas. For each series, we choose the search term `jobs' as our term of interest.\footnotemark \
+\footnotetext{We remove searches that contain `Apple' or `Steve', as there was a large surge in Google searches containing `jobs' upon the death of Steve Jobs. This can be accomplished in Google Trends by searching, `jobs -apple -steve' rather than simply searching for `jobs'.} The term `jobs' captures a large variety of job search activities online, with many job related queries included in the more general `jobs' index. For example, people may search for jobs at a specific company (`Walmart jobs') or region (`Dallas jobs'). For such queries, Google is one of the most effective ways of finding the appropriate job posting site. Searches for `jobs' have a greater than 0.7 correlation with other job search related terms, such as `state jobs', `how to find a job', and `tech jobs'.\footnotemark
+\footnotetext{See online appendix Table A1 for a partial list of alternate terms tested and their correlations with one-another.}
+
+As a test of the applicability of our chosen term, we also use Google Correlate to determine which search terms that do not contain the text `jobs' are most correlated with Google searches for `jobs'.\footnotemark \ The most correlated results contain occupation specific searches (`security officer', `assistant', `technician'), job search specific terms (`applying for', `job board', `how do I get a job') and social safety net searches (`file for unemployment in Florida', `social security disability'). These results suggest that the search term `jobs' both picks up a large portion of jobs-related search activity and is highly correlated with other, more specific and detailed, search terms. Importantly, `jobs', has the highest volume and is least prone to sampling bias of all the terms discussed above.
+\footnotetext{According to Google: `Google Correlate is a tool on Google Trends which enables you to find queries with a similar pattern to a target data series.' See \citet{Scott2013} for further discussion of the uses and broader applications of Google Correlate and similar services.}
+
+Lastly, data from Google Trends has been used in prior research. Several papers starting with \citet{Choi2009} have used Google search data to forecast (or `now-cast') macroeconomic variables such as unemployment insurance claims, tourism inflows, product sales, auto sales, and unemployment rates, both in the US and abroad. See \citet{DAmuri2009}, \citet{Choi2013}, \citet{Fondeur2011}, \citet{Askitas2010}, and \citet{Artola2012} for a selection of forecasting work. Google Trends has been utilized in work involving financial markets, as well. \citet{DaZhiEngelberg2011} use Google search data show that search data predicts stock price movement and \citet{Vlastakis2012} show that demand for information about stocks rises in times of high volatility and high returns. Finally, others have utilized Google Trends for detecting patterns of disease or flu outbreaks (see \citet{Preis2014}) or even to measure the impact of racial animus on political elections (\citet{Stephens-Davidowitz2013}).
+
+
+\subsection{Online Job Search as a Component of Job Search}\label{sec:impjobsearch}
+One potential drawback of the GJSI is that it is solely a measure of online search activity. In this section, we argue that online job search is important and follows similar trends to overall job search. Our first piece of evidence comes from browsing traffic. Sites like CareerBuilder.com, Monster.com, and Indeed.com receive tens of millions of unique visitors per month, demonstrating the this type of search is ubiquitous and frequent.
+
+To investigate whether those visitors are representative, we turn to the National Longitudinal Survey of Youth (NLSY). In 2003, 53\% of NLSY job seekers used the internet and 83\% did in 2008.\footnotemark \ Similarly, the 2011 Internet and Computer Use supplement of the Current Population Survey reports that over 75\% of individuals who were searching for work in the past 4 weeks had used the internet to do so. Even as early as 2002, 22\% of job seekers found their jobs online (\citet{Stevenson2009}), suggesting that a much larger fraction used the internet as at least part of their search. Finally, the increased availability of the internet has decreased the use of physical classified jobs ads has made online job search more prevalent over the past decade, as documented in \citet{Kroft2011a}. Therefore, we conclude that online job search is sufficiently representative and makes up a large component of overall job search.
+\footnotetext{The NLSY only asked a question about internet use for job search from 2003 - 2008.}
+
+One concern with the GJSI is that Google searches represent a different type of activity than online job search in general. We now show that this is not the case by comparing the GJSI with data on individual browsing from comScore. The comScore Web Behavior Database is a panel of 100,000 consenting internet users across the United States who were tracked for the year 2007. We first use this panel to identify visits by a user to a job search website and to calculate the time spent visiting these sites.\footnotemark{} We then construct a proxy for the GJSI by calculating the ratio of visits to job search sites originating from Google as a fraction of total site visits to Google.
+\footnotetext{For example, we include all domain names containing `job', `career', `hiring', and `work' in addition to the largest job search sites (eg. monster.com, careerbuilder.com, indeed.com, and linkedin.com). We identified and removed websites which were unrelated to job search but contained the word `job'.}
+
+This is analogous to our GJSI, which is based on the number of Google searches related to the term `jobs' as a fraction of total Google searches. Table \ref{tab:comScore} displays the results of a regression of time spent on job search sites on the proxy for GJSI. We find that a 1\% increase in the `synthetic GJSI' is correlated with an approximately 1\% increase in overall time spent on online job search. Furthermore, the fraction of visits to Google that result in a visit to a job search site explains over 50\% of the total variability in the amount of job search per capita at a state-month level. These results suggest that our measure of job search is a good proxy for overall online job search effort.
+
+\subsection{The GJSI and The American Time Use Survey}\label{sec:atus}
+We also benchmark the GJSI against the job search related questions of the American Time Use Survey. ATUS job search activity is calculated using the amount of time that individuals spend in job search related activities.\footnotemark{} The monthly correlation between the national measured averages of job search per capita from the ATUS and the GJSI is approximately 0.56. This correlation is robust to the inclusion or exclusion of job-related travel time, removing the oversampling of weekend days, or using related Google job-search terms to measure job search activity.
+\footnotetext{We use the methodology from \citet{Krueger2010} to measure the quantity of job search using the ATUS. We assembled all ATUS data from 2003-2009 (though Krueger and Mueller used through 2007), and restricted our comparison to people of ages 20-65. We examine comparisons including and excluding `Travel Related to Work', which includes job search related travel but also many other types of job-related travel. Krueger and Muller included this category in their analysis. ATUS categories encompassing job search activities are: `Job Search Activities', `Job Interviewing', `Waiting Associated with Job Search or Interview', `Security Procedures Related to Job Search/Interviewing', `Job Search and Interviewing, other'.}
+
+Table \ref{tab:atuscorr} shows results of regressions of the GJSI on job search as measured by the ATUS at a state-month level. There is a statistically significant relationship between the Google and ATUS measure across all specifications. Columns 1-4 display the relationship between the GJSI and average ATUS job search activity both without controls and with state and month fixed effects. The dependent variable is either amount of job search time, or an indicator for non-zero job search activity. The fivefold increase in $R^2$ between columns 1 and 2 highlights a drawback of the small samples in the ATUS, where most state-month observations have no reported job search activity, attenuating any estimates. This makes any meaningful estimation using the ATUS difficult at a geographically disaggregated or high-frequency level. Across specifications, we find that increases in the GJSI are associated with more job search in the ATUS.
+
+Columns 5 and 6 display placebo regressions that include other search indexes derived from Google Trends. In column 5, we include an index of search for the term `weather' alongside our Google Job Search Index. We find no significant relationship between searches for weather and job search as measured by the ATUS. Moreover, the coefficient on our GJSI is virtually unchanged. In column 6, we include two other measures of Google search that could be related to unemployment rates or benefits rather than job search. `Google Unemp/Emp' refers to an index of all searches containing either the term `unemployment' or the term `employment'. `Google Unemp Rate' refers to an index including the term `Unemployment Rate'. Neither of these terms is significantly related to ATUS job search time when we include the baseline GJSI.\footnotemark
+\footnotetext{Other terms which were similarly non-significant in this specification include `economy', `economic', `unemployment insurance', `unemployment benefits', `GDP', `layoffs'.}
+
+
+\subsection{Day of Week and Holiday Effects}\label{sec:dayofweek}
+Another way in which we validate the GJSI is to study its behavior across days of the week and holidays. Our measure should follow the same predictable daily, monthly, and yearly trends as other job search measures. For instance, we would expect to see declines in search on weekends and holidays due to social commitments and general societal norms.\footnotemark \ It should also increase in the late spring because graduating students are looking for jobs and other students are looking for summer jobs. Indeed, the GJSI increases in January after a holiday lull and also increases at the end of the spring as expected. We compare relative job search effort for different days of the week using the American Time Use Survey, the comScore Web Panel, and the GJSI. Figure \ref{fig:dayofweek} displays the day-of-week fixed effects for all three measures graphically, with full regression results in Table \ref{tab:dayofweek}. The day of week effects move in tandem for all three measures of job search. For example, there are large drops in search on Fridays and weekends across all three measures. Furthermore, the ratios of weekend to holiday search are approximately the same for all 3 measures. We interpret these results as evidence that Google search for `jobs' is a good proxy for overall job search.
+\footnotetext{ATUS holidays are New Year's Day, Easter, Memorial Day, the Fourth of July, Labor Day, Thanksgiving Day, and Christmas Day.}
+
+We also apply the same methodology to other placebo search terms related to the economy, unemployment, and unemployment insurance to ensure that our validation of the GJSI is not due to a mechanical relationship inherent in Google's data or due to a general interest in the economy. In the bottom panel of Figure \ref{fig:dayofweek}, we plot day of week coefficients from regressions using three placebo search terms alongside the daily coefficients from our ATUS and comScore data. `Google Unemp Benefits' tracks the frequency of Google searches for the term `unemployment benefits' or `unemployment insurance', `Google Unemployment' tracks searches for the term `unemployment', and `Google Unemployment/Employment' tracks searches for the term `unemployment' or `employment'.
+
+We find little similarity between the weekly patterns of these Google search terms and the weekly patterns in the ATUS and the comScore web panel. We take this as further confirmation that the link between our GJSI and the amount of job search as measured by other datasets is not due solely to chance or to any mechanical feature of the Google Trends data. Rather, it represents a true link between the amount of job search undertaken in the real world and that observed through Google search behavior.
+
+
+\subsection{The GJSI and Macroeconomic Conditions}\label{sec:macrodrivers}
+If the GJSI is a valid proxy, we would expect that it also follows macroeconomic drivers of job search activity. Table \ref{tab:macroeffects} displays the results of regressions of the GJSI on labor market conditions at a state-month level. While these results are not causal, they all appear to move in the `expected' direction and have a high degree of predictive power. All columns use logged GJSI as the dependent variable and all variables have been standardized such that the standard deviation is equal to 1. Columns 1-3 show the results of a regression with the state unemployment rate as the independent variable with varying fixed effects. There is a positive correlation between the unemployment rate and the GJSI, with an increase in the unemployment rate of one standard deviation being associated with an increase in the GJSI of approximately 0.65-0.8 standard deviations.
+
+In Column 4, we add the number of initial unemployment benefit claims per capita to our regression. The coefficient on new claims is positive and significant, consistent with higher levels of job search for newly unemployed individuals. Columns 5 and 6 also include the number of final claims for UI per capita. We expect that current job search will be positively correlated with the number of final claims in the following month for two reasons. First, those who search more in the current month are more likely to find a job and exit the UI system in the following month. Second, recipients whose benefits will be expiring in the following month will most likely search at a higher rate in the current month. Indeed, we find the expected signs for all measures of labor market conditions, though the point estimate becomes insignificantly positive with the inclusion of both state and month fixed effects.
+
+
+\subsection{Inferring Relative Search Intensities from the GJSI}\label{sec:nlls}
+The GJSI is an aggregate measure that is composed of the job search activity of specific sub-populations. Therefore, small changes to the GJSI may mask large changes in the search effort within certain groups. For example, UI policy affects the share of a population which receives UI and also affects the returns to job search for this subpopulation. If job searchers have many weeks of UI benefits, then their returns to job search should be lower. In this section, we describe a procedure for using the GJSI to infer relative search intensities and apply it to measure the relative search intensity of individuals with different weeks left of UI benefits.
+
+Because the GJSI is a non-linear transformation, OLS will not recover meaningful estimates of relative job search intensities. However, since we know the form of the non-linear transformation, we can use a nonlinear least squares (NLLS) procedure to recover estimates of relative job search intensities. This procedure can also be useful for the analysis of other Google Trends series.
+
+In order to use this procedure, we must make two substantive assumptions regarding search behavior. Below, we discuss these assumptions using an illustrative example. Derivations are available in our online appendix. Suppose that we are interested in the relative job search intensity between two types of job searchers, the employed and the unemployed. The first assumption we make is that the Google search intensity for non-jobs related terms must be equal between the employed and the unemployed. While this assumption is not likely to hold exactly, we think that any differences in overall search behavior by type are dwarfed by differences in job search activity. Our second assumption is that the amount of job search done by different types can be decomposed into a type specific job search intensity level and a time specific fixed effect. Essentially, we stipulate that the ratio of job search between any two types is constant over time, which is an implication of many models of job search.
+
+Using these assumptions, we can write down the following estimating equation:
+\begin{equation}\label{eqn:estimating_eq}
+\log{JS}_{dt} =\beta_{0d} + \beta_{1dt} + \beta_{2t}+\log{(\gamma_{E}N_{Edt}+\gamma_{U}N_{Udt})}+\epsilon_{dt}
+\end{equation}
+where $\beta_{0d}$ is an location specific fixed effect, $\beta_{1dt}$ is a location specific time trend (to account for differential trends in internet usage by location) and $\beta_{2t}$ are time fixed effects. $N_{Edt}$, is the share of employed individuals in the population at time t and $N_{Udt}$ is the share of unemployed individuals in the population at time t. The ratio  $\frac{\gamma_{E}}{\gamma_{U}}$ is the relative job search intensity between these two types of searchers.
+
+We estimate this equation using administrative UI data from the Texas Workforce Commission. We focus on this data rather than a national sample from the Current Population Survey (CPS) because the CPS is too imprecise to measure the distribution of potential benefit duration at a state-month level. On the other hand, because our Texas data includes all UI recipients in Texas, we can measure how the number of individuals at each level of PBD changes from week to week at a DMA level. We include further details on the Texas data in our online appendix. 
+
+An important drawback of using the Texas data is that we lose the cross-state variation in the timing of UI expansions. Therefore, much of the variation in the composition of the unemployed in this data is driven by differential layoff timing across DMAs. Although we include controls for DMA fixed effects and trends, we cannot exclude that differential layoff timing across DMAs is correlated with other shocks to the returns to job search behavior, which will consequently affect our estimates. Therefore, we view our results using Texas data as suggestive and illustrative.
+
+Table \ref{tab:nllscurlaw} displays estimates from a nonlinear least squares (NLLS) model based on Equation \ref{eqn:estimating_eq} with three types of job seekers: those on UI, those not on UI and the employed. Columns 1 displays the coefficients corresponding to the $\gamma_i$'s in Equation \ref{eqn:nlls}. The coefficient on the number on UI is approximately 25\% smaller than the coefficient on the number of unemployed individuals not on UI. This corroborates empirical results from KM as well as standard models of moral hazard that predict less job search activity among the unemployed who are on UI. Second, the employed search less than one tenth as much as the unemployed.
+
+Next, we test whether individuals with different weeks-left of UI search with different intensities. We use the `current law' definition of weeks left (results using `current-policy' beliefs are in an online appendix). Table \ref{tab:nllscurlaw} column 2 displays coefficients corresponding to search effort by individuals with 0 to 10, 11 to 20, 21 to 30 and 30 or more weeks left. One concern about our specification may be that we do not fully account for the fact that people may search differently when they initially begin UI than when they continue in UI. In column 3, we control for the number of individuals with 5 or fewer weeks on UI without substantively changing our results.
+
+Our results confirm that the GJSI is driven, in part, by heterogeneous search activity across groups. In general, individuals with higher numbers of potential weeks search less than those with few weeks of benefits remaining. Those with fewer than 10 weeks remaining search 66\% more than those with 10 - 20 weeks remaining and 108\% more than those with more than 30 weeks remaining.\footnotemark \
+\footnotetext{Figure \ref{fig:weeks_left_effects} displays the coefficients from a NLLS regression with weeks-left binned at a 5 week level. The results confirm that there is a higher level of search nearer to UI expiration. However, we lose precision on the coefficients past 15 weeks left.}
+
+
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+\section{The Aggregate Effects of UI Expansions on the GJSI}
+We now test whether the expansions in the potential benefit duration (PBD) of UI affected aggregate job search. We use both PBD shifts that occur due to the changes in the EUC program at the time of legislation as well as those due to hitting state-level unemployment thresholds for increases in PBD. This latter category includes both thresholds set by the new EUC program as well as the previously enacted EB program. 
+
+An important consideration for our analysis is the extent to which individuals can anticipate increases in PBD. If some individuals did anticipate the imminent expansion in UI benefits (i.e. the perceived probability of expansion went from somewhere above 0\% to 100\% instead of from 0\% to 100\%), our estimates represent lower bounds on the true effects of expansions on search. There are several reasons, however, why these increases were unlikely to be expected by unemployed individuals. First, expansions were often politically contentious and it was uncertain whether they would be passed or in what exact form. Second, some of the expansions came at predetermined thresholds of unemployment rates by state. Such expansions would be unpredictable at a high-frequency level because it is hard to predict short-run unemployment rate changes. As evidence, we look at media articles regarding benefits around the time of new legislation to see whether the media anticipated these changes. Figure \ref{fig:euc_news} displays counts of newspaper articles in Texas about the EUC or EB system for the 15 days before and 15 days following each expansion or extension. The increase in coverage only begins 2 days before the policy change. This gives us confidence that individuals were not exposed to much information about changes to UI benefits until the time immediately preceding those changes.
+
+Our data for this exercise comes from the Current Population Survey (CPS). We follow \citet{Rothstein2011} in constructing a panel of individuals on unemployment insurance across states, using repeated survey observations and data on job loss reasons to determine the lengths of UI spells and eligibility for UI. The identification comes from cross-state variation in the timing of UI policy changes. Different states crossed the EUC and EB thresholds at different times, enacted idiosyncratic legislation, or were differentially affected by federal changes to UI. This variation in timing results in different potential benefit durations across states during a given time period.
+
+Our baseline specification is:
+\begin{equation}\label{eqn:main}
+\begin{split}
+\log{GJSI_{st}} = \alpha PBD_{st} + \beta_{1} U_{st} + \beta_{2} U^{2}_{st} + \\
+\sum_{m}{(\kappa_{1m}t + \kappa_{2m}t^{2})*1(m=s)} + \gamma_{t} + \gamma_{s} + \epsilon_{st}
+\end{split}
+\end{equation}
+where $PBD_{st}$ is a measure of the potential weeks of UI for a newly unemployed individual on month t in state s. $U_{st}$ is the state level unemployment rate. $\kappa_{im}$ are state specific linear and quadratic trends. $\gamma_{t}$ and $\gamma_{s}$ are year-month and state fixed effects, respectively.
+Table \ref{tab:nationalregs} displays estimates of the above specification using data from January 2005 through December of 2014. The main coefficient of interest in the above equation is $\alpha$, which represents the effect of the PBD on job search activity. Our estimate of $\alpha$ is negative and statistically significant across all specifications. The coefficient in our preferred specification (4), which includes controls for both state labor market conditions and state-specific trends, implies that an increase of 10 weeks in UI benefits results in a 2.1\% drop in aggregate job search in the state.
+
+Columns (6) and (7) split the sample into two time periods: 2005-2011 and 2012-2014. Prior to 2011, most of the variation in potential benefit duration came from variation in how fast states' potential benefit duration increased alongside unemployment rates and increases in the generosity of the UI system. Starting in 2012, regulatory changes and declines in the unemployment rate across states began to drive potential benefit duration downwards. We find that in both periods, higher levels of potential benefit duration tended to be associated with lower job search, but this relationship is stronger in the earlier period. The difference between the two time periods may be driven by the fact that there was more media attention surrounding the unemployment insurance system in the earlier period, or because there were more UI recipients close to expiration when the economy was worse during the Great Recession.
+
+Table A2 in our online appendix includes additional results where we replace the potential benefit duration with a post-expansion indicator which equals 1 in the month following an expansion of UI benefits. The coefficient on post expansion is not significantly different than zero in all specifications. We view this as further evidence that there was no large change in job search due to the UI expansions.
+
+\subsection{Event Study Evidence Regarding Dynamic Responses to UI}
+In this section we study how job search changes in response to large changes in PBD. We use both the increases in PBD due to state crossings of EUC and EB unemployment rate triggers and the drops in PBD in the subsequent periods (due to both state and federal decisions). We do this for several reasons. First, large changes in PBD may be more salient to the unemployed. Second, at least some of these large changes were probably unanticipated by job-seekers and are therefore less likely to suffer from the attenuation bias caused by job-seeker expectations regarding UI policy. Lastly, the dynamic response to a UI policy change is itself interesting.
+
+We first focus on large increases in PBD during the Great Recession. Our empirical strategy uses the event study methodology of \citet{Marinescu2015}. To execute the event study, we identify the largest PBD increases that were not concurrent with the passage of legislation regarding UI by Congress.\footnotemark \ These increases added between 13 and 26 weeks to the PBD of those eligible for UI in a state. In each case, we consider up to 4 months before and after the change. If a change in UI occurred in the 4 months prior to the biggest change, then we exclude observations including and before the month of the prior change. Similarly, if a change in UI occurred after the largest change, then we exclude the month of the subsequent change and the months after the change. Consequently, our sample does not represent a balanced panel.
+\footnotetext{In cases where there are multiple jumps of the same size in a state, we use the first.}
+
+We estimate two specifications using the sample of large jumps: a before and after analysis and a difference in difference specification with control states that did not experience jumps during the same time period. The estimating equation for the before and after analysis is:
+\begin{equation}\label{eqn:befandaf}
+\log{GJSI_{st}} = \beta^{i}_{st} + \gamma_{s} + \epsilon_{st}
+\end{equation}
+where $\beta^{i}_{st}$ is an indicator variable for whether state s experienced a change in PBD i months before and $\gamma_{s}$ is a state fixed effect. 
+
+This simple before and after analysis is potentially corrupted by state specific changes in other labor market conditions or in Google search usage in general, which may occur concurrently with changes in UI. To account for time trends, we find control states for each identified jump which do not experience a jump in the same time period. If a `control' state experiences a jump in potential weeks left before the `treatment' state, we only keep observations for the `control' after that occur after that jump. Similarly, if a `control' state experiences a jump in potential weeks left after the `treatment' state, we only keep observations for the `control' that occur before that jump. Our difference in difference specification is as follows:
+\begin{equation}\label{eqn:befandafdiff}
+\log{GJSI_{stj}} = \beta^{i}_{st} + \gamma_{t} + \gamma_{sj} + \epsilon_{stj}
+\end{equation}
+Where $\gamma_{t}$ is a year-month fixed effect and $\gamma_{sj}$ is a state-by-jump fixed effect.\footnotemark
+\footnotetext{Some state-month observations may appear multiple times as controls for different jumps.} 
+
+Table \ref{tab:eventstudy} columns (1) and (2) show the results from these regressions. In both specifications, the coefficients on the impulse coefficients before and after the increase are less than 3\% in absolute value and statistically insignificant.
+
+We also estimate a version of our panel specification, described in Equation \ref{eqn:main}, where the coefficient on PBD is replaced with impulse coefficients surrounding increases of at least 13 weeks.\footnotemark \ The top panel of figure \ref{fig:impulse_change} and column (3) of Table \ref{tab:eventstudy} display estimates of this specification. These estimates are small, statistically insignificant, and robust to the inclusion of time trends and additional controls. 
+\footnotetext{For this specification, a given state and time observation can take on multiple values of the impulse if, for example, it lies within 4 months of two separate increases in PBD. We limit the sample to the time period before 2012 to exclude a time period with multiple drops in UI benefits.}
+
+Next we consider the response of job search to drops in PBD that occurred after 2011. Our first specification focuses on the decreases in PBD caused by the failure of Congress to renew EUC in December 2013 (see \citet{hagedornimpact2015} for more information regarding this change). This change caused differential drops in PBD across states at the same time. We exploit this variation by splitting our states into those whose PBD dropped by more than 24 weeks and those whose PBD dropped by less than 24 weeks. We then interact each impulse with an indicator for whether the state experienced a large drop. If there was a large search effort response to PBD then we would expect searchers in states with larger drops to search more after the drop. The coefficients on the interaction terms in this regression are displayed in column (4) of Table \ref{tab:eventstudy}. Once again, none of our estimates are large or statistically significant. If anything, there was a decrease in job search following bigger drops.
+
+Lastly, the bottom panel of Figure \ref{fig:impulse_change} displays the coefficients using the panel specification but only using the sample after 2011 and focusing on drops in PBD of at least 7 weeks.\footnotemark \ This specification once again yields non-significant coefficients in the post-drop period. In conclusion, our event study methodology fails to find evidence of large job search responses to changes in potential benefit durations in the period between 2004 and 2014. 
+\footnotetext{Several of these drops were caused by individual state decisions to reduce the PBD of regular weekly benefits.}
+
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+\section{Discussion}
+We develop the Google Job Search Index (GJSI), a new measure of job search from Google search data. We benchmark the GJSI to a number of alternate measures of job search activity and find that it is a good measure of aggregate job search activity. We argue that the GJSI is a useful complement to existing measures of labor market condition. First, it is freely available and allows researchers and policy-makers to measure the effects of policies in real time. Second, it is available at a higher geo-temporal resolution than existing measures of job search. Lastly, it suffers from less sampling bias than survey evidence.
+
+We use the GJSI to study how job search responded to the changes in unemployment insurance policy in the period between 2005 and 2014. We find that job search does respond to the potential benefit duration (PBD) of unemployment insurance. However, this job search response is small. To see this, consider that our largest estimate suggests that a 10 week increase in PBD results in a 3.3\% decrease in aggregate job search. During October of 2009, the unemployment rate was approximately 10\% and the share of those eligible for UI was approximately half of that number. Furthermore, according to the American Time Use Survey (Table \ref{tab:atussumm}), the unemployed are responsible for approximately two-thirds of all job search. If we assert that the entirety of the decline in aggregate search was driven by those eligible for UI, our estimates imply that a 10 week increase in PBD caused eligible UI recipients to decrease job search by 10\%.
+
+Finally, we use an alternative event study methodology to study changes in UI policy and similarly fail to find large aggregate job search responses. We conclude that expansions in the UI system during the Great Recession had only minor effects through drops in job search.
+
+
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+\newpage
+\bibliographystyle{aer}
+\bibliography{texasbib}
+
+
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+\newpage
+
+\begin{figure}[!ht]
+\centering
+\caption{Day of Week Fixed Effects and Placebo Test} \label{fig:dayofweek}
+	\begin{tabular}{c}
+	\textbf{Day-of-Week Comparisons}\\
+\includegraphics[width=5.6in]{Final_Figures_Tables/Figures/dayofweekgraph.png}\\
+	\textbf{Day-of-Week Placebo Comparisons}\\
+\includegraphics[width=5.6in]{Final_Figures_Tables/Figures/dayofweekgraph_placebo.png}
+\end{tabular}
+	\vspace{.5mm}
+	\hspace{.45in}
+	\begin{tablenotes}
+\item Notes: Panels show coefficients and standard error bands from separate regressions. Each regresses a measure of job search or Google search index on day-of-week dummies and relevant geographic and seasonal fixed effects. ATUS represents coefficients derived from data from the American Time Use Survey from 2003-2010. ComScore represents coefficients derived from data from a sample of the comScore Web Panel in 2007. Google Index represents coefficients derived from data from the Google Job Search Index from 2004-2013. `Google Unemp Benefits' tracks the frequency of Google searches for the term `unemployment benefits' or `unemployment insurance', `Google Unemployment' tracks searches for the term `unemployment', and `Google Unemployment/Employment' tracks searches for the term `unemployment' or `employment'.
+\end{tablenotes}
+\end{figure}
+
+
+\newpage
+\clearpage
+
+%From 4b_Make_Rothstein_weeks_left_by_user.do
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=5in]{Final_Figures_Tables/Figures/weeks_left_by_type.png}
+  \caption{Average Weeks Left by Type}
+  \label{fig:avgweeksleft}
+  \end{center}
+	\floatfoot{\normalsize Notes: This figure shows the average number of weeks the population of UI recipients are eligible for. `Current Pol' refers to an assumption that the current UI policy, as of the listed week, is continued for all time. `Current Law' refers to an assumption that the current UI law, as of the listed week, will be obeyed, meaning many of the extended benefits will expire in the future. Data covers all UI recipients in Texas.}
+\end{figure}
+
+\newpage
+\clearpage
+
+%From 2. Graphs with Texas and Nation
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=5in]{Final_Figures_Tables/Figures/national_euc.png}
+  \caption{Number of News Articles Regarding EUC}
+  \label{fig:euc_news}
+  \end{center}
+	\floatfoot{\normalsize Notes: Columns show the number of articles per day written about the emergency unemployment compensation or extended benefits programs. Searches are run on the Access World News Newsbank archives, which covers more than 1,500 US Newspapers. Search terms include ``emergency unemployment compensation'' and ``extended benefits''.}
+\end{figure}
+
+
+\newpage
+\clearpage
+
+
+\begin{figure}[!ht]
+\centering
+\caption{The Dynamic Response to Changes in UI Generosity} \label{fig:impulse_change}
+	\begin{tabular}{c}
+	\textbf{Duration Increases (2005-2011)}\\
+\includegraphics[width=3.2in]{Final_Figures_Tables/Figures/jump_shock_pre_2012.pdf}\\
+	\textbf{Duration Decreases (2012-2014)}\\
+\includegraphics[width=3.2in]{Final_Figures_Tables/Figures/drop_shock_post_2011.pdf}
+\end{tabular}
+	\vspace{.5mm}
+	\hspace{.45in}
+	\begin{tablenotes}
+\item Notes: The top panel displays a coefficient estimate and 95\% confidence interval where each coefficient represents a period relative to a jump of at least 13 weeks in potential benefit duration. These coefficients were obtained from a panel regression which uses CPS data from 2005 to 2011. The bottom panel displays coefficient estimates and 95\% confidence interval where each coefficient represents a period relative to a drop of at least 7 weeks in potential benefit duration. These coefficients were obtained from a panel regression which uses CPS data from 2012 to 2014. Both regressions control for the fraction of the population on UI, year-month fixed effects, and state fixed effects. Standard errors are clustered at the state level.
+\end{tablenotes}
+\end{figure}
+
+
+
+\clearpage
+
+
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+%\section{Tables}
+
+
+\begin{sidewaystable}
+\centering
+\begin{threeparttable}
+\caption{Summary of Major Unemployment Legislation}
+\label{tab:announcements}
+\begin{tabular}{llll}
+\hline
+ Bill  & Date Passed  & EUC Effect  &  Summary  \\
+\hline
+Supp. Appropriations Act & Jun. 30, 2008 & Created & Extends emergency unemployment compensation for\\
+  &&&                                                      an additional 13 weeks. States with unemployment\\
+ &&&                                                       rates of 6\% or higher would be eligible for an\\
+  &&&                                                      additional 13 weeks. (Tier 1) \\
+Unemp. Comp. Extension Act & Nov. 21, 2008& Expanded& Provides for seven more weeks of unemployment \\
+  &&&                                                      insurance benefits. States with an unemployment\\
+  &&&                                                      rate above six percent are provided an additional\\
+    &&&                                                    13 weeks of extended benefits. (Tier 2)\\
+Worker, Homeownership, and & Nov. 6, 2009 &Expanded & Makes Tier 2 available to all states\\
+  Business Asst. Act     &&&                                       Extends unemployment insurance benefits by\\
+     &&&                                                   up to 19 weeks in states that have jobless rates above\\
+     &&&                                                   8.5 percent. (Tiers 3 and 4)\\
+DoD Appropriations Act & Dec. 19, 2009& Extended&Extends the filing deadline for federal unemployment\\
+      &&&                                                  insurance benefits until Feb 28, 2010. \\
+Temporary Extension Act & Mar. 2, 2010& Extended&Extends the filing deadline for federal unemployment\\
+      &&&                                                  insurance benefits until April 5, 2010. \\
+Continuing Extension Act & Apr. 15, 2010& Extended&Extends the filing deadline for federal unemployment\\
+      &&&                                                  insurance benefits until June 2, 2010. \\
+Unemp. Comp. Extension Act & Jul. 22, 2010& Extended&Extends the filing deadline for federal unemployment\\
+      &&&                                                  insurance benefits until November 30, 2010. \\
+Tax Relief and UI Reauth Act & Dec. 17, 2010& Extended&Extends the filing deadline for federal unemployment\\
+      &&&                                                  insurance benefits until Jan 3, 2012. \\
+Temporary Payroll Tax Cut  & Dec. 23, 2011& Extended&Extends the filing deadline for federal unemployment\\
+ Continuation Act     &&&                            insurance benefits until March 6, 2012. \\
+Middle Class Tax Relief and & Feb. 22, 2012& Extended&Extends the filing deadline for federal unemployment\\
+  Job Creation Act     &&&                            insurance benefits until Jan 2, 2013. \\
+American Taxpayer Relief Act & Jan. 2, 2013 & Extended&Extends the filing deadline for federal unemployment\\
+ of 2012      &&&                                                  insurance benefits until Jan 1, 2014. \\
+Congress chooses not to  & Dec. 2013 & Ended  & EUC is terminated when Congress declines reapproval\\
+extend EUC &  &   & \\
+\hline
+\end{tabular}
+\begin{tablenotes}
+\item These are the major congressional actions which affected the availability and generosity of federal unemployment benefits.
+\end{tablenotes}
+\end{threeparttable}
+\end{sidewaystable}
+
+
+%From 2. Make comScore Table.do
+\newgeometry{left=.5in, right=.5in}
+\begin{sidewaystable}[H]
+\caption{Correlation of Google Search to Online Job Search Time - comScore Data}
+\label{tab:comScore}
+\begin{center}
+\input{Final_Figures_Tables/Tables/GooglecomScore.tex}
+\begin{tablenotes}
+\item Synthetic GJSI is an index constructed from the number of visits to Google.com that lead to a job search site over the total number of visits to Google.com across a state-month observation. The dependent variable measures the amount of time users spend on job search related websites, per capita, in a given state-month. Column 3 utilizes only states with a population in excess of 1 million. All numbers are taken from 2007 comScore web panel data. The Synthetic GJSI ratio has a mean of 0.009.
+\end{tablenotes}
+\end{center}
+\end{sidewaystable}
+
+%From 1. FinalWorking - State
+\begin{sidewaystable}[H]
+\caption{ATUS Search Time Correlation}
+\label{tab:atuscorr}
+\begin{center}
+\input{Final_Figures_Tables/Tables/ATUSCorr.tex}
+\begin{tablenotes}
+\item `Search Time' refers to ATUS Search Time, the average number of minutes per day respondents report that they spent on job search in a given state-month. Standard errors clustered at a state level. Columns 2 and 4 use the sample of state-month observations with non-zero job search time recorded. Google indexes represents coefficients derived from data from three separate Google Trends queries from 2004-2014. `Google Weather Search' is an index analogous to the GJSI but using the term `weather'. `Google Unemp Rate' tracks the frequency of Google searches for the term `unemployment rate', and `Google Unemployment/Employment' tracks searches for the term `unemployment' or `employment'.
+\end{tablenotes}
+\end{center}
+\end{sidewaystable}
+
+%From 2. Make ATUS comScore Table
+\begin{sidewaystable}[H]
+\caption{Day of Week Fixed Effects for Google, comScore, and ATUS}
+\label{tab:dayofweek}
+\begin{center}
+\input{Final_Figures_Tables/Tables/holiday_dow.tex}
+\begin{tablenotes}
+\item  `Google Search' refers to the logged value of the GJSI. `ATUS Job Search' refers to the logged number of minutes of time spent on job search for each ATUS respondent. `ComScore Job Search' refers to the logged number of minutes online job search per capita as measured by comScore. Holiday is an indicator equal to one if the ATUS diary day or the GJSI day was a holiday. Each day represents an indicator equal to 1 if the ATUS diary day was the given day of the week. Weekend is an indicator equal to one if the ATUS diary day was a Saturday or Sunday. Specifications include differing fixed effects because of the differing nature of each dataset. All include, at a minimum, state and time fixed effects. Google data necessarily utilizes Season-State fixed effects, while we use finer time fixed effects with the ATUS and comScore data.
+\end{tablenotes}
+\end{center}
+\end{sidewaystable}
+
+%From 1. Make Empirical Test Table
+\begin{sidewaystable}[H]
+\caption{Empirical Tests of Google Job Search Measure}
+\label{tab:macroeffects}
+\begin{center}
+\input{Final_Figures_Tables/Tables/Table1.tex}
+\begin{tablenotes}
+\item Notes: Observations are at a state-month level. `Jobs Search' refers to the logged monthly state level GJSI. `Initial claims per capita’ is the number of initial claimants of unemployment benefits, per capita, by state. `Next Month Final Claims' is the per capita amount of claimants receiving their final unemployment benefit payment, by state. Both dependent and independent variables are scaled such that each has a standard deviation of 1.
+\end{tablenotes}
+\end{center}
+\end{sidewaystable}
+
+%From 2c_new_tables
+\begin{table}
+\caption{Effect of UI Status and Composition on Job Search (NLLS)}\label{tab:nllscurlaw}
+\begin{center}
+\input{Final_Figures_Tables/Tables/nllsregs_current_law.tex}
+\begin{tablenotes}
+\item  Notes: Dependent variable is log(GJSI) at DMA-week level. Analysis spans all Texas DMAs from 2006-2011. Number on UI, Not on UI, and Number Employed are the total number of individuals in each category. Unemployed/Employed gives the relative levels of search activity across types. Standard Errors Clustered at DMA level.
+\end{tablenotes}
+\end{center}
+\end{table}
+
+%From 4c_national_regressions_restat
+\begin{sidewaystable}
+\caption{Effects of UI Expansions and Composition by State \label{tab:nationalregs}}
+\begin{center}
+\input{Final_Figures_Tables/Tables/national_regs_new_restat.tex}
+\begin{tablenotes}
+\item  Notes: Dependent variable in columns 1-4 is log(GJSI) at state-month level. Dependent variable for columns 5-6 is the change in log(GJSI) from the previous month at a state-month level. Analysis spans all 50 states and Washington DC from 2005 - 2014. Observations from Louisiana during 2005 are removed due to Hurricane Katrina. Post Legislation is an indicator for the month following an expansion of benefits either due to a trigger or national legislation. ``Potential Benefit Duration'' is computed using the ``Current Law'' assumption. Standard errors are clustered at state level.
+\end{tablenotes}
+\end{center}
+\end{sidewaystable}
+
+%From 4c_national_regressions_restat
+\begin{sidewaystable}
+\caption{Event Study Regression Results \label{tab:eventstudy}}
+\centering
+\begin{threeparttable}
+\input{Final_Figures_Tables/Tables/all_impulse.tex}
+\begin{tablenotes}
+\item This table displays the results from five regression specifications intended to study the dynamic response of the GJSI with respect to large changes in the UI system. The first three columns use increases in potential benefit duration (PBD) and the later two uses drops in PBD. Column (1) uses the set of the largest increases in PBD per state that were not concurrent with federal legislation and excluded observations where other changes in UI affected the PBD within the 4 months surrounding the change. State fixed effects are included. Column (2) use the same changes but adds in observations from `control' states which did not experience a change in UI policy in the same time period. That specification includes state of shock and year-month fixed effects. The coefficients in columns (3) and (5) were obtained from panel regressions that use CPS data from 2005 to 2011 and 2012 to 2014 respectively. Controls for the fraction of the population on UI, year-month fixed effects, and state fixed effects are included. Column (4) displays the coefficients on the interaction between the dynamic response and whether a state experienced a large drop in PBD when Congress failed to extend PBD in December of 2013. Standard errors are clustered at the state level for all specifications.
+\end{tablenotes}
+\end{threeparttable}
+\end{sidewaystable}
+
+
+\end{spacing}
+
+\end{document}

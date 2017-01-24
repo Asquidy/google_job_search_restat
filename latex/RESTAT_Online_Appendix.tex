@@ -1,0 +1,192 @@
+\documentclass[12pt]{article}
+\usepackage{natbib}
+\usepackage[toc,page]{appendix}
+\usepackage{graphicx}
+\usepackage{rotating}
+\usepackage{longtable}
+\usepackage{dcolumn}
+\usepackage{threeparttable}
+\usepackage{rotating}
+\usepackage{subfig}
+\usepackage{tabularx}
+\usepackage{threeparttable}
+\usepackage[margin = 1.0in]{geometry}
+\usepackage{caption}
+\usepackage{lscape}
+\usepackage[capposition=top]{floatrow}
+\usepackage{amsmath}
+\usepackage{wrapfig}
+\usepackage{hyperref}
+\usepackage{setspace}
+%\usepackage{changepage}
+
+\pdfpagewidth 8.5in
+\pdfpageheight 11in
+
+\hypersetup{colorlinks, linkcolor = blue, citecolor = blue, urlcolor = blue}
+\floatsetup[table]{capposition=top}
+
+\begin{document}
+
+
+\title{\vspace{-25mm} The Impact of Unemployment Insurance on Job Search: Evidence from Google Search Data - Online Appendix}
+
+\begin{spacing}{2}
+
+\author{Scott R. Baker and Andrey Fradkin}
+%The first draft of this paper was created on April 17 2011.
+
+\date{\today}
+\maketitle
+
+\clearpage
+
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+\begin{appendix}
+\setcounter{equation}{0}\renewcommand{\theequation}{A.\arabic{equation}}
+\setcounter{figure}{0} \renewcommand{\thefigure}{A\arabic{figure}}
+\setcounter{table}{0} \renewcommand{\thetable}{A\arabic{table}}
+\newgeometry{left=1in, right=1in}
+\begin{spacing}{2}
+
+\section{Texas Data and NLLS Assumptions}\label{app:nlls}
+We first describe our Texas Workforce Commission Dataset in greater detail and then derive the assumptions necessary to infer relative search intensities from this data. The Texas data spans 2006-2011 and includes every recipient of UI in Texas during that time period. In total, over 2 million individuals received UI during 2.7 million unemployment spells during this period. The total number of UI recipients in Texas rose from a baseline of around 100,000 during 2007 to over 400,000 during 2009 and 2010 and remained at elevated levels through the end of 2012, with over 300,000 claimants. The data covers a number of demographic and economic characteristics for individual UI recipients. We observe an individual's age, gender, and zip code of residence. We use the zip code to assign individuals to DMAs which are then matched to the GJSI. Furthermore, we observe a recipient's tier of benefits, received retroactive payments, weekly eligible benefit amount, and weekly amount received.
+
+This data allows us to account for the nuances of UI receipt when calculating the potential weeks left an individual level. The `standard' use of UI is thought of as an individual losing a steady job, having zero income, applying for UI benefits, receiving standard weekly benefit checks, undertaking job search while receiving UI, and finally finding and starting a new job. There are large deviations from this timeline in the administrative data.
+
+Some individuals have no observed income for a number of quarters before applying for UI. Other UI recipients work part-time during their entire UI spell. Part-time workers have extended UI spells and often go without UI for several weeks until they are granted large lump-sum retroactive payments. There are also many individuals who exit UI early but do not receive income in the subsequent quarters. Departures from ``standard'' use play a large role in shaping the duration, potential duration, and income during a UI spell but are missed by the majority of current UI research.\footnotemark \
+\footnotetext{The UI policy changes over the time period which we study are complex, with substantial variability in the time at which benefits are set to expire. We need to make an assumption regarding how many weeks of benefits potential recipients expect to be eligible for. For most of this paper we follow \citet{Rothstein2011} in calculating weeks left using the ``current law'' model of expectations. Under the ``current law'' assumption, UI recipients expect UI expansions to expire according to current law with no additional laws passed. Results utilizing the alternative ``current policy'' assumption, where UI recipients expect UI expansions to be extended indefinitely, available upon request. Figure \ref{fig:avgweeksleft} shows the average expected remaining duration of UI benefits under each assumption. The gap in expected weeks left between the two assumptions is driven by the fact that the EUC program was often extended for only a few months at a time, so any new users would only be able to take advantage of a fraction of the headline number of weeks available before EUC expired. The large jump in early 2011 reflects the extension of the EUC program from March 2011 until December 2012.}
+
+The simplest specification for such an investigation is an OLS model in which the GJSI is predicted by the composition of the unemployed and the state of the UI system. Below is one possible specification, which includes the percentages of the unemployed with given potential durations (`WeeksLeftBin') as well as state and year-month fixed effects.
+
+\begin{equation}
+	\log{JS}_{it} = \sum_{k = 1}^{n} \beta_{k} WeeksLeftBin_{kit} + \gamma_{t} + \gamma_{s} + u_{it}
+\end{equation}
+
+The coefficients corresponding to the weeks-left bins are likely to be correlated with relative job search of that unemployed category. However, they are hard to interpret quantitatively because the GJSI is a non-linear transformation of the searches of the unemployed. In order to be precise about the job search decisions of the unemployed, we explicitly model the manner in which the GJSI is constructed.
+
+Consider the following illustrative example. Suppose that there are two types of job searchers, the employed and the unemployed. In that case, the observed measure of job search from Google equals:
+
+\begin{equation}\label{eqn:nlls}
+JS =\frac{1}{\mu}\left[\frac{\gamma_{Ut} N_{Ut} + \gamma_{Et}N_{Et}}{\alpha_{Et} N_{Et} + \alpha_{Ut} N_{Ut}}\right]
+\end{equation}
+
+In the above equation, $N_{Ut}$ and $N_{Et}$ refer to the number of unemployed and employed individuals at time t. The coefficients $\gamma$ represent the total amount of job search by the corresponding type at time t and the coefficients $\alpha$ represent the overall amount of search by those types at time t. Lastly, $\mu$ is a query specific scaling factor that sets the maximum value of the series to 100. Our estimation strategy requires 2 behavioral assumptions:
+
+\begin{enumerate}
+\item $\alpha_{it}=\alpha_{t} \hspace{2mm} \forall i$
+\item $\gamma_{it}=\gamma_{i}\kappa_{t} \hspace{2mm} \forall i$
+\end{enumerate}
+
+The first assumption states that all types of individuals do not systematically differ in their quantity of overall online searches. It is unlikely that this assumption will hold precisely, but we have few strong priors on the direction of the difference in overall search behavior between groups. We might expect that the unemployed might use Google more because they are sitting at home on their computers all day. Alternatively, we might expect the employed to use Google more because they are working at a computer. However, all that is necessary for our identification strategy to produce results with little bias is that any systematic differences in overall search by type are dwarfed by differences in job search.
+
+The second assumption states that the amount of job search done by different types can be decomposed into a type-specific job search intensity and a time specific trend. We stipulate that the ratio of job search between any two types is constant over time. This is a standard implication of optimal job search behavior in many models of job search. Our parameter of interest is the ratio of job search between different types of job seekers.
+
+Given our assumptions we derive the following equation by taking the logarithm of both sides of \autoref{eqn:nlls}:
+
+\begin{equation}
+\log{JS} =-\log{(\mu N)} + \log{(\frac{\kappa_{t}}{\alpha_{t}})} +\log{(\gamma_{U}N_{Ut}+\gamma_{E}N_{E2})}
+\end{equation}
+
+We then convert Equation (2) into the following estimation equation where each observation is a DMA-week:
+\begin{equation}\label{eqn:estimating_eq_app}
+\log{JS}_{dt} =\beta_{0d} + \beta_{1dt} + \beta_{2t}+\log{(\gamma_{E}N_{Edt}+\gamma_{U}N_{Udt})}+\epsilon_{dt}
+\end{equation}
+
+$\beta_{0d}$ is an DMA specific fixed effect, $\beta_{1dt}$ is a DMA specific time trend (to account for differential trends in internet usage by DMA) and $\beta_{2t}$ are Texas-wide time fixed effects.\footnotemark \ The error term in the above equation represents DMA-time specific fluctuations in job search. These errors are caused by unobserved drivers of search such as DMA specific weather changes or Google's sampling error.
+\footnotetext{Our results are qualitatively unchanged when including a quadratic DMA-specific time trend.}
+
+One worry about our estimates is that the composition of unemployed at a DMA-week level is endogenous. Our identifying assumption is that DMA specific returns to job search are uncorrelated with high frequency changes in the composition of job seekers in that DMA. Suppose that firms increase recruiting in a DMA at the same time that more people's benefits are about to expire in that DMA. Then our coefficient on the number of individuals who are about to expire will also include some component of a general increase in search effort in that DMA because of higher returns to search.
+
+We have no direct evidence on DMA specific recruiting intensity. However, the correlation of census region vacancies and the GJSI is negative, suggesting that the response of vacancies to the composition of the unemployed is not first order during this period.\footnotemark \ Given the abundance of unemployed labor during the recession, it is doubtful that firms would strongly react to small changes in job search effort among the already unemployed given the relatively small proportions of the population that each UI expansion affects.
+\footnotetext{Vacancies are measured at a monthly level by the Job Openings and Labor Turnover Survey.}
+
+A related concern with our specification is that we may be picking up job search responses by the spouses of the unemployed. We do not have any data on the joint job search decisions of unemployed spouses but note that many unemployed individuals are young males who are not yet married. Another worry is that the job search activity by the employed might be driving our results due to a correlation of changes in job search behavior between employed and unemployed populations. We think that this is unlikely because, although the unemployed make up less than 10\% of the labor force, they search 46 times more than the employed on average according to the ATUS (seen in Appendix Table \ref{tab:atussumm}). Furthermore, the unemployed are more likely to respond to changes in UI benefit duration than the employed. 
+\end{spacing}
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+\begin{sidewaystable}[!htpb]
+\centering
+\begin{threeparttable}
+\caption{Google Search Term Correlations}
+\label{tab:termcorrelations}
+\begin{tabular}{lcccccccccccc}
+\hline
+  &Jobs & H.t.F & Tech & State & City & Retail& Walmart & Sales & Temp & Local& Online & Monster \\
+\hline
+Jobs& 1.000 &&&&&&&&&&&\\
+How to Find& 0.804  & 1.000&&&&&&&&&&\\
+Tech      &  0.943  & 0.812  & 1.000&&&&&&&&&\\
+   State  &  0.893  & 0.643  & 0.839   &1.000&&&&&&&&\\
+    City  &   0.949 &  0.816 &  0.916  & 0.882  & 1.000&&&&&&&\\
+  Retail  &  0.910  & 0.799  & 0.875  & 0.797 &  0.914 &  1.000&&&&&&\\
+ Walmart  &   0.762  & 0.867 &  0.773  & 0.578  & 0.844  & 0.809 &  1.000&&&&&\\
+   Sales  &   0.840  & 0.569 &  0.806  & 0.868  & 0.799  & 0.799 &  0.506  & 1.000&&&&\\
+    Temp  &   0.740  & 0.457 &  0.671  & 0.749  & 0.680  & 0.662 &  0.395  & 0.714  & 1.000 &&&\\  
+   Local  &   0.842  & 0.729 &   0.811 &  0.791 &  0.930 & 0.848 &   0.784 &  0.737 &  0.575&   1.000 &&\\ 
+  Online  &   0.883  & 0.869 &  0.871  & 0.735  & 0.932  & 0.885 &  0.934  & 0.677  & 0.525 &  0.872 & 1.000&\\
+  Monster &  0.887   & 0.524 & 0.749   & 0.854  & 0.819  & 0.476 & 0.286   & 0.749  & 0.629 & 0.499  & 0.664  & 1.000 \\ 
+  Weather &   0.212  & 0.284 &  0.231  & 0.191  & 0.333  & 0.242 &  0.337  & 0.157  & 0.056 &  0.452 & 0.345  & -0.0961 \\
+\hline
+\end{tabular}
+\begin{tablenotes}
+\item Numbers represent correlations of national weekly Google search for the listed search terms from 2004-2012.
+\end{tablenotes}
+\end{threeparttable}
+\end{sidewaystable}
+
+
+%From 4c_national_regressions_restat
+\begin{table}
+\caption{Change in log(GJSI) Following Expansions: Robustness \label{tab:robustexpansion}}
+\begin{threeparttable}
+\begin{center}
+\input{Final_Figures_Tables/Tables/robust_expansion_restat.tex}
+\begin{tablenotes}
+\item Notes: The dependent variable is log(GJSI) at a state-month level in columns (1)-(4). In columns (5) and (6), the dependent variable is the monthly change in log(GJSI). Regressions are run from 2005 - 2014 and standard errors are clustered at a state level.
+\end{tablenotes}
+\end{center}
+\end{threeparttable}
+\end{table}
+
+
+\begin{sidewaystable}[!htpb]
+\caption{ATUS Summary Statistics}
+\label{tab:atussumm}
+\centering
+\begin{threeparttable}
+\begin{tabular}{lcccccc}
+\hline
+ Sample Splits&ATUS         & \% of  & Avg Job     & Avg Job Search  & Frac. & Avg Job   \\
+  & Sample      & Total  & Search      &   Ex-Travel     & Any Job & Search of   \\
+ &  Size       &        & (min/day)   &   (min/day)     &   Search   &  Participants  \\
+\hline
+Employed &57,914   & 76.12\%  & 0.63  & 0.47 & 0.78\%  & 81.3  \\
+Unemployed &3,252   &  4.27\% & 29.1 &  25.3 & 18.23\% & 159.7  \\
+Not in Labor Force & 14,921  & 19.61\%   & 0.8  & 0.6 & 0.82\%  & 98.1 \\
+\hline
+Holiday& 1,328& 1.7\% & 0.60 & 0.54 & 0.68\% & 80.6 \\
+Non-Holiday& 74,759& 98.3\% & 1.9 & 1.6 & 1.33\% & 128.6 \\
+\hline
+Weekend&38,431& 50.5\% & 0.87 & 0.71 & 0.64\% & 109.8 \\
+Weekday& 37,656& 49.5\% & 2.9 & 2.4 & 1.8\% & 134.8 \\
+\hline
+\end{tabular}
+\begin{tablenotes}
+\item  Sub-sample of ATUS respondents is taken to match the demographic sub-sample used by \citet{Krueger2010}. We use all respondents for both weekends and weekdays, while noting that weekends are oversampled to include an equal amount of weekend and weekdays. We drop respondents younger than age 20 or older than 65.
+\end{tablenotes}
+\end{threeparttable}
+\end{sidewaystable}
+
+
+\end{appendix}
+
+\end{spacing}
+
+\end{document}
