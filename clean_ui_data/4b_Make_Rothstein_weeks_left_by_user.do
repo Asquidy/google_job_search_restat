@@ -309,7 +309,7 @@ save user_weeks_left_roth_data, replace
 /***Make some graphs about numbers of weeks left, benefit amounts, naive v. soph, and others:
 cap cd "C:\Users\sbaker2\Dropbox\Texas Job Search - New\Texas_UI_Data"
 cap cd "/Users/afradkin/Dropbox/Texas_Job_Search_New/Texas_UI_Data"
-cap cd "C:\Users\Scott Baker\Dropbox\Texas Job Search - New\Texas_UI_Data"
+cap cd "C:\Users\Scott\Dropbox\Texas Job Search - New\Texas_UI_Data"
 
 clear all
 use user_weeks_left_roth_data
@@ -358,8 +358,8 @@ cap graph export "C:\Users\sbaker2\Dropbox\Texas Job Search - New\src2\latex\Fin
 cap graph export "C:\Users\Scott\Dropbox\Texas Job Search - New\src2\latex\Final_Figures_Tables\Figures\weeks_eligible_by_type_new_users.png", width(1200) height(600) replace
 
 **Avg weeks left by type over time
-twoway (line naive_total_weeks_left date, lpattern(dash))(line soph_total_weeks_left date) if date<18978
-cap graph export "C:\Users\Scott Baker\Dropbox\Texas Job Search - New\src2\latex\Final_Figures_Tables\Figures\weeks_left_by_type.png", width(1200) height(600) replace
+twoway (line naive_total_weeks_left date)(line soph_total_weeks_left date) if date<18978
+cap graph export "C:\Users\sbaker2\Dropbox\Texas Job Search - New\src2\latex\Final_Figures_Tables\Figures\weeks_left_by_type.png", width(1200) height(600) replace
 cap graph export "C:\Users\Scott\Dropbox\Texas Job Search - New\src2\latex\Final_Figures_Tables\Figures\weeks_left_by_type.png", width(1200) height(600) replace
 
 **Avg Fraction of those on UI with less than XX weeks left
