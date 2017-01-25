@@ -1,12 +1,10 @@
+*** Merge Files Necessary for Non-Linear Least Squares Analysis of Texas Data ***
 clear all
 set mem 1100m
 set more off
 
-cap cd "C:\Users\scottb131\Dropbox\Texas Job Search - New"
-cap cd "/Users/afradkin/Dropbox/Texas_Job_Search_New/"
-
-cap use "Google_Data\final_weekly_search_data.dta"
-cap use "Google_Data\final_weekly_search_data.dta"
+cap cd "~/Dropbox/Texas_Job_Search_New/restat_data/"
+cap use "Google_Data/final_weekly_search_data.dta"
 
 sort msa date
 tsset msa_code date, daily delta(7)
@@ -39,15 +37,15 @@ foreach var of varlist employment labor_force unemp_rate {
 }
 
 ***Merge with num people by weeks_left/date/msa naive
-merge 1:1 msa_code date using "Texas_UI_Data\naive_weeks_left_data.dta"
+merge 1:1 msa_code date using "Texas_UI_Data\soph_weeks_left_data.dta"
 drop if _merge==2
 drop _merge
 
-foreach num of numlist 0(1)99{
+foreach num of numlist 0(1)87{
 	rename count`num' num_on_ui`num'
 }
-***Merge with num people by weeks_left/date/msa soph
-** merge 1:1 msa_code date using "Texas_UI_Data\soph_weeks_left_data.dta"
+***Merge with num people by weeks_left/date/msa naive
+** merge 1:1 msa_code date using "Texas_UI_Data\naive_weeks_left_data.dta"
 ** drop if _merge==2
 ** drop _merge
 
@@ -64,7 +62,7 @@ tsset msa_code date, daily delta(7)
 replace population = l.population if population==.
 
 ***Add holidays
-***Do this by expanding out to daily and then collapsing back to weekly
+*** Do this by expanding out to daily and then collapsing back to weekly
 tsset msa_code date
 tsfill, full
 
@@ -94,12 +92,6 @@ drop week new_week
 gen weekyear=wofd(date)
 tsset msa_code date, daily delta(7)
 
-***Merge with data on the extension dates
-** merge m:1 date using Texas_UI_Data\TX_Weeks_Left_Data.dta
-*** merge m:1 date using "Texas_UI_Data\only_law_change_indicators_actual.dta"
-*** drop if _merge==2
-*** drop _merge
-
 gen eb13 = eb==13
 gen eb20 = eb==20
 drop eb
@@ -118,37 +110,57 @@ foreach var of varlist num_weeks_on* num_on_ui* {
 	replace `var' = `var'/(population)
 }
 
-**Make one and two week indicators for after the extensions
-tsset msa_code date, daily delta(7)
-foreach var of varlist tier* eb* {
-	gen `var'_1week = `var'==1 & l.`var'==0
-	replace `var'_1week = l.`var'_1week if l.`var'_1week==1 & l1.`var'_1week==0
-	gen `var'_2week = `var'==1 & l.`var'==0
-	replace `var'_2week = l.`var'_2week if l.`var'_2week==1 & l2.`var'_2week==0
-	gen `var'_4week = `var'==1 & l.`var'==0
-	replace `var'_4week = l.`var'_4week if l.`var'_4week==1 & l4.`var'_4week==0
-}
-foreach var of varlist  num_weeks_on* num_on_ui* {
-	gen `var'_1week = `var' if `var'!=0 & l.`var'==0
-	replace `var'_1week = 0 if `var'_1week==.
-	replace `var'_1week = l.`var'_1week if l.`var'_1week!=0 & l1.`var'_1week==0
-	gen `var'_2week = `var' if `var'!=0 & l.`var'==0
-	replace `var'_2week = 0 if `var'_2week==.
-	replace `var'_2week = l.`var'_2week if l.`var'_2week!=0 & l2.`var'_2week==0
-	gen `var'_4week = `var' if `var'!=0 & l.`var'==0
-	replace `var'_4week = 0 if `var'_4week==.
-	replace `var'_4week = l.`var'_4week if l.`var'_4week!=0 & l4.`var'_4week==0
-}
+***** Old code for post-expansion indicators *********
+******************************************************
+** Make one and two week indicators for after the extensions
+* tsset msa_code date, daily delta(7)
+* foreach var of varlist tier* eb*{
+* 	cap gen `var'_1week = `var'==1 & l.`var'==0
+* 	replace `var'_1week = l.`var'_1week if l.`var'_1week==1 & l1.`var'_1week==0
+* 	cap gen `var'_2week = `var'==1 & l.`var'==0
+* 	replace `var'_2week = l.`var'_2week if l.`var'_2week==1 & l2.`var'_2week==0
+* 	cap gen `var'_4week = `var'==1 & l.`var'==0
+* 	replace `var'_4week = l.`var'_4week if l.`var'_4week==1 & l4.`var'_4week==0
+* }
 
-egen all_extensions_1week = rowmax(tier1_13_1week tier1_20_1week tier2_1week tier3_1week tier4_1week eb13_1week eb20_1week)
-egen all_extensions_2week = rowmax(tier1_13_2week tier1_20_2week tier2_2week tier3_2week tier4_2week eb13_2week eb20_2week)
-egen all_extensions_4week = rowmax(tier1_13_4week tier1_20_4week tier2_4week tier3_4week tier4_4week eb13_4week eb20_4week)
+* foreach var of varlist *_last {
+* 	tab `var'
+* 	foreach num of numlist 1 2 4{
+* 		cap drop `var'_`num'week
+* 		cap gen `var'_`num'week = 0
+* 		di `num'*7
+* 		replace `var'_`num'week = 1 if date >= `var' & date < (`var' + `num'*7)
+* 	}	
+* }
 
+* foreach var of varlist  num_weeks_on* num_on_ui* {
+* 	gen `var'_1week = `var' if `var'!=0 & l.`var'==0
+* 	replace `var'_1week = 0 if `var'_1week==.
+* 	replace `var'_1week = l.`var'_1week if l.`var'_1week!=0 & l1.`var'_1week==0
+* 	gen `var'_2week = `var' if `var'!=0 & l.`var'==0
+* 	replace `var'_2week = 0 if `var'_2week==.
+* 	replace `var'_2week = l.`var'_2week if l.`var'_2week!=0 & l2.`var'_2week==0
+* 	gen `var'_4week = `var' if `var'!=0 & l.`var'==0
+* 	replace `var'_4week = 0 if `var'_4week==.
+* 	replace `var'_4week = l.`var'_4week if l.`var'_4week!=0 & l4.`var'_4week==0
+* }
+
+* egen all_extensions_1week = rowmax(tier1_13_1week tier1_20_1week tier2_1week tier3_1week tier4_1week eb13_1week eb20_1week)
+* egen all_extensions_2week = rowmax(tier1_13_2week tier1_20_2week tier2_2week tier3_2week tier4_2week eb13_2week eb20_2week)
+* egen all_extensions_4week = rowmax(tier1_13_4week tier1_20_4week tier2_4week tier3_4week tier4_4week eb13_4week eb20_4week)
+
+* egen all_extensions_and_exp_1week = rowmax(tier1_13_1week tier1_20_1week tier2_1week tier3_1week tier4_1week eb13_1week eb20_1week hole*last*_1week)
+
+* egen all_extensions_and_exp_2week = rowmax(tier1_13_2week tier1_20_2week tier2_2week tier3_2week tier4_2week eb13_2week eb20_2week hole*last*_2week)
+
+* egen all_extensions_and_exp_4week = rowmax(tier1_13_4week tier1_20_4week tier2_4week tier3_4week tier4_4week eb13_4week eb20_4week hole*last*_4week)
+******************************************************
 ***Combine num_on_ui to the same level as num affected
 
-foreach var of varlist num_on_ui0-num_on_ui99 {
+foreach var of varlist num_on_ui0-num_on_ui87 {
 	replace `var' = 0 if `var'==.
 }
+
 
 egen num_weeks_on_from0 = rowtotal(num_weeks_on1-num_weeks_on4 num_weeks_on0)
 egen num_weeks_on_from5 = rowtotal(num_weeks_on5-num_weeks_on9)
@@ -157,6 +169,7 @@ egen num_weeks_on_from15 = rowtotal(num_weeks_on15-num_weeks_on19)
 egen num_weeks_on_from20 = rowtotal(num_weeks_on20-num_weeks_on24)
 egen num_weeks_on_from25 =rowtotal(num_weeks_on26 - num_weeks_on29)
 
+
 egen num_on_ui_2weeks = rowtotal(num_on_ui0-num_on_ui1)
 egen num_on_ui_5weeks = rowtotal(num_on_ui2-num_on_ui4)
 egen num_on_ui_8weeks = rowtotal(num_on_ui5-num_on_ui7)
@@ -164,7 +177,7 @@ egen num_on_ui_11weeks = rowtotal(num_on_ui8-num_on_ui10)
 egen num_on_ui_14weeks = rowtotal(num_on_ui11-num_on_ui13)
 egen num_on_ui_17weeks = rowtotal(num_on_ui14-num_on_ui16)
 egen num_on_ui_20weeks = rowtotal(num_on_ui17-num_on_ui19)
-egen num_on_ui_high_weeks = rowtotal(num_on_ui20-num_on_ui99)
+egen num_on_ui_high_weeks = rowtotal(num_on_ui20-num_on_ui87)
 *
 egen num_ui_0weeks = rowtotal(num_on_ui0)
 egen num_ui_4weeks = rowtotal(num_on_ui1-num_on_ui4)
@@ -182,8 +195,8 @@ egen num_ui_59weeks = rowtotal(num_on_ui55-num_on_ui59)
 egen num_ui_64weeks = rowtotal(num_on_ui60-num_on_ui64)
 egen num_ui_69weeks = rowtotal(num_on_ui65-num_on_ui69)
 egen num_ui_74weeks = rowtotal(num_on_ui70-num_on_ui74)
-egen num_ui_75weeks = rowtotal(num_on_ui75-num_on_ui99)
-
+egen num_ui_75weeks = rowtotal(num_on_ui75-num_on_ui87)
+*
 egen num_ui_0_10_weeks = rowtotal(num_on_ui0-num_on_ui10)
 egen num_ui_10_20_weeks = rowtotal(num_on_ui11-num_on_ui20)
 egen num_ui_20_30_weeks = rowtotal(num_on_ui21-num_on_ui30)
@@ -192,39 +205,38 @@ egen num_ui_40_50_weeks = rowtotal(num_on_ui41-num_on_ui50)
 egen num_ui_50_60_weeks = rowtotal(num_on_ui51-num_on_ui60)
 egen num_ui_60_70_weeks = rowtotal(num_on_ui61-num_on_ui70)
 egen num_ui_70_80_weeks = rowtotal(num_on_ui71-num_on_ui80)
-egen num_ui_80_90_weeks = rowtotal(num_on_ui81-num_on_ui90)
-egen num_ui_90_100_weeks = rowtotal(num_on_ui91-num_on_ui99)
+egen num_ui_80_90_weeks = rowtotal(num_on_ui81-num_on_ui87)
 
-*drop num_on_ui0-num_on_ui99
-***Generate various indicators
+
+*** Generate dates and indicators
 egen year_month = group(year month)
 tab msa, gen(msas)
 tab year, gen(yy)
 tab month, gen(mm)
-gen week=week(date)
+gen week = week(date)
+
 **Generate a few other variables
 gen ljob_search = log(job_search)
-gen d_ljob_search = ljob_search-l7.ljob_search
-gen ext_X_unemp = all_extensions_2week*unemp_rate
 gen unemployment=labor_force - employment
 gen llabor_force=log(labor_force)
 gen lunemployment=log(unemployment)
 gen lpopulation = log(population)
 gen lunemp_rate = log(unemp_rate)
-gen lunemp_X_announce_1week = lunemp_rate*all_extensions_1week
-gen lunemp_X_announce_2week = lunemp_rate*all_extensions_2week
-gen lunemp_X_announce_4week = lunemp_rate*all_extensions_4week
 egen fractotal_on_ui = rowtotal(num_on_ui_2weeks-num_on_ui_high_weeks)
 gen total_on_ui = fractotal_on_ui*population
-gen total_on_ui_labor = fractotal_on_ui*population/labor_force
-gen num_ui_X_announce_2week = all_extensions_2week*total_on_ui
-gen num_ui_X_announce_4week = all_extensions_4week*total_on_ui
-gen num_ui_X_announce_1week = all_extensions_1week*total_on_ui
 
+*** Check here that everything adds up! 
+egen check_sum1 = rowtotal(num_weeks_on1-num_weeks_on120 num_weeks_on0)
+replace check_sum1 = check_sum1 * population
+
+egen check_sum2 = rowtotal(num_on_ui0-num_on_ui87)
+replace check_sum2 = check_sum2 * population
+
+gen total_on_ui_labor = fractotal_on_ui*population/labor_force
 egen msa_year = group(msa year)
 
-***Keep only periods where we have UI periods
-*drop if msa_code==13 | msa_code == 19
+*** Keep only periods where we have UI periods
+* drop if msa_code==13 | msa_code == 19
 
 *** Get Rid of Dates Before and After UI Sample
 drop if date<td(1oct2006)
@@ -248,33 +260,13 @@ label var lunemployed "Log Unemployed"
 label var ltotal_on_ui "Log Total On UI"
 label var ljob_search "Log Job Search"
 egen yearmsa = group(year msa_code)
+
+*** Msa trends
 forvalues num = 1/19{
 	cap gen msasdate`num'=msas`num'*date
 }
+
 gen monthyear=mofd(date)
-merge m:1 monthyear using "Other_Data\south_vacancies.dta"
-drop if _merge==2
-drop _merge 
-gen lvacancies = log(vacancies)
-gen ltightness = log(vacancies/unemployed)
-gen lnot_on_ui = log(not_on_ui)
-save Texas_UI_Data/naive_readyforweeklyregs.dta, replace
 
-stop
-
-***************************************************
-*********Good regs to use for AEA
-***************************************************
-**Don't see anything systematic in cross section of UI recips
-areg ljob_search num_ui_4weeks-num_ui_75weeks unemp_rate holiday msas* [aweight = population], ab(year_month) cluster(msa_year)
-
-gen fr_total_on_ui = total_on_ui/population
-***See lower search among UI recips and higher among Unemp
-areg ljob_search all_extensions_2week fractotal_on_ui  num_ui_X_announce_2week unemp_rate holiday msas* [aweight = population], ab(year_month) cluster(msa_year)
-
-***Still true when just focusing on weeks around the extensions
-areg ljob_search total_on_ui unemp_rate holiday msas* [aweight = population] if total_on_ui !=.|l.total_on_ui!=.|l2.total_on_ui!=.|f.total_on_ui!=. |f2.total_on_ui!=., ab(year_month) cluster(msa_year)
-
-**Seems to be actually more search among those most affected
-areg ljob_search all_extensions_2week num_new_weeks_2_1week* unemp_rate holiday msas* [aweight = population], ab(year_month) cluster(msa_year)
+save Texas_UI_Data/soph_readyforweeklyregs.dta, replace
 

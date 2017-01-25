@@ -1,4 +1,4 @@
-### This Script Runs the Panel Data Analysis for Seeing the Effects of UI expansions on search.
+### This Script Runs the Panel Data Analysis for the Effects of UI expansions on search.
 rm(list = ls())
 library(data.table)
 library(haven)
@@ -12,12 +12,11 @@ library(stringr)
 library(statar)
 library(broom)
 library(coefplot)
-### source("~/Dropbox/stargazer_copy.R")
 
-table_folder <- "~/Dropbox/Texas_Job_Search_New/src2/latex/Final_Figures_Tables/Tables/"
-figure_folder <- "~/Dropbox/Texas_Job_Search_New/src2/latex/Final_Figures_Tables/Figures//"
+table_folder <- "~/Dropbox/Texas_Job_Search_New/replic_test_figures_and_tables/Tables/"
+figure_folder <- "~/Dropbox/Texas_Job_Search_New/replic_test_figures_and_tables/Figures/"
 tab <- function(x){table(x, useNA = 'always')}
-setwd("~/Dropbox/Texas_Job_Search_New/National_Analysis_Data")
+setwd("~/Dropbox/Texas_Job_Search_New/restat_data/National_Analysis_Data")
 
 ### Read Main Data
 data <- data.table(read_dta("final_merged_data.dta"))
@@ -100,6 +99,7 @@ data[, diff_from_nonsched_jump := seq_N_all - order_nonsched_jump]
 
 ### Pick dates within 7 weeks of jump:
 selected_jump_nonsched  <- data[diff_from_nonsched_jump<8 & diff_from_nonsched_jump>-8]
+
 ### loop through data and exclude observations where pbd changed:
 this_state <- data[1, state]
 this_state_index <- 1
@@ -129,10 +129,10 @@ selected_jump_nonsched <- selected_jump_nonsched[!exclude_rows]
 ### 1. selected_jump_nonsched
 ### 2. selected_drops_jump_nonsched
 
-### Run baseline regressions:
+### Maximum difference from time of benefits change:
 max_diff <- 5
 
-### Use Non-Scheduled Changes 
+### Use Non-Scheduled Changes:
 selected_jump_nonsched[, jump_size := max(diff_weeks), by = list(state)]
 selected_jump_nonsched[, after := as.numeric(diff_from_nonsched_jump>=0)]
 selected_jump_nonsched[, impulse := diff_from_nonsched_jump]
@@ -143,11 +143,7 @@ selected_jump_nonsched[, post_trend := as.numeric(impulse >= 0)*impulse]
 selected_jump_nonsched[, max_diff_weeks := max(diff_weeks), by = list(state)]
 selected_jump_nonsched <- selected_jump_nonsched[min_imp < 0]
 this_sample <-  selected_jump_nonsched[abs(impulse)<max_diff]
-this_reg_jump_nonsched_dummy <- felm(ljobs_search ~ after |state | 0 | state, data = this_sample)
-this_reg_jump_nonsched_dummy_frac  <- felm(ljobs_search ~ after + after:jump_size |state + quarter | 0 | state, data = this_sample)
 this_reg_jump_nonsched <- felm(ljobs_search ~ factor(impulse) |state| 0 | state, data = this_sample)
-
-stargazer(this_reg_jump_nonsched_dummy, this_reg_jump_nonsched_dummy_frac, this_reg_jump_nonsched, type = 'text')
 
 ### Create control states - Biggest:
 states <- unique(selected_jump_nonsched[, state])
@@ -176,28 +172,7 @@ full_control_obs[is_state_exp==0, impulse := 100]
 full_control_obs[is_state_exp==0, jump_size := 0]
 
 this_sample <- full_control_obs[abs(diff_from_nonsched_jump_ctr)<max_diff]
-this_reg_case_after <- felm(ljobs_search ~ after | state_exp_fe + year_month | 0 | state, data = this_sample, exactDOF=TRUE)
-this_reg_case_after_inter <- felm(ljobs_search ~ after + after:jump_size| state_exp_fe + year_month | 0 | state, data = this_sample, exactDOF=TRUE)
 this_reg_case_after_imp <- felm(ljobs_search ~ factor(impulse) | state_exp_fe + year_month | 0 | state, data = this_sample, exactDOF=TRUE)
-stargazer(this_reg_case_after, this_reg_case_after_inter, this_reg_case_after_imp, type = 'text')
-
-line2 <- c("Matched Non-Jump States", rep("No", 3), rep("Yes", 3))
-line3 <- c("State or Jump FE:", rep("Yes", 6))
-line4 <- c("Year-Month FE:", rep("No", 3), rep("Yes", 3))
-
-lines <- list(line2, line3, line4)
-impulses_left <- lapply(names(coef(this_reg_jump_nonsched)), function(x) substr(x, 16, 17))
-
-covariate_names <- c("After", "After * Jump Size", sapply(impulses_left, function(x) paste(x, "Months After Change")))
-### covariate.labels = covariate_names
-stargazer(this_reg_jump_nonsched_dummy, this_reg_jump_nonsched_dummy_frac, this_reg_jump_nonsched, this_reg_case_after, this_reg_case_after_inter, this_reg_case_after_imp, omit = c(11), covariate.labels = covariate_names, add.lines = lines, dep.var.labels = rep("", 6), dep.var.caption = "Log GJSI", float = FALSE, column.labels = NULL, omit.stat = c("f", "ser", "rsq", "adj.rsq"), column.separate = c(1, 1, 1), omit.table.layout = 'n', keep = c("impulse", "after", "frac"), dep.var.labels.include = FALSE, out = paste(table_folder, "jumps_up.tex", sep = ''))
-
-### Make line 1 span columns
-### line1_line <- pmatch("Sample Expansions", out)
-### line1_new <- "Sample Expansions: & \\multicolumn{3}{c}{Biggest} & \\multicolumn{3}{c}{Biggest Non-Scheduled} \\\\"
-### sink(paste(table_folder, "baseline.tex", sep = ''))
-### cat(out[1:(line1_line-1)], line1_new, out[(line1_line + 1):length(out)], sep = '\n')
-### sink()
 
 ### Large Drop Sample:
 ### Use Biggest Drop:
@@ -252,50 +227,10 @@ large_drop_sample[, drop_size := min(diff_weeks * as.numeric(year_month=='2014-1
 large_drop_sample[, impulse := seq(.N) - 5, by = state]
 large_drop_sample[, after := as.numeric(impulse>=0)]
 large_drop_sample[, large_drop := as.numeric(drop_size < -24)]
-large_drop_state <- large_drop_sample[large_drop==1, unique(state)]
-large_drop_sample_agg <- large_drop_sample[, list(ljobs_search = mean(ljobs_search)), by = list(year_month_date, large_drop)]
-this_plot <- ggplot(large_drop_sample_agg, aes(x = as.Date(year_month_date), y = ljobs_search, color = factor(large_drop))) + geom_line() + theme_bw() + xlab("Month") + ylab("log(GJSI)") + guides(color = guide_legend(title = "Drop > 24 Weeks"))
-this_plot
-ggsave(this_plot, file = paste(figure_folder, "post_large_drop.pdf", sep = ''))
-
 large_drop_sample[, impulse_factor := factor(impulse, c("-4", "-3", "-2", "-1", "0", "1", "2", "3", "4"))]
-
-reg_drop_ba <- felm(ljobs_search ~ after:large_drop  | state + year_month | 0 | state, data = large_drop_sample)
 reg_drop_imp <- felm(ljobs_search ~ impulse_factor:large_drop + year_month + state + large_drop| 0 | 0 |state , data = large_drop_sample)
-line2 <- c("Year-Month FE", rep("Yes", 2))
-line3 <- c("State FE:", rep("Yes", 2))
-lines <- list(line2, line3)
-impulses_left <- lapply(names(coef(this_reg2)), function(x) substr(x, 16, 17))
-impulses_left <- gsub(":", "", impulses_left)
-impulses_left <- sapply(impulses_left, function(x) paste(x, "Months After Change * Big Drop"))
-covariate_names <- c("After * Big Drop", impulses_left[-1])
 
-stargazer(reg_drop_ba, reg_drop_imp, covariate.labels = covariate_names, out = paste(table_folder, "drops.tex", sep = ''),  add.lines = lines, dep.var.caption = "Log GJSI", float = FALSE, column.labels = NULL, omit.stat = c("f", "ser", "rsq", "adj.rsq"), keep = c("after", "impulse"), dep.var.labels.include = FALSE)
-
-### large_drop_ctr <- data[as.Date(year_month_date) < '2015-05-01' & as.Date(year_month_date) > '2014-07-01']
-### large_drop_ctr[, drop_size := 0]
-### large_drop_ctr[, after := 0]
-### large_drop_ctr[, impulse := 0]
-### large_drop_ctr[, large_drop := 0]
-### 
-### large_drop_ctr_agg <- large_drop_ctr[, list(jobs_search = mean(jobs_search)), by = list(year_month_date, as.numeric(state ### %in% large_drop_state))]
-### setnames(large_drop_ctr_agg, "as.numeric", "large_drop")
-### ggplot(large_drop_ctr_agg, aes(x = as.Date(year_month_date), y = jobs_search, color = factor(large_drop))) + geom_line() + theme_bw() + xlab("Month") + ylab("log(GJSI)")
-
-## large_drop_total <- rbind(large_drop_sample, large_drop_ctr)
-## large_drop_total[, state_month := .GRP, by = list(state, month)]
-## large_drop_total[, state_year := .GRP, by = list(state, year)]
-## 
-## this_sample <- large_drop_total
-## this_reg_drop <- felm(ljobs_search ~ after | state_month + state_year| 0 | state, data = this_sample)
-## this_reg_drop_imp <- felm(ljobs_search ~ factor(impulse) |  state_month + state_year + impulse | 0 | state, data = this_sample)
-## stargazer(this_reg_drop, this_reg_drop_imp, type = 'text')
-### covariate_names <- c("After", "After * Jump Size", sapply(impulses_left, function(x) paste(x, "Months After Change")))
-### stargazer(this_reg_jump_nonsched_dummy, this_reg_jump_nonsched_dummy_frac, this_reg_jump_nonsched, this_reg_case_after, this_reg_case_after_inter, this_reg_case_after_imp, omit = c(11), covariate.labels = covariate_names, add.lines = lines, dep.var.labels = rep("", 6), dep.var.caption = "Log GJSI", float = FALSE, column.labels = NULL, omit.stat = c("f", "ser", "rsq", "adj.rsq"), column.separate = c(1, 1, 1), omit.table.layout = 'n', keep = c("impulse", "after", "frac"), dep.var.labels.include = FALSE, out = paste(table_folder, "jumps_up.tex", sep = ''))
-
-
-
-### Calculate Impulse for All obs:
+### Calculate Impulse for all obs:
 data[, `:=` (neg_impulse_m3 = 0
 	, neg_impulse_m2 = 0
 	, neg_impulse_m1 = 0
