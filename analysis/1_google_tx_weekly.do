@@ -1,8 +1,6 @@
 clear all
 set mem 1100m
 set more off
-cap cd "C:\Users\sbaker2\Dropbox\Texas Job Search - New\Google_Data\TexasWeeklyData"
-cap cd "C:\Users\Scott\Dropbox\Texas Job Search - New\Google_Data\TexasWeeklyData"
 cap cd "~/Dropbox/Texas_Job_Search_New/restat_data/Google_Data/TexasWeeklyData"
 
 global msas "600	612	618	623	625	626	627	633	634	635	636	641	651	657	661	662	692	709	749	765"
@@ -73,8 +71,6 @@ replace msa_code = 16 if msa=="Tyler-Longview"
 replace msa_code = 17 if msa=="Victoria"
 replace msa_code = 18 if msa=="Waco-Temple-Bryan"
 replace msa_code = 19 if msa=="Wichita Falls"
-
-cap cd "C:\Users\sbaker2\Dropbox\Texas Job Search - New\Google Data"
 
 sort msa year month day
 label var jobs_search "Google 'Jobs' Search"

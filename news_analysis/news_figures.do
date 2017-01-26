@@ -1,7 +1,7 @@
+*** Generate Figures Plotting Google News Related to UI Policy ***
 clear all
 set more off
-cap cd "C:\Users\sbaker2\Dropbox\Texas Job Search - New\News Searches"
-cap cd "C:\Users\Scott\Dropbox\Texas Job Search - New\News Searches"
+cd "~/Dropbox/Texas_Job_Search_New/restat_data/Google_Data"
 use all_news_search_data
 
 
@@ -19,17 +19,6 @@ replace texas_expansion=1 if year==2009 & month==11 & day==6
 replace texas_expansion=1 if year==2009 & month==12 & day==9
 replace texas_expansion=1 if year==2011 & month==12 & day==14
 
-/*gen extension = .
-replace extension = 1 if year==2009 & month==12 & day==19
-replace extension = 1 if year==2010 & month==3 & day==2
-replace extension = 1 if year==2010 & month==4 & day==15
-replace extension = 1 if year==2010 & month==7 & day==22
-replace extension = 1 if year==2010 & month==12 & day==17
-replace extension = 1 if year==2011 & month==12 & day==23
-replace extension = 1 if year==2012 & month==2 & day==22
-replace extension = 1 if year==2013 & month==1 & day==2
-
-*/
 *************
 
 foreach var of varlist national_ texas_ {
@@ -59,19 +48,14 @@ egen tx_euc_bin = sum(tx_euc_articles), by(period_bin)
 egen tx_ui_bin = sum(tx_ui_articles), by(period_bin)
 egen national_euc_bin = sum(national_euc_art), by(period_bin)
 
+* twoway (bar tx_euc_articles period)
+* twoway (bar tx_ui_articles period)
 
-stop
-
-
-twoway (bar tx_euc_articles period)
-twoway (bar tx_ui_articles period)
-
-twoway (bar tx_euc_bin period_bin)
-twoway (bar tx_ui_bin period_bin)
+* twoway (bar tx_euc_bin period_bin)
+* twoway (bar tx_ui_bin period_bin)
 
 
-cap cd "C:\Users\Scott\Dropbox\Texas Job Search - New\src2\latex\Final_Figures_Tables\Figures"
-cap cd "C:\Users\sbaker2\Dropbox\Texas Job Search - New\src2\latex\Final_Figures_Tables\Figures"
+cap cd  "~/Dropbox/Texas_Job_Search_New/replic_test_figures_and_tables"
 label var national_euc_bin "Number of Articles About EUC and Extended Benefits"
 label var national_euc_art "Number of Articles About EUC and Extended Benefits"
 label var period_bin "Number of Days Surrounding New Legislation"

@@ -10,7 +10,7 @@ local max "1"
 local states "AL AR AZ CA CO CT DC DE FL GA HI IL IN KS KY LA MA MD MI MN MO MS NC NE NH NJ NM NV NY OH OK OR PA RI SC TN TX UT VA WA WI WV AK ME MT WY ND SD VT IA ID"
 
 forvalues x = 1/`max' {
-	cap cd "Google_Data/StateMonth2004_2013_`x'"
+	cap cd "Google_Data/StateMonth_2004_2013_`x'"
 
 	foreach state of local states {
 		clear all
@@ -73,4 +73,4 @@ if `max'>1 {
 }
 
 compress
-save final_monthly_search_data, replace
+save final_monthly_search_data_2013, replace

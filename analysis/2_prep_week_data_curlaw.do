@@ -24,7 +24,7 @@ gen day = day(date)
 ***Generate an overall texas series to match with non-msa people and make msa_code=0
 
 ***Merge with the number affected data
-merge 1:1 msa_code date using "Texas_UI_Data\number_affected_data.dta"
+merge 1:1 msa_code date using "Texas_UI_Data/number_affected_data.dta"
 drop _merge
 
 ***Merge with unemp and labor force data by month/MSA
@@ -37,7 +37,7 @@ foreach var of varlist employment labor_force unemp_rate {
 }
 
 ***Merge with num people by weeks_left/date/msa naive
-merge 1:1 msa_code date using "Texas_UI_Data\soph_weeks_left_data.dta"
+merge 1:1 msa_code date using "Texas_UI_Data/soph_weeks_left_data.dta"
 drop if _merge==2
 drop _merge
 
@@ -50,7 +50,7 @@ foreach num of numlist 0(1)87{
 ** drop _merge
 
 *** Merge w/ weeks on data
-merge 1:1 msa_code date using "Texas_UI_Data\number_weeks_on_data.dta"
+merge 1:1 msa_code date using "Texas_UI_Data/number_weeks_on_data.dta"
 drop if _merge==2
 drop _merge
 
