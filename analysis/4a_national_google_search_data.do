@@ -1,15 +1,16 @@
+*** Create Monthly State Level Google Search Series: Old Data Pull
+*** Note, this is data from older version of the paper. The next file compares the new data pull with this one.
 clear all
+cap cd "/Users/afradkin/Dropbox/Texas_Job_Search_New/restat_data"
 set mem 1100m
 set more off
 
-**This is number of runs I've done
+** Number of Independent Google Trends Queries:
 local max "1"
 local states "AL AR AZ CA CO CT DC DE FL GA HI IL IN KS KY LA MA MD MI MN MO MS NC NE NH NJ NM NV NY OH OK OR PA RI SC TN TX UT VA WA WI WV AK ME MT WY ND SD VT IA ID"
 
 forvalues x = 1/`max' {
-	cap cd "C:\Users\scottb131\Dropbox\Texas Job Search - New\Google_Data\StateMonthly_`x'" 
-	cap cd "C:\Users\Scott\Dropbox\Texas Job Search - New\Google Data\StateMonthly_`x'" 
-	cap cd "/Users/afradkin/Dropbox/Texas_Job_Search_New/Google_Data/StateMonthly_`x'"
+	cap cd "Google_Data/StateMonth_2004_2013_`x'"
 
 	foreach state of local states {
 		clear all
@@ -49,8 +50,9 @@ forvalues x = 1/`max' {
 
 	*** Take mean of job search across weeks in month
 	collapse jobs_search, by(year month state_*)
-	
-	cap cd "C:\Users\scottb131\Dropbox\Texas Job Search - New\Google Data"
+
+    cap cd "/Users/afradkin/Dropbox/Texas_Job_Search_New/restat_data"
+	cap cd "Google_Data"
 	compress
 	save all_us_monthly_data_`x', replace
 }
@@ -71,4 +73,4 @@ if `max'>1 {
 }
 
 compress
-save final_monthly_search_data, replace
+save final_monthly_search_data_2013, replace

@@ -1,7 +1,8 @@
+*** Clean Texas MSA Unemployment Data ***
 clear all
 set more off
-
-use "Other Data/tx_msa_unemp.dta"
+cd "~/Dropbox/Texas_Job_Search_New/restat_data"
+use "Other_Data/tx_msa_unemp.dta"
 
 drop unemp_rate
 
@@ -23,6 +24,6 @@ gen unemp_rate = (1-(emp/labor))*100
 
 rename area_short msa
 compress
-save "Other Data/clean_tx_msa_unemp.dta", replace
+save "Other_Data/clean_tx_msa_unemp.dta", replace
 
 

@@ -3,9 +3,8 @@ clear all
 set mem 1100m
 set more off
 
-cap cd "C:\Users\ScottHome\Dropbox\Texas Job Search - New\National_Analysis_Data"
-cap cd "C:\Users\Scott Baker\Dropbox\Texas Job Search - New\National_Analysis_Data"
-cap cd "~/Dropbox/Texas_Job_Search_New/National_Analysis_Data"
+cap cd "/Users/afradkin/Dropbox/Texas_Job_Search_New/restat_data/National_Analysis_Data"
+
 
 local states "AL AR AZ CA CO CT DC DE FL GA HI IL IN KS KY LA MA MD MI MN MO MS NC NE NH NJ NM NV NY OH OK OR PA RI SC TN TX UT VA WA WI WV AK ME MT WY ND SD VT IA ID"
 
@@ -119,106 +118,11 @@ replace l_ui_expansion = 0 if l_ui_expansion==.
 fvset base 1 year_month
 label var frac_lf "Frac. Pop in Lab. Force"
 
-cap cd "C:\Users\ScottHome\Dropbox\Texas Job Search - New\src2\latex\Final_Figures_Tables"
-cap cd "C:\Users\Scott Baker\Dropbox\Texas Job Search - New\src2\latex\Final_Figures_Tables"
-cap cd "C:\Users\srb834\Dropbox\Texas Job Search - New\src2\latex\Final_Figures_Tables"
-cap cd "~/Dropbox/Texas_Job_Search_New/src2/latex/Final_Figures_Tables"
+cd "~/Dropbox/Texas_Job_Search_New/replic_test_figures_and_tables"
 
-stop
-
-/*********************************************************************************************************
-*****Old National Table - OLS
-eststo clear
-eststo: areg ljobs_search totwks i.year_month, ab(state) cluster(state)
-qui estadd local stfe "Yes"
-qui estadd local myfe "Yes"
-qui estadd local smfe "No"
-
-eststo: areg ljobs_search totwks i.year_month, ab(state_month_group) cluster(state)
-qui estadd local stfe "No"
-qui estadd local myfe "Yes"
-qui estadd local smfe "Yes"
-
-eststo: areg ljobs_search totwks frac_total_ui c.frac_total_ui#c.frac_total_ui frac_emp c.frac_emp#c.frac_emp i.year_month statedate*, ab(state_month_group) cluster(state)
-qui estadd local stfe "No"
-qui estadd local myfe "Yes"
-qui estadd local smfe "Yes"
-
-eststo: areg ljobs_search post_legislation i.year_month, ab(state) cluster(state)
-qui estadd local stfe "Yes"
-qui estadd local myfe "Yes"
-qui estadd local smfe "No"
-
-eststo: areg ljobs_search post_legislation i.year_month statedate*, ab(state_month_group) cluster(state)
-qui estadd local stfe "No"
-qui estadd local myfe "Yes"
-qui estadd local smfe "Yes"
-
-eststo: areg ljobs_search post_legislation frac_total_ui frac_emp frac_near_exp i.year_month, ab(state_month_group) cluster(state)
-qui estadd local stfe "No"
-qui estadd local myfe "Yes"
-qui estadd local smfe "Yes"
-
-cd "~/Dropbox/Texas_Job_Search_New/src2/latex/Final_Figures_Tables"
-esttab using "Tables/national_regs_new", tex se keep(post_legislation totwks frac_total_ui frac_near_exp frac_emp) order(post_legislation totwks frac_total_ui frac_near_exp frac_emp) scalars("stfe State FE" "myfe Year-Month FE" "smfe State-Month FE" "r2 R-Squared") nomtitles star(* 0.10 ** 0.05 *** .01) nonotes addnote("} \floatfoot{ Notes: Dependent variable is log(GJSI) at state-month level. Analysis spans all 50 states and Washington DC from 2005 - March 2011. Observations from Lousiana during 2005 are removed due to Hurricane Katrina. ``Frac'' variables represent the fraction of the CPS participants in each category. Data taken from the CPS at a state-month level, imputing weeks left and UI status from the duration of unemployment. Post Legislation is an indicator for the month of and month following an expansion of benefits either due to a trigger or national legislation. ``Potential Benefit Duration'' is computed using the ``Current Law'' assumption. Standard errors are clustered at state level. \\ * p$<$0.10, ** p$<$0.05, *** p$<$0.01} {") obslast replace label gaps wrap
-
-
-*********************************************************************************************************
-***New National Table - OLS
-
-gen dljobs_search = d.ljobs_search 
-gen l_ui_expansion_ind = l.ui_expansion_ind
-gen  d_unemp_rate = d.unemp_rate
-gen  d_frac_near_exp = d.frac_near_exp
-gen unemp_rate_sq = unemp_rate^2
-label var unemp_rate "Unemployment Rate"
-label var dljobs_search "Change in Job Search"
-label var l_ui_expansion_ind "Post Expansion"
-label var d_unemp_rate "Change in Unemp. Rate"
-label var d_frac_near_exp "Change in Frac Near Expiration"
-label var unemp_rate_sq "Unemp. Rate Sq."
-replace l_ui_expansion = 0 if l_ui_expansion==.
-replace l_ui_expansion = 0 if l_ui_expansion==.
-fvset base 1 year_month
-
-eststo clear
-eststo: areg ljobs_search alt_totwks i.year_month if l.month!=., ab(state) cluster(state)
-qui estadd local stfe "Yes"
-qui estadd local myfe "Yes"
-qui estadd local trends "No"
-
-eststo: areg ljobs_search alt_totwks unemp_rate unemp_rate_sq statedatesq* i.year_month if l.month!=., ab(state) cluster(state)
-qui estadd local stfe "Yes"
-qui estadd local myfe "Yes"
-qui estadd local trends "Yes"
-
-eststo: areg ljobs_search ui_expansion_ind i.year_month if l.month!=., ab(state) cluster(state)
-qui estadd local stfe "Yes"
-qui estadd local myfe "Yes"
-qui estadd local trends "No"
-
-eststo: areg ljobs_search ui_expansion_ind unemp_rate unemp_rate_sq statedatesq* i.year_month statedate* if l.month!=., ab(state) cluster(state)
-qui estadd local stfe "Yes"
-qui estadd local myfe "Yes"
-qui estadd local trends "Yes"
-
-eststo: areg dljobs_search ui_expansion_ind i.year_month, ab(state) cluster(state)
-qui estadd local stfe "Yes"
-qui estadd local myfe "Yes"
-qui estadd local trends "No"
-
-eststo: areg dljobs_search ui_expansion_ind d_unemp_rate i.year_month, ab(state) cluster(state)
-qui estadd local stfe "Yes"
-qui estadd local myfe "Yes"
-qui estadd local trends "No"
-
-cap cd "~/Dropbox/Texas_Job_Search_New/src2/latex/Final_Figures_Tables"
-esttab using "Tables/national_regs_new_restat", tex se keep(l_ui_expansion_ind totwks unemp_rate unemp_rate_sq d_unemp_rate) order(totwks l_ui_expansion_ind  unemp_rate unemp_rate_sq d_unemp_rate) scalars("stfe State FE" "myfe Year-Month FE" "trends Linear and Quadratic State Trends" "r2 R-Squared") nomtitles star(* 0.10 ** 0.05 *** .01) nonotes obslast replace label gaps wrap
-*/
-
-*********************************************************************************************************
-***New National Table - OLS - RESTAT REVISION
-
+*******************************************************
+*** National Search Outcomes Table - OLS - RESTAT FINAL
+*******************************************************
 eststo clear
 eststo: areg ljobs_search alt_totwks i.year_month if l.month!=., ab(state) cluster(state)
 qui estadd local stfe "Yes"
@@ -255,13 +159,13 @@ qui estadd local stfe "Yes"
 qui estadd local myfe "Yes"
 qui estadd local trends "No"
 
-cap cd "~/Dropbox/Texas_Job_Search_New/src2/latex/Final_Figures_Tables"
-cap cd "C:\Users\ScottHome\Dropbox\Texas Job Search - New\src2\latex\Final_Figures_Tables"
+cd "~/Dropbox/Texas_Job_Search_New/replic_test_figures_and_tables"
 esttab using "Tables/national_regs_new_restat", tex se keep(alt_totwks unemp_rate unemp_rate_sq insured_unemp_rate  frac_lf wage) order(alt_totwks unemp_rate unemp_rate_sq insured_unemp_rate  frac_lf wage) scalars("stfe State FE" "myfe Year-Month FE" "trends Linear and Quadratic State Trends" "r2 R-Squared") nomtitles star(* 0.10 ** 0.05 *** .01) nonotes obslast replace label gaps wrap
 
 
-*********************************************************************************************************
-*** Robustness Specs
+****************************************************************
+*** Robustness: Just use a before and after expansion indicator
+****************************************************************
 
 eststo clear
 eststo: areg ljobs_search l_ui_expansion_ind i.year_month if l.month!=., ab(state) cluster(state)
@@ -289,7 +193,7 @@ qui estadd local stfe "Yes"
 qui estadd local myfe "Yes"
 qui estadd local trends "Yes"
 
-cap cd "~/Dropbox/Texas_Job_Search_New/src2/latex/Final_Figures_Tables"
+cd "~/Dropbox/Texas_Job_Search_New/replic_test_figures_and_tables"
 esttab using "Tables/robust_expansion_restat", tex se keep(l_ui_expansion_ind unemp_rate unemp_rate_sq) order(l_ui_expansion_ind  unemp_rate unemp_rate_sq) scalars("stfe State FE" "myfe Year-Month FE""trends Linear and Quadratic State Trends" "r2 R-Squared") nomtitles star(* 0.10 ** 0.05 *** .01) nonotes obslast replace label gaps wrap
 
 
