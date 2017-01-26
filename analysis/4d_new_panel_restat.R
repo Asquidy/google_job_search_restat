@@ -11,7 +11,6 @@ library(magrittr)
 library(stringr)
 library(statar)
 library(broom)
-library(coefplot)
 
 table_folder <- "~/Dropbox/Texas_Job_Search_New/replic_test_figures_and_tables/Tables/"
 figure_folder <- "~/Dropbox/Texas_Job_Search_New/replic_test_figures_and_tables/Figures/"
@@ -266,8 +265,7 @@ this_plot <- ggplot(coef_this_reg[1:8], aes(impulse, estimate)) +
   geom_errorbar(aes(ymin=estimate - 1.96*std.error, ymax=estimate + 1.96*std.error), 
                 lwd=1, colour="red", width=0) +
   geom_point(size=4, pch=21, fill="yellow") +
-  theme_bw() + xlab('Month Relative to Drop in Potential Benefit Duration')
-
+  theme_bw() + xlab('Month Relative to Drop in PBD') + theme(axis.title=element_text(size=24)) + ylab("Estimate")
 ggsave(this_plot, file = paste(figure_folder, "drop_shock_post_2011.pdf", sep = ''))
 
 ### Calculate Impulse for All obs:
@@ -306,8 +304,7 @@ this_plot <- ggplot(coef_this_reg, aes(impulse, estimate)) +
   geom_hline(yintercept=0, lty=2, lwd=1, colour="grey50") +
   geom_errorbar(aes(ymin=estimate - 1.96*std.error, ymax=estimate + 1.96*std.error), 
                 lwd=1, colour="red", width=0) +
-  geom_point(size=4, pch=21, fill="yellow") +
-  theme_bw() + xlab('Month Relative to Jump in Potential Benefit Duration')
+  geom_point(size=4, pch=21, fill="yellow") + theme_bw() + xlab('Month Relative to Jump in PBD') + theme(axis.title=element_text(size=24)) + ylab("Estimate") 
 ggsave(this_plot, file = paste(figure_folder, "jump_shock_pre_2012.pdf"))
 
 

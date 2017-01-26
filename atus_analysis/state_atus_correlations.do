@@ -1,6 +1,5 @@
 clear all
-cap cd "C:\Users\scottb131\Dropbox\Texas Job Search - New\ATUS"
-cap cd "C:\Users\srb834\Dropbox\Texas Job Search - New\ATUS"
+cap cd "~/Dropbox/Texas_Job_Search_New/restat_data/ATUS"
 set mem 1000m
 set more off
 
@@ -14,14 +13,6 @@ nsplit tucaseid, digits(4 2 8)
 
 sort tucaseid
 drop if tucaseid==tucaseid[_n-1]
-
-/*
-kruger mueller use:
-
-sum  t050403 t050404 t050405 t050481 t050499  t180589 if teage>19 & teage<66 & tucaseid1<2008
-
-telfs is labor force status
-*/
 
 gen AllJobSearchTimeWTravel = t050403+ t050404 +t050405+ t050481+ t050499+  t180589 
 gen AllJobSearchTime = t050403+ t050404 +t050405+ t050481+ t050499
@@ -76,22 +67,6 @@ label variable dw7 "Saturday"
 compress
 save ATUS_state, replace
 
-/*
-*********************************************************
-Check relative time spent on search between unemp/emp out of kru/muel's sample (in their sample it was 50/1)
-gen unemp = 0
-replace unemp = 1 if telfs==3|telfs==4
-gen emp = 0
-replace emp = 1 if telfs==1|telfs==2
-gen nilf =0
-replace nilf = 1 if telfs==5
-
-sum AllJobSearchTimeWTravel if emp==1&year==2009
-sum AllJobSearchTimeWTravel if unemp==1&year==2009
-
-*********************************************************
-*/
-
 collapse  JobSearchIndicator JobSearchWTravelIndicator  t050403- t180589 (sum) count (sum) AllJobSearchTime AllJobSearchTimeWTravel, by(year state month)
 
 rename year Year
@@ -120,8 +95,7 @@ drop _merge
 ***Merge in new indicators
 
 sort Year Month state
-cap merge 1:1 Year Month state using "C:\Users\scottb131\Dropbox\Texas Job Search - New\Google_Data\all_aux_term_monthly_new.dta"
-cap merge 1:1 Year Month state using "C:\Users\Scott Baker\Dropbox\Texas Job Search - New\Google_Data\all_aux_term_monthly_new.dta"
+cap merge 1:1 Year Month state using "~/Dropbox/Texas_Job_Search_New/restat_data/Google_Data/all_aux_term_monthly_new.dta"
 drop _merge
 
 *********************************************************************************************
@@ -204,46 +178,10 @@ replace AllJobSearchTime=0 if AllJobSearchTime==.
 gen AllJobSearchTime_percap = AllJobSearchTime/count
 drop if count==.
 
-*sum AllJobSearchTime_percap
-*replace AllJobSearchTime_percap = AllJobSearchTime_percap/r(sd)
-*sum JobSearchIndicator
-*replace JobSearchIndicator = JobSearchIndicator/r(sd)
-
-/*
-**********************************************************************************************************************************************
-*********GRAPHS
-**********************************************************************************************************************************************
-
-graph twoway (lfitci ljobs JobSearchIndicator)   (scatter ljobs JobSearchIndicator), ytitle("Google Job Search") xtitle("ATUS Job Search Indicator") legend(ring(0) pos(5) order(2 "linear fit" 1 "95% CI"))
-
-graph twoway (lfitci ljobs  AllJobSearchTime)   (scatter ljobs  AllJobSearchTime),  ytitle("Google Job Search") xtitle("ATUS Job Search Time") legend(ring(0) pos(5) order(2 "linear fit" 1 "95% CI"))
-
-graph twoway (lfitci weather JobSearchIndicator) (scatter weather JobSearchIndicator), ytitle("Google Weather Search") xtitle("ATUS Job Search Indicator") legend(ring(0) pos(5) order(2 "linear fit" 1 "95% CI"))
-
-**********************************************************************************************************************************************
-*********TABLES
-**********************************************************************************************************************************************
-*****OLD TABLE
-reg AllJobSearchTime_percap ljobs, cluster(state) nocons
-outreg2 using Tables\ATUSCorr, tex(landscape pr frag) keep(ljobs) label replace addtext(Year FE, NO, Month FE, NO) ctitle("Search Time") nocons nor2
-
-reg JobSearchIndicator ljobs, cluster(state) nocons
-outreg2 using Tables\ATUSCorr, tex(landscape pr frag) keep(ljobs) label  addtext(Year FE, NO, Month FE, NO) ctitle("Search Indicator") nocons nor2
-
-reg AllJobSearchTime_percap ljobs mm* yy*, cluster(state) nocons
-outreg2 using Tables\ATUSCorr,  tex(landscape pr frag) keep(ljobs) label  addtext(Year FE, YES, Month FE, YES) ctitle("Search Time") nocons nor2
-
-reg JobSearchIndicator ljobs mm* yy*, cluster(state) nocons
-outreg2 using Tables\ATUSCorr, tex(landscape pr frag) keep(ljobs) label  addtext(Year FE, YES, Month FE, YES) ctitle("Search Indicator") nocons nor2
-
-reg AllJobSearchTime_percap lweather mm* yy*, cluster(state) nocons
-outreg2 using Tables\ATUSCorr, tex(landscape pr frag) keep(lweather) label addtext(Year FE, YES, Month FE, YES) ctitle("Search Time") nocons nor2
 
 ***********************************************************************************************************************************************
 *****NEW TABLE
-cap cd "C:\Users\scottb131\Dropbox\Texas Job Search - New\src2\latex\Final_Figures_Tables"
-cap cd "C:\Users\Scott\Dropbox\Texas Job Search - New\src2\latex\Final_Figures_Tables"
-cap cd "C:\Users\srb834\Dropbox\Texas Job Search - New\src2\latex\Final_Figures_Tables"
+cd "~/Dropbox/Texas_Job_Search_New/replic_test_figures_and_tables/Tables"
 
 gen any_search_time = AllJobSearchTime!=0
 gen any_search_time_X_ljobs = any_search_time*ljobs
@@ -252,31 +190,21 @@ egen min_lunemp = min(lunemp)
 replace lunemp = min_lunemp if lunemp==.
 
 reg AllJobSearchTime_percap ljobs, cluster(state) nocons
-outreg2 using Tables\ATUSCorr, tex(landscape pr frag) keep(ljobs) label replace addtext(State FE, NO, Month FE, NO) ctitle("Search Time") nocons
+outreg2 using ATUSCorr, tex(landscape pr frag) keep(ljobs) label replace addtext(State FE, NO, Month FE, NO) ctitle("Search Time") nocons
 
 reg AllJobSearchTime_percap ljobs if AllJobSearchTime>0, cluster(state) nocons
-outreg2 using Tables\ATUSCorr, tex(landscape pr frag) keep(ljobs) label addtext(State FE, NO, Month FE, NO) ctitle("Search Time-NonZero") nocons
-
-*probit any_search_time ljobs  mm* yy*, vce(cluster state)
-*outreg2 using Tables\ATUSCorr, tex(landscape pr frag) keep(ljobs) label addtext(State FE, NO, Month FE, NO) ctitle("Search Indic") nocons
-
-*reg any_search_time ljobs, cluster(state) nocons
-*outreg2 using Tables\ATUSCorr, tex(landscape pr frag) keep(ljobs) label addtext(State FE, NO, Month FE, NO) ctitle("Search Indic") nocons
+outreg2 using ATUSCorr, tex(landscape pr frag) keep(ljobs) label addtext(State FE, NO, Month FE, NO) ctitle("Search Time-NonZero") nocons
 
 reg AllJobSearchTime_percap ljobs ss* mm*, cluster(state) nocons
-outreg2 using Tables\ATUSCorr,  tex(landscape pr frag) keep(ljobs) label addtext(State FE, YES, Month FE, YES) ctitle("Search Time") nocons
+outreg2 using ATUSCorr,  tex(landscape pr frag) keep(ljobs) label addtext(State FE, YES, Month FE, YES) ctitle("Search Time") nocons
 
 reg AllJobSearchTime_percap ljobs ss* mm* if AllJobSearchTime>0, cluster(state) nocons
-outreg2 using Tables\ATUSCorr,  tex(landscape pr frag) keep(ljobs) label addtext(State FE, YES, Month FE, YES) ctitle("Search Time-NonZero") nocons
-
-*reg any_search_time ljobs ss* mm*, cluster(state) nocons
-*outreg2 using Tables\ATUSCorr, tex(landscape pr frag) keep(ljobs) label addtext(State FE, YES, Month FE, YES) ctitle("Search Indic") nocons
+outreg2 using ATUSCorr,  tex(landscape pr frag) keep(ljobs) label addtext(State FE, YES, Month FE, YES) ctitle("Search Time-NonZero") nocons
 
 ***SRB: New columns for R&R
 reg AllJobSearchTime_percap ljobs lweather ss* mm*, cluster(state) nocons
-outreg2 using Tables\ATUSCorr, tex(landscape pr frag) keep(ljobs lweather) label addtext(State FE, YES, Month FE, YES) ctitle("Search Time") nocons
+outreg2 using ATUSCorr, tex(landscape pr frag) keep(ljobs lweather) label addtext(State FE, YES, Month FE, YES) ctitle("Search Time") nocons
 
 reg AllJobSearchTime_percap ljobs lunemp_emp lunemp ss* mm*, cluster(state) nocons
-outreg2 using Tables\ATUSCorr, tex(landscape pr frag) keep(ljobs lunemp lunemp_emp) label addtext(State FE, YES, Month FE, YES) ctitle("Search Time") nocons
-
+outreg2 using ATUSCorr, tex(landscape pr frag) keep(ljobs lunemp lunemp_emp) label addtext(State FE, YES, Month FE, YES) ctitle("Search Time") nocons
 

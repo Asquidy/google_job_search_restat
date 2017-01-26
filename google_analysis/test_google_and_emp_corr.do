@@ -1,37 +1,15 @@
+*** Generate Table 5, regression of GJSI on unemployment rates ***
 clear all
 
-cap cd "C:\Users\scottb131\Dropbox\Texas Job Search - New\src2\latex\Final_Figures_Tables\Tables"
+cap cd "~/Dropbox/Texas_Job_Search_New/restat_data/Google_Data/"
 use  monthly_data_for_empirical_tests
 
-/**********************************************************************************************************************************************
-*********OLD TABLE 1. EMPIRICAL TESTS FOR GOOGLE MEASURE
-**********************************************************************************************************************************************
-
-reg  difflallsearch diffunemprate laglallsearch yy* mm*, cluster(stateyear)
-outreg2 using Table1, tex(landscape pr frag) keep(diffunemprate) label replace addtext(Year FE, YES, Month FE, YES) ctitle("$\Delta$ Jobs Search") nocons
-
-reg  difflallsearch diffunemprate diffscinitialclaims laglallsearch yy* mm*, cluster(stateyear)
-outreg2 using Table1,  tex(landscape pr frag) keep(diffunemprate diffscinitialclaims) label  addtext(Year FE, YES, Month FE, YES) ctitle("$\Delta$ Jobs Search") nocons
-
-reg  difflallsearch diffunemprate diffscinitialclaims forfinalpayments laglallsearch yy* mm*, cluster(stateyear)
-outreg2 using Table1, tex(landscape pr frag) keep(diffunemprate diffscinitialclaims forfinalpayments) label  addtext(Year FE, YES, Month FE, YES) ctitle("$\Delta$ Jobs Search") nocons
-
-reg  difflallsearch diffunemprate diffscinitialclaims forfinalpayments diffvacanciespercap laglallsearch yy* mm*, cluster(stateyear)
-outreg2 using Table1,  tex(landscape pr frag) keep(diffunemprate diffscinitialclaims forfinalpayments diffvacanciespercap) label  addtext(Year FE, YES, Month FE, YES) ctitle("$\Delta$ Jobs Search") nocons
-
-reg  difflallsearch diffunemprate diffscinitialclaims forfinalpayments difftightness2 laglallsearch yy* mm*, cluster(stateyear)
-outreg2 using Table1, tex(landscape pr frag) keep(diffscinitialclaims forfinalpayments difftightness2) label  addtext(Year FE, YES, Month FE, YES) ctitle("$\Delta$ Jobs Search") nocons
-
-*/
-
-
-
 *********************************************************************************************
-***Merge in new indicators
+*** Merge in new data
 rename state state_abv
 rename state_long state
 sort Year Month state
-merge 1:1 Year Month state using "C:\Users\scottb131\Dropbox\Texas Job Search - New\Google_Data\all_aux_term_monthly_new.dta"
+merge 1:1 Year Month state using "all_aux_term_monthly_new.dta"
 drop _merge
 
 *********************************************************************************************
@@ -57,7 +35,7 @@ foreach var of varlist lbenefit lunemp_emp lunemp lweather lallsearch allsearch 
 
 label var unemprate "Unemployment Rate"
 
-STOP STOP STOP
+cap cd "~/Dropbox/Texas_Job_Search_New/replic_test_figures_and_tables/Tables"
 
 reg lallsearch unemprate, cluster(stateyear)
 outreg2 using Table1, tex(landscape pr frag) keep(unemprate) label replace addtext(Month FE, NO, State FE, NO) ctitle("Log(GJSI)") nocons

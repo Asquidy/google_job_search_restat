@@ -1,11 +1,10 @@
-clear all
+**************************************************************
+****** Create Day of Week Tables for Google ******************
+****** and Other Search Measures, as well as placebos ********
+**************************************************************
 
-******************************************************
-******Google Placebos
 clear all
-cap use "C:\Users\Scott\Dropbox\Texas Job Search - New\Google_Data\all_aux_terms_national_daily.dta"
-cap use "C:\Users\Scott Baker\Dropbox\Texas Job Search - New\Google_Data\all_aux_terms_national_daily.dta"
-
+use "~/Dropbox/Texas_Job_Search_New/restat_data/Google_Data/all_aux_terms_national_daily.dta"
 gen date = mdy(month, day, year)
 gen dow = dow(date)
 
@@ -166,8 +165,7 @@ label var dowfe6 "Friday"
 label var dowfe7 "Saturday"
 
 
-cap cd "C:\Users\scottb131\Dropbox\Texas Job Search - New\src2\latex\Final_Figures_Tables\Tables"
-cap cd "C:\Users\Scott\Dropbox\Texas Job Search - New\src2\latex\Final_Figures_Tables\Tables"
+cap cd "~/Dropbox/Texas_Job_Search_New/replic_test_figures_and_tables/Tables"
 
 areg lbenefits weekend holiday, cluster(year_month) absorb(year_month)
 outreg2 using holiday_dow_placebo, tex(landscape pr frag) keep(holiday weekend) label addtext( Year FE, YES, Month FE, YES, State FE, YES) ctitle("Google Benefits") nocons nor2 replace
@@ -189,11 +187,10 @@ outreg2 using holiday_dow_placebo, tex(landscape pr frag) keep(dowfe2 dowfe3 dow
 
 
 ******************************************************
-***Google Columns:
+*** Google Columns:
 clear all
-cap cd "C:\Users\scottb131\Dropbox\Texas Job Search - New\Texas Job Search - Old\Google Trends\Master Data"
-cap cd "C:\Users\Scott\Dropbox\Texas Job Search - New\Texas Job Search - Old\Google Trends\Master Data"
-use dailysearchandclaimsfe.dta
+cap cd "~/Dropbox/Texas_Job_Search_New/restat_data/Google_Data/"
+use dailysearch.dta
 
 encode state, gen(state_code)
 tsset state_code date
@@ -205,8 +202,7 @@ sum search
 gen search_sd = search/r(sd)
 rename aholiday holiday
 
-cap cd "C:\Users\scottb131\Dropbox\Texas Job Search - New\src2\latex\Final_Figures_Tables\Tables"
-cap cd "C:\Users\Scott\Dropbox\Texas Job Search - New\src2\latex\Final_Figures_Tables\Tables"
+cap cd "~/Dropbox/Texas_Job_Search_New/replic_test_figures_and_tables/Tables"
 
 areg lsearch weekend holiday mfe*, cluster(seasonstate) absorb(seasonstate)
 outreg2 using holiday_dow, tex(landscape pr frag) keep(holiday weekend) label addtext( Year FE, NO, Month FE, YES, State FE, YES) ctitle("Google Job Search") nocons nor2 replace
@@ -216,13 +212,10 @@ outreg2 using holiday_dow, tex(landscape pr frag) keep(dowfe2 dowfe3 dowfe4 dowf
 
 clear
 
-/*
-log:  -.21; -.147
-*/
 ******************************************************
 ****ATUS Columns:
-cap cd "C:\Users\scottb131\Dropbox\Texas Job Search - New\ATUS"
-cap cd "C:\Users\Scott\Dropbox\Texas Job Search - New\ATUS"
+cap cd "~/Dropbox/Texas_Job_Search_New/restat_data/ATUS/"
+
 
 use ATUS_state
 
@@ -244,8 +237,8 @@ forvalues x = 1/7 {
 	rename dw`x' dowfe`x'
 }
 
-cap cd "C:\Users\scottb131\Dropbox\Texas Job Search - New\src2\latex\Final_Figures_Tables\Tables"
-cap cd "C:\Users\Scott\Dropbox\Texas Job Search - New\src2\latex\Final_Figures_Tables\Tables"
+cap cd "~/Dropbox/Texas_Job_Search_New/replic_test_figures_and_tables/Tables"
+
 
 rename trholiday holiday
 cap tab year, gen(yy)
@@ -259,18 +252,10 @@ outreg2 using holiday_dow,  tex(landscape pr frag) keep(dowfe2 dowfe3 dowfe4 dow
 
 clear
 
-/*
-reg: -1.7; -1
-reg std: -.089; -.052
-
-log = -.053; -.028
-log std = -.1; -.057
-*/
 ******************************************************
 ***ComScore Columns:
 
-cap cd "C:\Users\scottb131\Dropbox\Texas Job Search - New\Texas Job Search - Old\Google Trends\Master Data"
-cap cd "C:\Users\Scott\Dropbox\Texas Job Search - New\Texas Job Search - Old\Google Trends\Master Data"
+cap cd "~/Dropbox/Texas_Job_Search_New/restat_data/comScore_analysis/"
 
 use comscorestateday
 
@@ -278,8 +263,7 @@ use comscorestateday
 sum totaljobsearchtime
 gen totaljobsearchtime_sd = totaljobsearchtime/r(sd)
 
-cap cd "C:\Users\scottb131\Dropbox\Texas Job Search - New\src2\latex\Final_Figures_Tables\Tables"
-cap cd "C:\Users\Scott\Dropbox\Texas Job Search - New\src2\latex\Final_Figures_Tables\Tables"
+cap cd "~/Dropbox/Texas_Job_Search_New/replic_test_figures_and_tables/Tables"
 
 areg totaljobsearchtime weekend holiday mfe*, ab(state)
 outreg2 using holiday_dow, tex(landscape pr frag) keep(weekend holiday) label addtext(Year FE, YES, Month FE, YES, State FE, YES) ctitle("comScore Job Search") nocons nor2
