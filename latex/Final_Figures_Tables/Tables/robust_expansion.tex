@@ -1,0 +1,24 @@
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular}{l*{4}{c}}
+\hline\hline
+                    &\multicolumn{1}{c}{(1)}         &\multicolumn{1}{c}{(2)}         &\multicolumn{1}{c}{(3)}         &\multicolumn{1}{c}{(4)}         \\
+\hline
+Post Expansion      &     0.00347         &    -0.00239         &   -0.000572         &    -0.00542         \\
+                    &   (0.00940)         &    (0.0117)         &   (0.00821)         &   (0.00730)         \\
+[1em]
+Unemployment Rate   &                     &                     &       5.037\sym{*}  &       2.975         \\
+                    &                     &                     &     (2.765)         &     (1.869)         \\
+[1em]
+Unemp. Rate Sq.     &                     &                     &      -25.75         &      -9.997         \\
+                    &                     &                     &     (17.28)         &     (10.30)         \\
+\hline
+State FE            &         Yes         &         Yes         &         Yes         &         Yes         \\
+Year-Month FE       &         Yes         &         Yes         &         Yes         &         Yes         \\
+State Seasonality FE&          No         &         Yes         &          No         &         Yes         \\
+Linear and Quadratic State Trends&          No         &          No         &          No         &         Yes         \\
+R-Squared           &       0.822         &       0.840         &       0.826         &       0.930         \\
+Observations        &        3758         &        3758         &        3758         &        3758         \\
+\hline\hline
+\end{tabular}
+}

@@ -55,7 +55,8 @@ egen national_euc_bin = sum(national_euc_art), by(period_bin)
 * twoway (bar tx_ui_bin period_bin)
 
 
-cap cd  "~/Dropbox/Texas_Job_Search_New/replic_test_figures_and_tables"
+cap cd  "~/Dropbox/Texas_Job_Search_New/final_git_repo/google_job_search_restat/latex/Final_Figures_Tables/Figures"
+
 label var national_euc_bin "Number of Articles About EUC and Extended Benefits"
 label var national_euc_art "Number of Articles About EUC and Extended Benefits"
 label var period_bin "Number of Days Surrounding New Legislation"

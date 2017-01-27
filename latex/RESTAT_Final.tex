@@ -198,7 +198,7 @@ An important drawback of using the Texas data is that we lose the cross-state va
 
 Table \ref{tab:nllscurlaw} displays estimates from a nonlinear least squares (NLLS) model based on Equation \ref{eqn:estimating_eq} with three types of job seekers: those on UI, those not on UI and the employed. Columns 1 displays the coefficients corresponding to the $\gamma_i$'s in Equation \ref{eqn:nlls}. The coefficient on the number on UI is approximately 25\% smaller than the coefficient on the number of unemployed individuals not on UI. This corroborates empirical results from KM as well as standard models of moral hazard that predict less job search activity among the unemployed who are on UI. Second, the employed search less than one tenth as much as the unemployed.
 
-Next, we test whether individuals with different weeks-left of UI search with different intensities. We use the `current law' definition of weeks left (results using `current-policy' beliefs are in an online appendix). Table \ref{tab:nllscurlaw} column 2 displays coefficients corresponding to search effort by individuals with 0 to 10, 11 to 20, 21 to 30 and 30 or more weeks left. One concern about our specification may be that we do not fully account for the fact that people may search differently when they initially begin UI than when they continue in UI. In column 3, we control for the number of individuals with 5 or fewer weeks on UI without substantively changing our results.
+Next, we test whether individuals with different weeks-left of UI search with different intensities. We use the `current law' definition of weeks left. Table \ref{tab:nllscurlaw} column 2 displays coefficients corresponding to search effort by individuals with 0 to 10, 11 to 20, 21 to 30 and 30 or more weeks left. One concern about our specification may be that we do not fully account for the fact that people may search differently when they initially begin UI than when they continue in UI. In column 3, we control for the number of individuals with 5 or fewer weeks on UI without substantively changing our results.
 
 Our results confirm that the GJSI is driven, in part, by heterogeneous search activity across groups. In general, individuals with higher numbers of potential weeks search less than those with few weeks of benefits remaining. Those with fewer than 10 weeks remaining search 66\% more than those with 10 - 20 weeks remaining and 108\% more than those with more than 30 weeks remaining.\footnotemark \
 \footnotetext{Figure \ref{fig:weeks_left_effects} displays the coefficients from a NLLS regression with weeks-left binned at a 5 week level. The results confirm that there is a higher level of search nearer to UI expiration. However, we lose precision on the coefficients past 15 weeks left.}
@@ -445,7 +445,7 @@ extend EUC &  &   & \\
 \begin{center}
 \input{Final_Figures_Tables/Tables/holiday_dow.tex}
 \begin{tablenotes}
-\item  `Google Search' refers to the logged value of the GJSI. `ATUS Job Search' refers to the logged number of minutes of time spent on job search for each ATUS respondent. `ComScore Job Search' refers to the logged number of minutes online job search per capita as measured by comScore. Holiday is an indicator equal to one if the ATUS diary day or the GJSI day was a holiday. Each day represents an indicator equal to 1 if the ATUS diary day was the given day of the week. Weekend is an indicator equal to one if the ATUS diary day was a Saturday or Sunday. Specifications include differing fixed effects because of the differing nature of each dataset. All include, at a minimum, state and time fixed effects. Google data necessarily utilizes Season-State fixed effects, while we use finer time fixed effects with the ATUS and comScore data.
+\item  `Google Search' refers to the logged value of the GJSI. `ATUS Job Search' refers to the logged minutes per day spent on job search for each ATUS respondent. `ComScore Job Search' refers to the logged minutes of online job search per capita as measured by comScore. Holiday and Weekend are indicators equal to one on the respective days. Each listed day represents an indicator equal to 1 for the given day. Specifications include differing fixed effects because of the differing nature of each dataset. All include, at a minimum, state and time fixed effects. Google data necessarily utilizes Season-State fixed effects, while we use finer time fixed effects with the ATUS and comScore data.
 \end{tablenotes}
 \end{center}
 \end{sidewaystable}
@@ -465,23 +465,27 @@ extend EUC &  &   & \\
 %From 2c_new_tables
 \begin{table}
 \caption{Effect of UI Status and Composition on Job Search (NLLS)}\label{tab:nllscurlaw}
+\begin{threeparttable}
 \begin{center}
 \input{Final_Figures_Tables/Tables/nllsregs_current_law.tex}
 \begin{tablenotes}
 \item  Notes: Dependent variable is log(GJSI) at DMA-week level. Analysis spans all Texas DMAs from 2006-2011. Number on UI, Not on UI, and Number Employed are the total number of individuals in each category. Unemployed/Employed gives the relative levels of search activity across types. Standard Errors Clustered at DMA level.
 \end{tablenotes}
 \end{center}
+\end{threeparttable}
 \end{table}
 
 %From 4c_national_regressions_restat
 \begin{sidewaystable}
-\caption{Effects of UI Expansions and Composition by State \label{tab:nationalregs}}
-\begin{center}
+\caption{Effects of UI Expansions and Composition by State
+\label{tab:nationalregs}}
+\centering
+\begin{threeparttable}
 \input{Final_Figures_Tables/Tables/national_regs_new_restat.tex}
 \begin{tablenotes}
-\item  Notes: Dependent variable in columns 1-4 is log(GJSI) at state-month level. Dependent variable for columns 5-6 is the change in log(GJSI) from the previous month at a state-month level. Analysis spans all 50 states and Washington DC from 2005 - 2014. Observations from Louisiana during 2005 are removed due to Hurricane Katrina. Post Legislation is an indicator for the month following an expansion of benefits either due to a trigger or national legislation. ``Potential Benefit Duration'' is computed using the ``Current Law'' assumption. Standard errors are clustered at state level.
+\item  Notes: Dependent variable in columns 1-4 is log(GJSI) at state-month level. Dependent variable for columns 5-6 is the change in log(GJSI) from the previous month. Analysis spans all 50 states and Washington DC from 2005 - 2014. Observations from Louisiana during 2005 are removed due to Hurricane Katrina. Post Legislation is an indicator for the month following an expansion of benefits. ``Potential Benefit Duration'' is computed using the ``Current Law'' assumption. Standard errors are clustered at state level.
 \end{tablenotes}
-\end{center}
+\end{threeparttable}
 \end{sidewaystable}
 
 %From 4c_national_regressions_restat
@@ -491,7 +495,7 @@ extend EUC &  &   & \\
 \begin{threeparttable}
 \input{Final_Figures_Tables/Tables/all_impulse.tex}
 \begin{tablenotes}
-\item This table displays the results from five regression specifications intended to study the dynamic response of the GJSI with respect to large changes in the UI system. The first three columns use increases in potential benefit duration (PBD) and the later two uses drops in PBD. Column (1) uses the set of the largest increases in PBD per state that were not concurrent with federal legislation and excluded observations where other changes in UI affected the PBD within the 4 months surrounding the change. State fixed effects are included. Column (2) use the same changes but adds in observations from `control' states which did not experience a change in UI policy in the same time period. That specification includes state of shock and year-month fixed effects. The coefficients in columns (3) and (5) were obtained from panel regressions that use CPS data from 2005 to 2011 and 2012 to 2014 respectively. Controls for the fraction of the population on UI, year-month fixed effects, and state fixed effects are included. Column (4) displays the coefficients on the interaction between the dynamic response and whether a state experienced a large drop in PBD when Congress failed to extend PBD in December of 2013. Standard errors are clustered at the state level for all specifications.
+\item Notes: Columns (1)-(3) use increases in potential benefit duration (PBD) and the latter two use drops in PBD. Column (1) uses the set of the largest increases in PBD per state that were not concurrent with federal legislation and excludes observations where other changes in UI affected the PBD within 4 months. Column (2) adds in observations from `control' states which did not experience a change in UI policy in the same period. Coefficients in columns (3) and (5) were obtained from panel regressions that use CPS data from 2005 to 2011 and 2012 to 2014, respectively, and control for the fraction of the population on UI. Column (4) displays the coefficients on the interaction between the dynamic response and whether a state experienced a large drop in PBD when Congress failed to extend PBD in December of 2013. Standard errors are clustered at the state level for all specifications.
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}

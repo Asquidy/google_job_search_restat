@@ -1,0 +1,50 @@
+\begin{table}[htbp]\centering
+\scriptsize
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Effects of UI Expansion Over Time \label{tab:impulsereponsetable}}
+\begin{tabular}{l*{4}{c}}
+\hline\hline
+                    &\multicolumn{1}{c}{(1)}         &\multicolumn{1}{c}{(2)}         &\multicolumn{1}{c}{(3)}         &\multicolumn{1}{c}{(4)}         \\
+\hline
+Month of Legislation&     -0.0253\sym{**} &     -0.0271\sym{**} &     -0.0112\sym{*}  &     -0.0118\sym{*}  \\
+                    &    (0.0117)         &    (0.0120)         &   (0.00596)         &   (0.00626)         \\
+[1em]
+Month of Legislation&     -0.0200\sym{**} &     -0.0230\sym{**} &    -0.00521         &    -0.00530         \\
+- Lag 1             &   (0.00932)         &   (0.00940)         &   (0.00627)         &   (0.00619)         \\
+[1em]
+Month of Legislation&     -0.0157\sym{*}  &     -0.0184\sym{**} &    0.000402         &     0.00161         \\
+- Lag 2             &   (0.00911)         &   (0.00900)         &   (0.00762)         &   (0.00742)         \\
+[1em]
+Month of Legislation&     -0.0162         &     -0.0187         &   -0.000947         &     0.00196         \\
+- Lag 3             &    (0.0130)         &    (0.0127)         &   (0.00934)         &   (0.00951)         \\
+[1em]
+Month of Legislation&     -0.0151         &     -0.0176         &    -0.00357         &   -0.000369         \\
+- Lag 4             &    (0.0146)         &    (0.0145)         &   (0.00924)         &   (0.00925)         \\
+[1em]
+Month of Legislation&     -0.0181         &     -0.0202\sym{*}  &    -0.00781         &    -0.00468         \\
+- Lag 5             &    (0.0113)         &    (0.0112)         &   (0.00680)         &   (0.00684)         \\
+[1em]
+Month of Legislation&     -0.0119         &     -0.0132         &    -0.00107         &     0.00315         \\
+- Lag 6             &    (0.0127)         &    (0.0124)         &    (0.0104)         &    (0.0110)         \\
+[1em]
+Month of Legislation&    -0.00151         &    -0.00205         &     0.00868         &      0.0136         \\
+- Lag 7             &   (0.00978)         &   (0.00942)         &    (0.0101)         &    (0.0102)         \\
+[1em]
+Month of Legislation&   -0.000316         &   -0.000783         &     0.00850         &      0.0119         \\
+- Lag 8             &    (0.0116)         &    (0.0111)         &    (0.0104)         &    (0.0106)         \\
+[1em]
+Unemployment Rate   &                     &      -0.701         &                     &       1.974\sym{***}\\
+                    &                     &     (0.832)         &                     &     (0.604)         \\
+[1em]
+Fraction Employed   &                     &      -2.378\sym{**} &                     &      -0.499         \\
+                    &                     &     (1.173)         &                     &     (0.694)         \\
+\hline
+State FE            &         Yes         &         Yes         &         Yes         &         Yes         \\
+Year and Month FE   &         Yes         &         Yes         &         Yes         &         Yes         \\
+State Time Trend    &          No         &          No         &         Yes         &         Yes         \\
+R-Squared           &       0.832         &       0.835         &       0.903         &       0.906         \\
+Observations        &        3417         &        3417         &        3417         &        3417         \\
+\hline\hline
+\multicolumn{5}{l}{\footnotesize } \floatfoot{Notes: Dependent variable is log(GJSI) at state-month level. Analysis spans all 50 states and Washington DC from 2005-2012.  represents the fraction of the population who are employed, by the CPS definition. Post Legislation and it's lags are indicators for the month of a UI extension or expansion law (or lags of this variable). Standard errors are clustered at a state level. \\ * p$<$0.10, ** p$<$0.05, *** p$<$0.01} {}\\
+\end{tabular}
+\end{table}

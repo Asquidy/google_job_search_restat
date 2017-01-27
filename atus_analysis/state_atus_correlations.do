@@ -181,7 +181,7 @@ drop if count==.
 
 ***********************************************************************************************************************************************
 *****NEW TABLE
-cd "~/Dropbox/Texas_Job_Search_New/replic_test_figures_and_tables/Tables"
+cd "~/Dropbox/Texas_Job_Search_New/final_git_repo/google_job_search_restat/latex/Final_Figures_Tables/Tables"
 
 gen any_search_time = AllJobSearchTime!=0
 gen any_search_time_X_ljobs = any_search_time*ljobs

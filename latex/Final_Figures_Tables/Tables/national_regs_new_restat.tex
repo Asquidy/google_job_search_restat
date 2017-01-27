@@ -1,0 +1,32 @@
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular}{l*{7}{c}}
+\hline\hline
+                    &\multicolumn{1}{c}{(1)}         &\multicolumn{1}{c}{(2)}         &\multicolumn{1}{c}{(3)}         &\multicolumn{1}{c}{(4)}         &\multicolumn{1}{c}{(5)}         &\multicolumn{1}{c}{(6)}         &\multicolumn{1}{c}{(7)}         \\
+\hline
+Potential Benefit   &    -0.00154\sym{***}&    -0.00230\sym{***}&    -0.00234\sym{***}&    -0.00207\sym{***}&    -0.00202\sym{***}&    -0.00330\sym{***}&    -0.00107\sym{**} \\
+Duration            &  (0.000528)         &  (0.000617)         &  (0.000752)         &  (0.000714)         &  (0.000752)         &  (0.000693)         &  (0.000427)         \\
+[1em]
+Unemployment Rate   &                     &       1.592\sym{**} &       0.701         &       1.687         &       0.435         &       2.103         &       1.462         \\
+                    &                     &     (0.759)         &     (2.983)         &     (2.266)         &     (2.896)         &     (3.022)         &     (3.440)         \\
+[1em]
+Unemp. Rate Sq.     &                     &                     &      -1.800         &      -8.189         &       1.435         &      -8.649         &      -10.01         \\
+                    &                     &                     &     (18.66)         &     (14.03)         &     (18.20)         &     (18.35)         &     (23.32)         \\
+[1em]
+Insured Unemp. Rate &                     &                     &       5.233\sym{***}&       3.594\sym{***}&       4.958\sym{***}&       3.929\sym{***}&       5.290\sym{***}\\
+                    &                     &                     &     (1.231)         &     (0.714)         &     (1.238)         &     (1.270)         &     (1.808)         \\
+[1em]
+Frac. Pop in Lab.   &                     &                     &       0.293         &       1.166\sym{**} &       1.297         &      -1.295         &       2.095\sym{*}  \\
+Force               &                     &                     &     (1.033)         &     (0.544)         &     (1.047)         &     (1.035)         &     (1.238)         \\
+[1em]
+Average Wk. Wage    &                     &                     &                     &                     &       0.403         &                     &                     \\
+('000)              &                     &                     &                     &                     &     (0.327)         &                     &                     \\
+\hline
+State FE            &         Yes         &         Yes         &         Yes         &         Yes         &         Yes         &         Yes         &         Yes         \\
+Year-Month FE       &         Yes         &         Yes         &         Yes         &         Yes         &         Yes         &         Yes         &         Yes         \\
+Linear and Quadratic State Trends&          No         &          No         &          No         &         Yes         &          No         &          No         &          No         \\
+R-Squared           &       0.751         &       0.754         &       0.765         &       0.875         &       0.701         &       0.839         &       0.780         \\
+Observations        &        6055         &        6055         &        6055         &        6055         &        4895         &        4219         &        1836         \\
+\hline\hline
+\end{tabular}
+}

@@ -1,0 +1,35 @@
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Effect of UI Status on Job Search (NLLS) \label{tab:nlls2}}
+\begin{tabular}{l*{4}{c}}
+\hline\hline
+                    &\multicolumn{1}{c}{(1)}         &\multicolumn{1}{c}{(2)}         &\multicolumn{1}{c}{(3)}         &\multicolumn{1}{c}{(4)}         \\
+\hline
+xb\_sctotal\_on\_ui    &                     &                     &                     &                     \\
+Number on UI        &      0.0193         &       0.847\sym{***}&       0.840\sym{***}&                     \\
+                    &    (0.0143)         &     (0.114)         &     (0.237)         &                     \\
+\hline
+xb\_scnot\_on\_ui      &                     &                     &                     &                     \\
+Not on UI           &      0.0262         &       0.941\sym{***}&       1.090\sym{***}&                     \\
+                    &    (0.0184)         &     (0.150)         &     (0.269)         &                     \\
+\hline
+xb\_scemployed       &                     &                     &                     &                     \\
+Number Employed     &    0.000722         &      0.0760\sym{***}&      0.0940\sym{***}&                     \\
+                    &  (0.000456)         &    (0.0105)         &    (0.0163)         &                     \\
+\hline
+xb\_all\_extensions\_and\_exp\_4week&                     &                     &                     &                     \\
+Post Legislation    &                     &     0.00960         &     -0.0191\sym{**} &     -0.0224\sym{***}\\
+                    &                     &   (0.00943)         &   (0.00773)         &   (0.00732)         \\
+\hline
+UI Recipients/Employed&       36.27         &       12.39         &       11.60         &      -1.708         \\
+UI Recipients/Non-UI Unemployed&       0.737         &       0.900         &       0.771         &     -0.0585         \\
+\hline \vspace{-2mm}&                     &                     &                     &                     \\
+DMA FE and Trend    &         Yes         &         Yes         &         Yes         &         Yes         \\
+Year and Week FE    &          No         &         Yes         &          No         &          No         \\
+Year-Month FE       &          No         &          No         &         Yes         &         Yes         \\
+R-Squared           &       0.998         &       0.998         &       0.998         &       0.691         \\
+Observations        &        5070         &        5070         &        5070         &        5070         \\
+\hline\hline
+\multicolumn{5}{l}{\footnotesize } \begin{minipage} [t] {\columnwidth} Notes: Dependent variable is log(GJSI) at DMA-week level. Analysis spans all Texas DMAs from 2006-2011. Number on UI, Not on UI, and Number Employed are the total number of individuals in each category. Post Legislation is the week of and three weeks following legislation. Unemployed/Employed gives the relative levels of search activity across types. Standard Errors Clustered at DMA level. \\ * p$<$0.10, ** p$<$0.05, *** p$<$0.01 \end{minipage} {}\\
+\end{tabular}
+\end{table}

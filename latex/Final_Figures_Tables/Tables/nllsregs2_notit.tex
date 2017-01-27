@@ -1,0 +1,28 @@
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular}{l*{4}{c}}
+\hline\hline
+                    &\multicolumn{1}{c}{(1)}         &\multicolumn{1}{c}{(2)}         &\multicolumn{1}{c}{(3)}         &\multicolumn{1}{c}{(4)}         \\
+\hline
+Number on UI        &       1.097\sym{***}&       1.117\sym{***}&       0.601\sym{***}&       0.612\sym{***}\\
+                    &     (0.120)         &     (0.116)         &     (0.154)         &     (0.156)         \\
+\hline
+Not on UI           &       1.301\sym{***}&       1.301\sym{***}&       0.728\sym{***}&       0.731\sym{***}\\
+                    &    (0.0846)         &    (0.0849)         &     (0.148)         &     (0.150)         \\
+\hline
+Number Employed     &      0.0260\sym{***}&      0.0260\sym{***}&      0.0526\sym{***}&      0.0534\sym{***}\\
+                    &   (0.00467)         &   (0.00472)         &   (0.00949)         &   (0.00977)         \\
+\hline
+Post Legislation    &                     &    -0.00927         &                     &     -0.0198\sym{**} \\
+                    &                     &   (0.00764)         &                     &   (0.00728)         \\
+\hline
+Unemployed/Employed &       50.04         &       50.03         &       13.85         &       13.70         \\
+UI/Non-UI           &       0.843         &       0.858         &       0.826         &       0.838         \\
+\hline \vspace{-2mm}&                     &                     &                     &                     \\
+MSA FE and Trend    &         Yes         &         Yes         &         Yes         &         Yes         \\
+Year-Month FE       &          No         &          No         &         Yes         &         Yes         \\
+R-Squared           &       0.646         &       0.646         &       0.721         &       0.721         \\
+Observations        &        4527         &        4527         &        4527         &        4527         \\
+\hline\hline
+\end{tabular}
+}

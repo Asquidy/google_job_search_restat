@@ -1,0 +1,44 @@
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Effect of UI Duration on Job Search - Current Law Beliefs (NLLS) \label{tab:sophregs}}
+\begin{tabular}{l*{5}{c}}
+\hline\hline
+                    &\multicolumn{1}{c}{(1)}         &\multicolumn{1}{c}{(2)}         &\multicolumn{1}{c}{(3)}         &\multicolumn{1}{c}{(4)}         &\multicolumn{1}{c}{(5)}         \\
+\hline
+xb\_num\_ui\_0\_10\_weeks&                     &                     &                     &                     &                     \\
+0-10 Weeks Left     &       0.825         &      0.0427         &     0.00408         &       1.155         &       0.919         \\
+                    &     (0.693)         &    (0.0384)         &   (0.00389)         &     (1.023)         &     (1.045)         \\
+\hline
+xb\_num\_ui\_10\_20\_weeks&                     &                     &                     &                     &                     \\
+10-20 Weeks Left    &       5.465\sym{***}&      0.0625         &     0.00215         &       3.143\sym{*}  &       3.168\sym{*}  \\
+                    &     (1.469)         &    (0.0625)         &   (0.00434)         &     (1.654)         &     (1.680)         \\
+\hline
+xb\_num\_ui\_20\_30\_weeks&                     &                     &                     &                     &                     \\
+20-30 Weeks Left    &       3.052\sym{***}&       0.230\sym{*}  &      0.0184         &       4.192\sym{***}&       4.207\sym{***}\\
+                    &     (1.028)         &     (0.133)         &    (0.0146)         &     (1.011)         &     (1.039)         \\
+\hline
+xb\_greater\_than\_30  &                     &                     &                     &                     &                     \\
+Over 30 Weeks Left  &       3.240\sym{***}&       0.101\sym{*}  &     0.00762         &       1.434\sym{**} &       1.445\sym{**} \\
+                    &     (0.352)         &    (0.0548)         &   (0.00625)         &     (0.526)         &     (0.537)         \\
+\hline
+xb\_scnot\_on\_ui      &                     &                     &                     &                     &                     \\
+Not on UI           &       3.369\sym{***}&       0.110\sym{**} &     0.00948         &       2.133\sym{***}&       2.120\sym{***}\\
+                    &     (0.350)         &    (0.0523)         &   (0.00732)         &     (0.564)         &     (0.580)         \\
+\hline
+xb\_scemployed       &                     &                     &                     &                     &                     \\
+Number Employed     &      0.0856\sym{***}&     0.00537\sym{**} &    0.000690         &       0.193\sym{***}&       0.198\sym{***}\\
+                    &    (0.0112)         &   (0.00215)         &  (0.000478)         &    (0.0345)         &    (0.0361)         \\
+\hline
+xb\_all\_extensions\_4week&                     &                     &                     &                     &                     \\
+Post Legislation    &                     &                     &     -0.0118         &                     &     -0.0387\sym{**} \\
+                    &                     &                     &    (0.0164)         &                     &    (0.0139)         \\
+\hline
+MSA Trend and FE    &         Yes         &         Yes         &         Yes         &         Yes         &         Yes         \\
+Year and Week FE    &          No         &         Yes         &         Yes         &          No         &          No         \\
+Year-Month FE       &          No         &          No         &          No         &         Yes         &         Yes         \\
+R-Squared           &       0.998         &       0.998         &       0.998         &       0.998         &       0.998         \\
+Observations        &        5070         &        5070         &        5070         &        5070         &        5070         \\
+\hline\hline
+\multicolumn{6}{l}{\footnotesize } \begin{minipage} [t] {\columnwidth} Notes: Dependent variable is log(GJSI) at DMA-week level. Analysis spans all Texas DMAs from 2006-2011. Each Weeks Left category, Not on UI, and Number Employed are the total number of individuals in each category. Post Legislation is the week of and three weeks following legislation. Standard Errors Clustered at DMA level. \\ * p$<$0.10, ** p$<$0.05, *** p$<$0.01 \end{minipage} {}\\
+\end{tabular}
+\end{table}

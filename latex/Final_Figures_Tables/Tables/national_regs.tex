@@ -1,0 +1,30 @@
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular}{l*{6}{c}}
+\hline\hline
+                    &\multicolumn{1}{c}{(1)}         &\multicolumn{1}{c}{(2)}         &\multicolumn{1}{c}{(3)}         &\multicolumn{1}{c}{(4)}         &\multicolumn{1}{c}{(5)}         &\multicolumn{1}{c}{(6)}         \\
+\hline
+Post Legislation    &     -0.0264\sym{*}  &     -0.0182         &     -0.0341\sym{**} &     -0.0344\sym{**} &        -0.0294\sym{*}  &     -0.0296\sym{*}   \\
+                    &    (0.0154)         &    (0.0153)         &    (0.0158)         &    (0.0157)         &       (0.0171)         &    (0.0170)          \\
+[1em]
+Max Weeks Left      &                     &    -0.00168\sym{**} &                     &                     &                     &                     \\
+                    &                     &  (0.000742)         &                     &                     &                     &                     \\
+[1em]
+Fraction On UI      &                     &                     &       3.587\sym{*}  &       2.956         &        0.347\sym{***}&       0.354\sym{**}    \\
+                    &                     &                     &     (2.119)         &     (2.163)         &       0.120)         &     (0.141)            \\
+[1em]
+Fraction Employed   &                     &                     &      -2.385\sym{**} &      -2.254\sym{*}  &           0.0811\sym{***}&      0.0934\sym{***}   \\
+                    &                     &                     &     (1.137)         &     (1.151)         &        (0.00184)         &   (0.00219)            \\
+[1em]
+Frac $<$10 Weeks    &                     &                     &                     &       3.478\sym{***}&                     &       0.180\sym{***}  \\
+Left                &                     &                     &                     &     (1.186)         &                     &    (0.0664)           \\
+\hline
+State FE            &         Yes         &         Yes         &         Yes         &         Yes         &         Yes         &         Yes         \\
+Year-Month FE       &         Yes         &         Yes         &         Yes         &         Yes         &         Yes         &         Yes         \\
+Specification       &         OLS         &         OLS         &         OLS         &         OLS         &        NLLS         &        NLLS         \\
+R-Squared           &       0.822         &       0.824         &       0.831         &       0.832         &       1.000         &       1.000         \\
+Observations        &        3825         &        3825         &        3825         &        3825         &        3825         &        3825         \\
+\hline\hline
+\multicolumn{7}{l}{\footnotesize } \floatfoot{ Notes: Dependent variable is log(GJSI) at state-month level. Analysis spans all 50 states and Washington DC from 2005-2012.  variables represent the fraction of the CPS participants in each category. Data taken from the CPS at a state-month level, imputing weeks left and UI status from the duration of unemployment. Post Legislation is an indicator for the month of and month following an extension. Also included are the fraction of the population who are unemployed but not on UI. Columns 1-4 are OLS while columns 5-6 are NLLS. Standard errors are clustered at state level. \\ * p$<$0.10, ** p$<$0.05, *** p$<$0.01} {}\\
+\end{tabular}
+}

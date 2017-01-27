@@ -1,0 +1,31 @@
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular}{l*{6}{c}}
+\hline\hline
+                    &\multicolumn{1}{c}{(1)}         &\multicolumn{1}{c}{(2)}         &\multicolumn{1}{c}{(3)}         &\multicolumn{1}{c}{(4)}         &\multicolumn{1}{c}{(5)}         &\multicolumn{1}{c}{(6)}         \\
+\hline
+Potential Benefit   &    -0.00235\sym{***}&    -0.00307\sym{***}&                     &                     &                     &                     \\
+Duration            &  (0.000711)         &  (0.000662)         &                     &                     &                     &                     \\
+[1em]
+Post Expansion      &                     &                     &     0.00347         &     0.00465         &    -0.00810\sym{*}  &    -0.00832\sym{**} \\
+                    &                     &                     &   (0.00940)         &   (0.00590)         &   (0.00404)         &   (0.00413)         \\
+[1em]
+Unemployment Rate   &                     &       1.699\sym{**} &                     &       1.545\sym{**} &                     &                     \\
+                    &                     &     (0.805)         &                     &     (0.654)         &                     &                     \\
+[1em]
+Share $<$10 Weeks   &                     &       1.084\sym{**} &                     &       1.508\sym{***}&                     &                     \\
+Left                &                     &     (0.427)         &                     &     (0.313)         &                     &                     \\
+[1em]
+Change in Unemp Rate&                     &                     &                     &                     &                     &       1.694\sym{***}\\
+                    &                     &                     &                     &                     &                     &     (0.452)         \\
+[1em]
+Change in Frac Near &                     &                     &                     &                     &                     &      0.0953         \\
+Expiration          &                     &                     &                     &                     &                     &     (0.252)         \\
+\hline
+State FE            &         Yes         &         Yes         &         Yes         &         Yes         &         Yes         &         Yes         \\
+Year-Month FE       &         Yes         &         Yes         &         Yes         &         Yes         &         Yes         &         Yes         \\
+R-Squared           &       0.826         &       0.831         &       0.822         &       0.902         &       0.727         &       0.728         \\
+Observations        &        3758         &        3758         &        3758         &        3758         &        3758         &        3758         \\
+\hline\hline
+\end{tabular}
+}

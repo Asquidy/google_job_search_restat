@@ -1,0 +1,14 @@
+		(1)	(2)	(3)	(4)
+VARIABLES	LABELS	Job Search Time Per Cap	Log(Job Search Time Per Cap)	Log(Job Search Time Per Cap) - High Pop	Log(Job Search Time Per Cap)
+					
+google_index	Synthetic GJSI	0.254***			
+		(0.00879)			
+lgoogle_index	Log(Synthetic GJSI)		1.248***	1.075***	0.807***
+			(0.0437)	(0.0449)	(0.0355)
+					
+Observations		600	600	516	600
+R-squared		0.583	0.577	0.527	0.911
+State FE		NO	NO	NO	YES
+Month FE		NO	NO	NO	YES
+Standard errors in parentheses					
+*** p<0.01, ** p<0.05, * p<0.1					

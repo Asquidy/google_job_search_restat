@@ -1,0 +1,36 @@
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Effect of UI on Job Search (OLS)\label{tab:olsregs}}
+\begin{tabular}{l*{4}{c}}
+\hline\hline
+                    &\multicolumn{1}{c}{(1)}         &\multicolumn{1}{c}{(2)}         &\multicolumn{1}{c}{(3)}         &\multicolumn{1}{c}{(4)}         \\
+\hline
+Post Legislation    &                     &     -0.0203\sym{**} &                     &     -0.0124         \\
+                    &                     &    (0.0101)         &                     &    (0.0106)         \\
+[1em]
+Total on UI         &       2.328         &       2.390         &                     &                     \\
+                    &     (1.633)         &     (1.633)         &                     &                     \\
+[1em]
+Not on UI           &       4.674\sym{***}&       4.603\sym{***}&       4.259\sym{**} &       4.237\sym{**} \\
+                    &     (1.740)         &     (1.740)         &     (1.743)         &     (1.743)         \\
+[1em]
+0-10 Weeks Left     &                     &                     &       7.833\sym{***}&       7.611\sym{***}\\
+                    &                     &                     &     (2.645)         &     (2.652)         \\
+[1em]
+10-20 Weeks Left    &                     &                     &       1.531         &       1.399         \\
+                    &                     &                     &     (1.134)         &     (1.139)         \\
+[1em]
+20-30 Weeks Left    &                     &                     &       1.675\sym{*}  &       1.625\sym{*}  \\
+                    &                     &                     &     (0.922)         &     (0.923)         \\
+[1em]
+Over 30 Weeks Left  &                     &                     &       0.481         &       0.575         \\
+                    &                     &                     &     (0.875)         &     (0.878)         \\
+\hline
+DMA FE              &         Yes         &         Yes         &         Yes         &         Yes         \\
+Year-Month FE       &         Yes         &         Yes         &         Yes         &         Yes         \\
+R-Squared           &       0.703         &       0.703         &       0.704         &       0.704         \\
+Observations        &        5070         &        5070         &        5070         &        5070         \\
+\hline\hline
+\multicolumn{5}{l}{\footnotesize }\floatfoot{ Notes: Dependent variable is log(GJSI) at DMA-week level. Analysis spans all Texas DMAs from 2006-2011.  variables represent the fraction of the total population belonging to each category. Post Legislation is the week of and three weeks following legislation. Standard Errors Clustered at DMA level. \\ * p$<$0.10, ** p$<$0.05, *** p$<$0.01}{}\\
+\end{tabular}
+\end{table}

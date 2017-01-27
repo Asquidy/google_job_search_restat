@@ -1,0 +1,33 @@
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Effect of UI Status and Composition on Job Search (NLLS)}
+\begin{tabular}{l*{2}{c}}
+\hline\hline
+                    &\multicolumn{1}{c}{(1)}         &\multicolumn{1}{c}{(2)}         \\
+\hline
+Number on UI        &           1.666\sym{***}&                     \\
+                    &     (   (0.471)         &                     \\
+Not on UI           &           2.182\sym{***}&       2.133\sym{***}\\
+                    &     (   (0.535)         &     (0.564)         \\
+Number Employed     &           0.187\sym{***}&       0.193\sym{***}\\
+                    &    (0  (0.0321)         &    (0.0345)         \\
+0-10 Weeks Left     &                         &       1.155         \\
+                    &                         &     (1.023)         \\
+10-20 Weeks Left    &                         &       3.143\sym{*}  \\
+                    &                         &     (1.654)         \\
+20-30 Weeks Left    &                         &       4.192\sym{***}\\
+                    &                         &     (1.011)         \\
+Over 30 Weeks Left  &                         &       1.434\sym{**} \\
+                    &                         &     (0.526)         \\
+\hline
+UI Recipients/Employed &       11.69         &                     \\
+UI Recipients/Non-UI Unemployed &       0.763         &                     \\
+\hline \vspace{-2mm}&                  &                     \\
+DMA FE and Trend    &      Yes         &         Yes         \\
+Year and Month FE   &       No         &          No         \\
+Year-Month FE       &      Yes         &         Yes         \\
+Observations        &     5070         &        5070         \\
+\hline\hline
+\multicolumn{3}{l}{\footnotesize } \floatfoot{Notes: Dependent variable is log(GJSI) at DMA-week level. Analysis spans all Texas DMAs from 2006-2011. Number on UI, Not on UI, and Number Employed are the total number of individuals in each category. Post Legislation is the week of and three weeks following legislation. Unemployed/Employed gives the relative levels of search activity across types. Standard Errors Clustered at DMA level. \\ * p$<$0.10, ** p$<$0.05, *** p$<$0.01} {}\\
+\end{tabular}
+\end{table}

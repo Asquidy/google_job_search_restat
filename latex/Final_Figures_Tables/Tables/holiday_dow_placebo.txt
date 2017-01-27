@@ -1,0 +1,26 @@
+		(1)	(2)	(3)	(4)	(5)	(6)
+VARIABLES	LABELS	Google Benefits	Google Benefits	Google Unemp	Google Unemp	Google Unemp/Emp	Google Unemp/Emp
+							
+dowfe2	Monday		0.196***		0.158***		0.253***
+			(0.0201)		(0.0184)		(0.0121)
+dowfe3	Tuesday		-0.000904		-0.0956***		0.138***
+			(0.0238)		(0.0238)		(0.0173)
+dowfe4	Wednesday		-0.0838***		-0.227***		0.0611***
+			(0.0250)		(0.0271)		(0.0197)
+dowfe5	Thursday		-0.145***		-0.332***		-0.0107
+			(0.0258)		(0.0301)		(0.0217)
+dowfe6	Friday		-0.222***		-0.391***		-0.0927***
+			(0.0268)		(0.0310)		(0.0217)
+dowfe7	Saturday		-0.516***		-0.880***		-0.489***
+			(0.0348)		(0.0308)		(0.0253)
+holiday	Holiday	-0.122**	-0.145***	-0.237***	-0.263***	-0.273***	-0.286***
+		(0.0493)	(0.0404)	(0.0428)	(0.0243)	(0.0332)	(0.0249)
+weekend	Weekend	-0.208***		-0.264***		-0.315***	
+		(0.0194)		(0.0121)		(0.00732)	
+							
+Observations		3,517	3,517	4,018	4,018	4,018	4,018
+Year FE		YES	YES	YES	YES	YES	YES
+Month FE		YES	YES	YES	YES	YES	YES
+State FE		YES	YES	YES	YES	YES	YES
+Robust standard errors in parentheses							
+*** p<0.01, ** p<0.05, * p<0.1							

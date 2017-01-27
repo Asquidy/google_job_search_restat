@@ -1,0 +1,50 @@
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Effect of UI Status and Composition on Job Search (NLLS) \label{tab:nlls}}
+\begin{tabular}{l*{4}{c}}
+\hline\hline
+                    &\multicolumn{1}{c}{(1)}         &\multicolumn{1}{c}{(2)}         &\multicolumn{1}{c}{(3)}         &\multicolumn{1}{c}{(4)}         \\
+\hline
+xb\_sctotal\_on\_ui    &                     &                     &                     &                     \\
+Number on UI        &       0.518\sym{**} &       0.528\sym{**} &                     &                     \\
+                    &     (0.232)         &     (0.235)         &                     &                     \\
+\hline
+xb\_scnot\_on\_ui      &                     &                     &                     &                     \\
+Not on UI           &       0.326         &       0.329         &       0.363         &       0.375         \\
+                    &     (0.247)         &     (0.249)         &     (0.265)         &     (0.271)         \\
+\hline
+xb\_scemployed       &                     &                     &                     &                     \\
+Number Employed     &      0.0975\sym{***}&      0.0984\sym{***}&      0.0994\sym{***}&       0.101\sym{***}\\
+                    &    (0.0172)         &    (0.0173)         &    (0.0171)         &    (0.0172)         \\
+\hline
+xb\_all\_extensions\_and\_exp\_4week&                     &                     &                     &                     \\
+Post Legislation    &                     &     -0.0258\sym{***}&                     &     -0.0304\sym{***}\\
+                    &                     &   (0.00691)         &                     &    (0.0102)         \\
+\hline
+xb\_num\_ui\_0\_10\_weeks&                     &                     &                     &                     \\
+0-10 Weeks Left     &                     &                     &      0.0198         &     -0.0106         \\
+                    &                     &                     &     (0.618)         &     (0.630)         \\
+\hline
+xb\_num\_ui\_10\_20\_weeks&                     &                     &                     &                     \\
+10-20 Weeks Left    &                     &                     &       0.539\sym{**} &       0.494\sym{**} \\
+                    &                     &                     &     (0.230)         &     (0.227)         \\
+\hline
+xb\_num\_ui\_20\_30\_weeks&                     &                     &                     &                     \\
+20-30 Weeks Left    &                     &                     &       0.472\sym{**} &       0.460\sym{**} \\
+                    &                     &                     &     (0.215)         &     (0.216)         \\
+\hline
+xb\_greater\_than\_30  &                     &                     &                     &                     \\
+Over 30 Weeks Left  &                     &                     &       0.540\sym{**} &       0.563\sym{**} \\
+                    &                     &                     &     (0.248)         &     (0.256)         \\
+\hline
+UI Recipients/Employed&       3.345         &       3.341         &                     &                     \\
+UI Recipients/Non-UI Unemployed&       1.588         &       1.605         &                     &                     \\
+\hline \vspace{-2mm}&                     &                     &                     &                     \\
+DMA FE and Trend    &         Yes         &         Yes         &         Yes         &         Yes         \\
+Year-Month FE       &         Yes         &         Yes         &         Yes         &         Yes         \\
+R-Squared           &       0.998         &       0.998         &       0.998         &       0.998         \\
+Observations        &        5070         &        5070         &        5070         &        5070         \\
+\hline\hline
+\multicolumn{5}{l}{\footnotesize } \floatfoot{Notes: Dependent variable is log(GJSI) at DMA-week level. Analysis spans all Texas DMAs from 2006-2011. Number on UI, Not on UI, and Number Employed are the total number of individuals in each category. Post Legislation is the week of and three weeks following legislation. Unemployed/Employed gives the relative levels of search activity across types. Standard Errors Clustered at DMA level. \\ * p$<$0.10, ** p$<$0.05, *** p$<$0.01} {}\\
+\end{tabular}
+\end{table}

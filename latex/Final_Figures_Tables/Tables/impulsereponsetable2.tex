@@ -1,0 +1,50 @@
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Effects of UI Expansion Over Time \label{tab:impulseresponsetable}}
+\scriptsize
+\begin{tabular}{l*{4}{c}}
+\hline\hline
+        &\multicolumn{1}{c}{National}         &\multicolumn{1}{c}{National}         &\multicolumn{1}{c}{Texas}         &\multicolumn{1}{c}{Texas}         \\
+        &\multicolumn{1}{c}{(1)}         &\multicolumn{1}{c}{(2)}         &\multicolumn{1}{c}{(3)}         &\multicolumn{1}{c}{(4)}         \\
+\hline
+Period of           &     -0.0253\sym{**} &     -0.0271\sym{**} &     -0.0560\sym{***}&     -0.0566\sym{***}\\
+Legislation         &    (0.0117)         &    (0.0120)         &    (0.0134)         &   (0.00900)         \\
+[1em]
+Period of           &     -0.0200\sym{**} &     -0.0230\sym{**} &     -0.0698\sym{***}&     -0.0695\sym{**} \\
+Legislation - Lag 1 &   (0.00932)         &   (0.00940)         &    (0.0196)         &    (0.0255)         \\
+[1em]
+Period of           &     -0.0157\sym{*}  &     -0.0184\sym{**} &     -0.0314         &     -0.0307         \\
+Legislation - Lag 2 &   (0.00911)         &   (0.00900)         &    (0.0238)         &    (0.0391)         \\
+[1em]
+Period of           &     -0.0162         &     -0.0187         &     -0.0130         &     -0.0122         \\
+Legislation - Lag 3 &    (0.0130)         &    (0.0127)         &    (0.0250)         &    (0.0361)         \\
+[1em]
+Period of           &     -0.0151         &     -0.0176         &     -0.0201         &     -0.0193         \\
+Legislation - Lag 4 &    (0.0146)         &    (0.0145)         &    (0.0268)         &    (0.0296)         \\
+[1em]
+Period of           &     -0.0181         &     -0.0202\sym{*}  &     0.00774         &     0.00826         \\
+Legislation - Lag 5 &    (0.0113)         &    (0.0112)         &    (0.0276)         &    (0.0278)         \\
+[1em]
+Period of           &     -0.0119         &     -0.0132         &     0.00441         &     0.00476         \\
+Legislation - Lag 6 &    (0.0127)         &    (0.0124)         &    (0.0275)         &    (0.0245)         \\
+[1em]
+Period of           &    -0.00151         &    -0.00205         &      0.0267         &      0.0267         \\
+Legislation - Lag 7 &   (0.00978)         &   (0.00942)         &    (0.0254)         &    (0.0239)         \\
+[1em]
+Period of           &   -0.000316         &   -0.000783         &     -0.0346         &     -0.0349\sym{*}  \\
+Legislation - Lag 8 &    (0.0116)         &    (0.0111)         &    (0.0216)         &    (0.0197)         \\
+[1em]
+Unemp. Rate         &                     &      -0.701         &                     &      0.0246         \\
+                    &                     &     (0.832)         &                     &    (0.0216)         \\
+[1em]
+Frac. Employed      &                     &      -2.378\sym{**} &                     &      -0.680         \\
+                    &                     &     (1.173)         &                     &     (1.057)         \\
+\hline
+Location FE         &         Yes         &         Yes         &         Yes         &         Yes         \\
+Period FE           &         Yes         &         Yes         &         Yes         &         Yes         \\
+R-Squared           &       0.832         &       0.835         &       0.659         &       0.662         \\
+Observations        &        3417         &        3417         &        5070         &        5070         \\
+\hline\hline
+\multicolumn{5}{l}{\footnotesize } \floatfoot{Notes: Dependent variable is log(GJSI) at state-month level in columns 1 and 2; DMA-week level in columns 3 and 4. Analysis spans all 50 states and Washington DC from 2005-2012 in columns 1 and 2 and all Texas DMAs from 2006-2011 in columns 3 and 4.  represents the fraction of the population who are employed, by the CPS definition. Post Legislation and it's lags are indicators for the month of a UI extension or expansion law (or lags of this variable). Standard errors are clustered at a state level for columns 1 and 2 and at a DMA level in columns 3 and 4. \\ * p$<$0.10, ** p$<$0.05, *** p$<$0.01} {}\\
+\end{tabular}
+\end{table}

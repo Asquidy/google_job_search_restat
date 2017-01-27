@@ -1,0 +1,23 @@
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular}{l*{4}{c}}
+\hline\hline
+                    &\multicolumn{1}{c}{(1)}         &\multicolumn{1}{c}{(2)}         &\multicolumn{1}{c}{(3)}         &\multicolumn{1}{c}{(4)}         \\
+\hline
+4 Wks Post Legislation&    -0.00981         &     -0.0373\sym{***}&                     &                     \\
+                    &   (0.00879)         &   (0.00940)         &                     &                     \\
+[1em]
+Unemp. Rate         &       0.116\sym{***}&      0.0370         &      0.0360         &      0.0361         \\
+                    &    (0.0111)         &    (0.0224)         &    (0.0228)         &    (0.0233)         \\
+[1em]
+4 Wks Post Expansion&                     &                     &     -0.0587\sym{***}&                     \\
+                    &                     &                     &    (0.0125)         &                     \\
+\hline
+MSA FE and Trend    &         Yes         &         Yes         &         Yes         &         Yes         \\
+Month-Year FE       &          No         &         Yes         &         Yes         &          No         \\
+Week-Year FE        &          No         &          No         &          No         &         Yes         \\
+R-Squared           &       0.641         &       0.720         &       0.722         &       0.755         \\
+Observations        &        4527         &        4527         &        4527         &        4527         \\
+\hline\hline
+\end{tabular}
+}

@@ -44,7 +44,7 @@ foreach var of varlist googlecount googlejobsearch totaljobsearchtime totalgoogl
 	gen l`var' = log(`var'+1)
 }
 
-cd "~/Dropbox/Texas_Job_Search_New/replic_test_figures_and_tables/Tables"
+cd "~/Dropbox/Texas_Job_Search_New/final_git_repo/google_job_search_restat/latex/Final_Figures_Tables/Tables"
 label var google_index "Synthetic GJSI"
 label var lgoogle_index "Log(Synthetic GJSI)"
 

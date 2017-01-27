@@ -1,0 +1,33 @@
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Effect of UI Status and Composition on Job Search (NLLS)}
+\begin{tabular}{l*{3}{c}}
+\hline\hline
+                    &\multicolumn{1}{c}{(1)}         &\multicolumn{1}{c}{(2)}         &\multicolumn{1}{c}{(3)}         \\
+Number on UI        &       0.833\sym{***}&                     &                     \\
+                    &     (0.235)         &                     &                     \\
+Not on UI           &       1.091\sym{***}&       1.082\sym{***}&       1.092\sym{***}\\
+                    &     (0.267)         &     (0.269)         &     (0.265)         \\
+Number Employed     &      0.0934\sym{***}&      0.0943\sym{***}&      0.0937\sym{***}\\
+                    &    (0.0161)         &    (0.0181)         &    (0.0181)         \\
+0-10 Weeks Left     &                     &       1.563\sym{**} &       1.484\sym{**} \\
+                    &                     &     (0.730)         &     (0.698)         \\
+10-20 Weeks Left    &                     &       0.938\sym{***}&       0.899\sym{***}\\
+                    &                     &     (0.297)         &     (0.303)         \\
+20-30 Weeks Left    &                     &       0.951\sym{***}&       0.926\sym{***}\\
+                    &                     &     (0.232)         &     (0.235)         \\
+Over 30 Weeks Left  &                     &       0.753\sym{***}&       0.713\sym{**} \\
+                    &                     &     (0.258)         &     (0.264)         \\
+$<$ 6 Weeks On      &                     &                     &       0.256         \\
+                    &                     &                     &     (0.324)         \\
+\hline
+UI Recipients/Employed&       11.69         &                     &                     \\
+UI Recipients/Non-UI Unemployed&       0.763         &                     &                     \\
+\hline \vspace{-2mm}&                     &                     &                     \\
+DMA FE and Trend    &         Yes         &         Yes         &         Yes         \\
+Year-Month FE       &         Yes         &         Yes         &         Yes         \\
+Observations        &        5070         &        5070         &        5070         \\
+\hline\hline
+\multicolumn{4}{l}{\footnotesize } \floatfoot{Notes: Dependent variable is log(GJSI) at DMA-week level. Analysis spans all Texas DMAs from 2006-2011. Number on UI, Not on UI, and Number Employed are the total number of individuals in each category. Unemployed/Employed gives the relative levels of search activity across types. Standard Errors Clustered at DMA level. \\ * p$<$0.10, ** p$<$0.05, *** p$<$0.01} {}\\
+\end{tabular}
+\end{table}

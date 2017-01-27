@@ -1,0 +1,18 @@
+		(1)	(2)	(3)	(4)	(5)	(6)	(7)	(8)
+VARIABLES	LABELS	Search Time	Search Time-NonZero	Search Indic	Search Time	Search Time-NonZero	Search Indic	Search Time	Search Time
+									
+ljobs	log(Google Job Search Index)	0.327***	1.890***	0.0413***	3.268***	6.035*	0.261***	3.446***	3.067***
+		(0.0284)	(0.208)	(0.00498)	(0.730)	(3.523)	(0.0594)	(0.762)	(1.052)
+lunemp_emp	log(Google Unemp/Emp Index)								0.527
+									(0.504)
+lunemp	log(Google Unemp Rate Index)								-0.102
+									(0.162)
+lweather	log(Google Weather Search Index)							-0.378	
+								(0.605)	
+									
+Observations		3,541	589	3,541	3,541	589	3,541	3,541	3,320
+R-squared		0.049	0.285	0.173	0.075	0.619	0.300	0.075	0.081
+State FE		NO	NO	NO	YES	YES	YES	YES	YES
+Month FE		NO	NO	NO	YES	YES	YES	YES	YES
+Robust standard errors in parentheses									
+*** p<0.01, ** p<0.05, * p<0.1									

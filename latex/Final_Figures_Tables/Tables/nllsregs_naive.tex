@@ -1,0 +1,37 @@
+\begin{table}[htbp]\centering
+\small
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Effect of UI Status and Composition on Job Search (NLLS) - Current Policy Beliefs \label{tab:naiveregs}}
+\begin{tabular}{l*{4}{c}}
+\hline\hline
+                    &\multicolumn{1}{c}{(1)}         &\multicolumn{1}{c}{(2)}         &\multicolumn{1}{c}{(3)}         &\multicolumn{1}{c}{(4)}         \\
+\hline
+Post Legislation    &                     &     -0.0437\sym{***}&                     &     -0.0387\sym{**} \\
+                    &                     &    (0.0136)         &                     &    (0.0139)         \\
+Number on UI        &       1.648\sym{***}&       1.693\sym{***}&                     &                     \\
+                    &     (0.461)         &     (0.481)         &                     &                     \\
+Not on UI           &       2.090\sym{***}&       2.175\sym{***}&       2.133\sym{***}&       2.120\sym{***}\\
+                    &     (0.491)         &     (0.547)         &     (0.564)         &     (0.580)         \\
+Number Employed     &       0.183\sym{***}&       0.191\sym{***}&       0.193\sym{***}&       0.198\sym{***}\\
+                    &    (0.0320)         &    (0.0336)         &    (0.0345)         &    (0.0361)         \\
+0-10 Weeks Left     &                     &                     &       1.155         &       0.919         \\
+                    &                     &                     &     (1.023)         &     (1.045)         \\
+10-20 Weeks Left    &                     &                     &       3.143\sym{*}  &       3.168\sym{*}  \\
+                    &                     &                     &     (1.654)         &     (1.680)         \\
+20-30 Weeks Left    &                     &                     &       4.192\sym{***}&       4.207\sym{***}\\
+                    &                     &                     &     (1.011)         &     (1.039)         \\
+Over 30 Weeks Left  &                     &                     &       1.434\sym{**} &       1.445\sym{**} \\
+                    &                     &                     &     (0.526)         &     (0.537)         \\
+Initial UI Claimants&                     &                     &                     &       0.321         \\
+                    &                     &                     &                     &     (0.448)         \\
+\hline
+UI Recipients/Employed&       11.43       &       11.40         &                     &                     \\
+UI Recipients/Non-UI Unemployed&  0.788   &       0.778         &                     &                     \\
+\hline \vspace{-2mm}&                     &                     &                     &                     \\
+DMA FE and Trend    &         Yes         &         Yes         &         Yes         &         Yes         \\
+Year-Month FE       &         Yes         &         Yes         &         Yes         &         Yes         \\
+Observations        &        5070         &        5070         &        5070         &        5070         \\
+\hline\hline
+\multicolumn{5}{l}{\footnotesize } \floatfoot{Notes: Dependent variable is log(GJSI) at DMA-week level. Analysis spans all Texas DMAs from 2006-2011. Number on UI, Not on UI, and Number Employed are the total number of individuals in each category. Post Legislation is the week of and three weeks following legislation. Unemployed/Employed gives the relative levels of search activity across types. Standard Errors Clustered at DMA level. \\ * p$<$0.10, ** p$<$0.05, *** p$<$0.01}\\
+\end{tabular}
+\end{table}

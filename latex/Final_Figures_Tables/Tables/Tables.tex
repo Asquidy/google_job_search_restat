@@ -1,0 +1,77 @@
+
+\documentclass[11pt, final]{article}
+
+\usepackage{amsmath}
+\usepackage{wrapfig}
+\usepackage{graphicx}
+\usepackage{rotating}
+\usepackage{subfig}
+\usepackage{longtable}
+\usepackage{threeparttable}
+
+\pdfpagewidth 8.5in
+\pdfpageheight 11in
+\setlength\topmargin{0in}
+\setlength\headheight{0in}
+\setlength\headsep{0in}
+\setlength\textheight{8.7in}
+\setlength\textwidth{6.5in}
+\setlength\oddsidemargin{-.12in}
+\setlength\evensidemargin{-.12in}
+\setlength\parindent{0.25in}
+
+\linespread{1.25}
+
+\begin{document}
+
+\begin{sidewaystable}
+\begin{center}
+\input{Tables/Table1.tex}
+\end{center}
+\begin{tablenotes}
+\item \footnotesize  `Jobs Search' refers to the logged change in our Google Index of job search activity from month to month. Change in unemployment rate is the change in the raw percent unemployment rate. Change in initial claims per capita is the change in the number of initial claimants of unemployment benefits, per capita, by state. `Next Month Final Claims' is the per capita amount of claimants receiving their final unemployment benefit payment, by state. Change in tightness refers to the change in vacancies divided by the unemployment rate from month to month.
+\end{tablenotes}
+\end{sidewaystable}
+
+\begin{sidewaystable}
+\begin{center}
+\input{Tables/Table2.tex}
+\end{center}
+\begin{tablenotes}
+\item \footnotesize `Google Search' refers to the logged value of our Google Search Index. `ATUS Job Search' refers to the logged number of minutes of time spent on job search for each ATUS respondent. `comScore Job Search' refers to the logged number of minutes online job search per capita as measured by comScore. Holiday is an indicator equal to one if the ATUS diary day or Google Search Index day was a holiday. Each day represents an indicator equal to 1 if the ATUS diary day was the given day of the week. Weekend is an indicator equal to one if the ATUS diary day was a Saturday or Sunday. Specifications include differing fixed effects because of the differing nature of each dataset. All include, at a minimum, state and time fixed effects. Google data necessarily utilizes Season-State fixed effects, while we use finer time fixed effects with the ATUS and comScore data.
+\end{tablenotes}
+\end{sidewaystable}
+
+
+\begin{sidewaystable}
+\caption{ATUS Summary Statistics}
+\label{tab:atussumm}
+\centering
+\begin{threeparttable}
+\begin{tabular}{l|l|l|l|l|l|l}
+\hline
+ & No. Respondents & \% of Total & Avg Job Search  & Avg Job Search Ex.  & Participation & Avg Job Search  \\
+ &	  &   &		 (min per day)  &	 Travel (min per day) 		& in Job Search &  of Participants  \\
+\hline
+By Labor Force Status:&   &   &  &  & &  \\
+Employed &57,914   & 76.12\%  & .63  & .47 & .78\%  & 81.3  \\
+Unemployed &3,252   &  4.27\% & 29.1 &  25.3 & 18.23\% & 159.7  \\
+Not in Labor Force & 14,921  & 19.61\%   & .8  & .6 & .82\%  & 98.1 \\
+\hline
+By Holiday:&&&&&&\\
+Holiday& 1,328& 1.7\% & .60 & .54 & .68\% & 80.6 \\
+Non-Holiday& 74,759& 98.3\% & 1.9 & 1.6 & 1.33\% & 128.6 \\
+\hline
+By Weekend:&&&&&\\
+Weekend&38,431& 50.5\% & .87 & .71 & .64\% & 109.8 \\
+Weekday& 37,656& 49.5\% & 2.9 & 2.4 & 1.8\% & 134.8 \\
+\hline
+\end{tabular}
+\begin{tablenotes}
+\item \footnotesize Subsample of ATUS respondents is taken to match the demographic subsample used by Krueger and Mueller. We use all respondents for both weekends and weekdays, while noting that weekends are oversampled to include an equal amount of weekend and weekdays. We drop respondents younger than age 20 or older than 65. We include years 2003-2009, while Krueger and Mueller use only 2003-2007.
+\end{tablenotes}
+\end{threeparttable}
+\end{sidewaystable}
+
+
+\end{document}

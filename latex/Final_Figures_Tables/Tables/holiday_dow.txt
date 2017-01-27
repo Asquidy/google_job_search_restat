@@ -1,0 +1,26 @@
+		(1)	(2)	(3)	(4)	(5)	(6)
+VARIABLES	LABELS	Google JS	Google JS	ATUS JS	ATUS JS	comScore JS	comScore JS
+							
+dowfe2	Monday		0.237***		0.0902***		0.111***
+			(0.00231)		(0.0134)		(0.00427)
+dowfe3	Tuesday		0.251***		0.0689***		0.132***
+			(0.00238)		(0.0136)		(0.00430)
+dowfe4	Wednesday		0.223***		0.0999***		0.119***
+			(0.00233)		(0.0136)		(0.00431)
+dowfe5	Thursday		0.169***		0.112***		0.106***
+			(0.00232)		(0.0137)		(0.00430)
+dowfe6	Friday		0.0709***		0.0560***		0.0623***
+			(0.00206)		(0.0137)		(0.00430)
+dowfe7	Saturday		-0.0527***		-0.00747		-0.0172***
+			(0.00169)		(0.0102)		(0.00429)
+holiday	Holiday	-0.148***	-0.147***	-0.0497*	-0.0533*	-0.0659***	-0.0664***
+		(0.00444)	(0.00397)	(0.0278)	(0.0280)	(0.00629)	(0.00631)
+weekend	Weekend	-0.217***		-0.0891***		-0.115***	
+		(0.00205)		(0.00725)		(0.00256)	
+							
+Observations		111,152	111,152	76,087	76,087	18,615	18,615
+Year FE		NO	NO	YES	YES	YES	YES
+Month FE		YES	YES	YES	YES	YES	YES
+State FE		YES	YES	YES	YES	YES	YES
+Robust standard errors in parentheses							
+*** p<0.01, ** p<0.05, * p<0.1							

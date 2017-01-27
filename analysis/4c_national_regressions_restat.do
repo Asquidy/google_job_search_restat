@@ -118,7 +118,7 @@ replace l_ui_expansion = 0 if l_ui_expansion==.
 fvset base 1 year_month
 label var frac_lf "Frac. Pop in Lab. Force"
 
-cd "~/Dropbox/Texas_Job_Search_New/replic_test_figures_and_tables"
+cd "~/Dropbox/Texas_Job_Search_New/final_git_repo/google_job_search_restat/latex/Final_Figures_Tables/Tables"
 
 *******************************************************
 *** National Search Outcomes Table - OLS - RESTAT FINAL
@@ -159,8 +159,8 @@ qui estadd local stfe "Yes"
 qui estadd local myfe "Yes"
 qui estadd local trends "No"
 
-cd "~/Dropbox/Texas_Job_Search_New/replic_test_figures_and_tables"
-esttab using "Tables/national_regs_new_restat", tex se keep(alt_totwks unemp_rate unemp_rate_sq insured_unemp_rate  frac_lf wage) order(alt_totwks unemp_rate unemp_rate_sq insured_unemp_rate  frac_lf wage) scalars("stfe State FE" "myfe Year-Month FE" "trends Linear and Quadratic State Trends" "r2 R-Squared") nomtitles star(* 0.10 ** 0.05 *** .01) nonotes obslast replace label gaps wrap
+cd  "~/Dropbox/Texas_Job_Search_New/final_git_repo/google_job_search_restat/latex/Final_Figures_Tables/Tables"
+esttab using "national_regs_new_restat", tex se keep(alt_totwks unemp_rate unemp_rate_sq insured_unemp_rate  frac_lf wage) order(alt_totwks unemp_rate unemp_rate_sq insured_unemp_rate  frac_lf wage) scalars("stfe State FE" "myfe Year-Month FE" "trends Linear and Quadratic State Trends" "r2 R-Squared") nomtitles star(* 0.10 ** 0.05 *** .01) nonotes obslast replace label gaps wrap
 
 
 ****************************************************************
@@ -193,7 +193,7 @@ qui estadd local stfe "Yes"
 qui estadd local myfe "Yes"
 qui estadd local trends "Yes"
 
-cd "~/Dropbox/Texas_Job_Search_New/replic_test_figures_and_tables"
-esttab using "Tables/robust_expansion_restat", tex se keep(l_ui_expansion_ind unemp_rate unemp_rate_sq) order(l_ui_expansion_ind  unemp_rate unemp_rate_sq) scalars("stfe State FE" "myfe Year-Month FE""trends Linear and Quadratic State Trends" "r2 R-Squared") nomtitles star(* 0.10 ** 0.05 *** .01) nonotes obslast replace label gaps wrap
+cd  "~/Dropbox/Texas_Job_Search_New/final_git_repo/google_job_search_restat/latex/Final_Figures_Tables/Tables"
+esttab using "robust_expansion_restat", tex se keep(l_ui_expansion_ind unemp_rate unemp_rate_sq) order(l_ui_expansion_ind  unemp_rate unemp_rate_sq) scalars("stfe State FE" "myfe Year-Month FE""trends Linear and Quadratic State Trends" "r2 R-Squared") nomtitles star(* 0.10 ** 0.05 *** .01) nonotes obslast replace label gaps wrap
 
 

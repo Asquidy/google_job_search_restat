@@ -1,0 +1,38 @@
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Effect of UI on Job Search (OLS)}
+\begin{tabular}{l*{3}{c}}
+\hline\hline
+                    &\multicolumn{1}{c}{(1)}         &\multicolumn{1}{c}{(2)}         &\multicolumn{1}{c}{(3)}         \\
+\hline
+Number Employed     &      -2.032\sym{**} &      -2.129\sym{**} &      -2.141\sym{**} \\
+                    &     (0.855)         &     (0.817)         &     (0.806)         \\
+[1em]
+Not on UI           &       2.642         &       2.130         &       2.124         \\
+                    &     (3.657)         &     (3.546)         &     (3.568)         \\
+[1em]
+Total on UI         &       0.296         &                     &                     \\
+                    &     (4.011)         &                     &                     \\
+[1em]
+0-10 Weeks Left     &                     &       6.769         &       6.158         \\
+                    &                     &     (5.234)         &     (4.885)         \\
+[1em]
+10-20 Weeks Left    &                     &       0.467         &       0.124         \\
+                    &                     &     (2.158)         &     (2.095)         \\
+[1em]
+20-30 Weeks Left    &                     &       0.611         &       0.361         \\
+                    &                     &     (2.018)         &     (1.920)         \\
+[1em]
+Over 30 Weeks Left  &                     &      -0.584         &      -0.943         \\
+                    &                     &     (1.970)         &     (1.861)         \\
+[1em]
+$<$ 6 Weeks On      &                     &                     &       2.027         \\
+                    &                     &                     &     (2.990)         \\
+\hline
+DMA FE              &         Yes         &         Yes         &         Yes         \\
+Year-Month FE       &         Yes         &         Yes         &         Yes         \\
+Observations        &        5070         &        5070         &        5070         \\
+\hline\hline
+\multicolumn{4}{l}{\footnotesize } \floatfoot{Notes: Dependent variable is log(GJSI) at DMA-week level. Analysis spans all Texas DMAs from 2006-2011.  variables represent the fraction of the total population belonging to each category. \\ * p$<$0.10, ** p$<$0.05, *** p$<$0.01} {}\\
+\end{tabular}
+\end{table}

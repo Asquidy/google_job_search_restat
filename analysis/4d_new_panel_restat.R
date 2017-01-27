@@ -12,8 +12,8 @@ library(stringr)
 library(statar)
 library(broom)
 
-table_folder <- "~/Dropbox/Texas_Job_Search_New/replic_test_figures_and_tables/Tables/"
-figure_folder <- "~/Dropbox/Texas_Job_Search_New/replic_test_figures_and_tables/Figures/"
+table_folder <- "~/Dropbox/Texas_Job_Search_New/final_git_repo/google_job_search_restat/latex/Final_Figures_Tables/Tables/"
+figure_folder <- "~/Dropbox/Texas_Job_Search_New/final_git_repo/google_job_search_restat/latex/Final_Figures_Tables/Figures/"
 tab <- function(x){table(x, useNA = 'always')}
 setwd("~/Dropbox/Texas_Job_Search_New/restat_data/National_Analysis_Data")
 
